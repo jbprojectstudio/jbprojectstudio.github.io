@@ -353,6 +353,33 @@
             footer h2 { font-size: 2rem !important; }
         }
     </style>
+
+    <!-- ================= CONFIGURAZIONE FACILE (MODIFICA QUI) ================= -->
+    <script>
+        // 1. CARTELLA FILE AUDIO
+        const AUDIO_FOLDER = "audio/"; 
+
+        // 2. LISTA A/B (MIX vs MASTER)
+        // Istruzioni: Scrivi il nome completo del file FINALE (B) inclusa l'estensione.
+        // Il sistema cercherà automaticamente la versione RAW aggiungendo "_raw" prima dell'estensione.
+        // Esempio: "MioBrano.mp3" -> Cerca "MioBrano_raw.mp3" (A) e "MioBrano.mp3" (B)
+        
+        const AB_FILES_LIST = [
+            "SoundHelix-Song-8.mp3",  // Demo
+            "SoundHelix-Song-15.mp3" 
+            // "RockSong.wav",
+        ];
+
+        // 3. LISTA PORTFOLIO (LAVORI FINITI)
+        // Istruzioni: Scrivi semplicemente il nome del file con estensione.
+        
+        const PORTFOLIO_FILES_LIST = [
+            "SoundHelix-Song-10.mp3",
+            "SoundHelix-Song-16.mp3"
+        ];
+    </script>
+    <!-- ================= FINE CONFIGURAZIONE ================= -->
+
 </head>
 <body>
 
@@ -517,41 +544,65 @@
             }
         }
 
-        // --- 2. DATI PLAYLIST (Sostituisci con i tuoi file reali) ---
-        // NOTA: Uso file MP3 di esempio gratuiti da internet.
+        // --- 2. LOGICA DI PARSING INTELLIGENTE (Nuova) ---
         
-        const abTracksData = [
-            {
-                title: "Rock Demo - 'Energy'",
-                duration: "3:45",
-                // File Raw (es. un mix statico approssimativo)
-                srcA: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3", 
-                // File Mastered (es. il prodotto finito)
-                srcB: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-            },
-            {
-                title: "Acoustic Pop - 'Morning'",
-                duration: "2:30",
-                srcA: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3",
-                srcB: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
-            }
-        ];
+        function getFileParts(filename) {
+            const lastDotIndex = filename.lastIndexOf('.');
+            if (lastDotIndex === -1) return { name: filename, ext: '' }; // Fallback se manca estensione
+            return {
+                name: filename.substring(0, lastDotIndex),
+                ext: filename.substring(lastDotIndex)
+            };
+        }
 
-        const portfolioTracksData = [
-            {
-                title: "Full Production - 'Neon Lights'",
-                duration: "4:12",
-                src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3"
-            },
-            {
-                title: "Mastering Work - 'Deep Dive'",
-                duration: "5:05",
-                src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3"
-            }
-        ];
+        function parseABList(list) {
+            return list.map(fullFileName => {
+                const parts = getFileParts(fullFileName);
+                // Pulisce il titolo (toglie trattini, underscore e l'estensione per la visualizzazione)
+                let cleanTitle = parts.name.replace(/-/g, ' ').replace(/_/g, ' ');
+
+                let isDemo = fullFileName.includes("SoundHelix");
+
+                if (isDemo) {
+                    // Logica demo (da rimuovere quando usi i tuoi file)
+                    return {
+                        title: cleanTitle,
+                        srcA: `https://www.soundhelix.com/examples/mp3/${parts.name}.mp3`,
+                        srcB: `https://www.soundhelix.com/examples/mp3/${parts.name.replace('8', '1').replace('15', '3')}.mp3`
+                    };
+                } else {
+                    // LOGICA REALE: Costruisce il nome RAW dinamicamente mantenendo l'estensione originale
+                    // Es: "song.flac" diventa -> srcA: "song_raw.flac", srcB: "song.flac"
+                    return {
+                        title: cleanTitle,
+                        srcA: `${AUDIO_FOLDER}${parts.name}_raw${parts.ext}`,
+                        srcB: `${AUDIO_FOLDER}${fullFileName}`
+                    };
+                }
+            });
+        }
+
+        function parsePortfolioList(list) {
+            return list.map(fullFileName => {
+                const parts = getFileParts(fullFileName);
+                let cleanTitle = parts.name.replace(/-/g, ' ').replace(/_/g, ' ');
+                let isDemo = fullFileName.includes("SoundHelix");
+                
+                return {
+                    title: cleanTitle,
+                    src: isDemo ? `https://www.soundhelix.com/examples/mp3/${fullFileName}` : `${AUDIO_FOLDER}${fullFileName}`
+                };
+            });
+        }
+
+        // Generazione Array Dati (Usa le variabili definite nell'HEAD)
+        const abTracksData = parseABList(AB_FILES_LIST);
+        const portfolioTracksData = parsePortfolioList(PORTFOLIO_FILES_LIST);
+
 
         // --- UTILITÀ: Formatta secondi in MM:SS ---
         function formatTime(seconds) {
+            if(!seconds || isNaN(seconds)) return "0:00";
             minutes = Math.floor(seconds / 60);
             minutes = (minutes >= 10) ? minutes : "0" + minutes;
             seconds = Math.floor(seconds % 60);
@@ -625,7 +676,7 @@
                 abTracksData.forEach((track, index) => {
                     let li = document.createElement('li');
                     li.className = 'playlist-item';
-                    li.innerHTML = `<span class="item-title">${track.title}</span><span class="item-duration">${track.duration}</span>`;
+                    li.innerHTML = `<span class="item-title">${track.title}</span>`;
                     li.addEventListener('click', () => this.loadTrack(index));
                     this.playlistList.appendChild(li);
                 });
@@ -752,7 +803,7 @@
                 portfolioTracksData.forEach((track, index) => {
                     let li = document.createElement('li');
                     li.className = 'playlist-item';
-                    li.innerHTML = `<span class="item-title">${track.title}</span><span class="item-duration">${track.duration}</span>`;
+                    li.innerHTML = `<span class="item-title">${track.title}</span>`;
                     li.addEventListener('click', () => this.loadTrack(index));
                     this.playlistList.appendChild(li);
                 });
