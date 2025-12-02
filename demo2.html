@@ -69,9 +69,10 @@
             z-index: 1001;
             display: flex;
             align-items: center;
+            gap: 10px; /* Spazio tra logo e testo */
         }
         
-        /* STILE LOGO IMMAGINE - FIXED */
+        /* STILE LOGO IMMAGINE - FIXED (COME DA RICHIESTA) */
         .logo img {
             height: 90px;
             margin-top: -20px;
@@ -167,16 +168,31 @@
         .section-title { text-align: center; font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 10px; }
         .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 40px; }
         
+        /* Modifica layout per Side-by-Side */
+        .dual-player-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: start;
+        }
+
         .player-container {
             background: var(--card-bg);
             border: 1px solid #333;
             border-radius: 20px;
             padding: 40px;
-            max-width: 800px;
-            margin: 0 auto;
+            /* Rimosso max-width fisso per adattarsi alla griglia */
+            width: 100%; 
+            box-sizing: border-box;
             position: relative;
             overflow: hidden;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
         }
 
         .player-container::before {
@@ -186,23 +202,23 @@
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
         }
 
-        .track-title-display { font-size: 1.5rem; font-weight: bold; margin-bottom: 30px; text-align: center;}
+        .track-title-display { font-size: 1.3rem; font-weight: bold; margin-bottom: 20px; text-align: center; color: var(--accent); min-height: 1.5em; }
 
         .controls-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 25px;
-            margin-bottom: 30px;
+            gap: 20px;
+            margin-bottom: 20px;
         }
 
         .play-btn-large {
-            width: 80px; height: 80px;
+            width: 70px; height: 70px; /* Leggermente più piccoli per stare affiancati */
             border-radius: 50%;
             background: var(--accent);
             border: none;
             color: #fff;
-            font-size: 30px;
+            font-size: 28px;
             cursor: pointer;
             display: flex; align-items: center; justify-content: center;
             box-shadow: 0 0 20px var(--accent-glow);
@@ -230,7 +246,7 @@
         }
 
         .switch-btn {
-            padding: 10px 30px;
+            padding: 8px 25px;
             border-radius: 25px;
             border: none;
             background: transparent;
@@ -239,6 +255,7 @@
             cursor: pointer;
             transition: 0.3s;
             white-space: nowrap;
+            font-size: 0.9rem;
         }
 
         .switch-btn.active {
@@ -249,10 +266,9 @@
 
         .progress-container {
             width: 100%;
-            max-width: 600px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
             color: var(--text-muted);
             font-size: 0.8rem;
         }
@@ -260,7 +276,7 @@
         .progress-bar {
             flex-grow: 1;
             -webkit-appearance: none;
-            height: 6px;
+            height: 5px;
             background: #333;
             border-radius: 5px;
             outline: none;
@@ -270,54 +286,62 @@
 
         .progress-bar::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 15px; height: 15px;
+            width: 12px; height: 12px;
             background: var(--accent);
             border-radius: 50%;
             box-shadow: -500px 0 0 492px var(--accent);
         }
 
         .playlist-container {
-            margin-top: 30px;
+            margin-top: 20px;
             border-top: 1px solid #222;
-            padding-top: 20px;
+            padding-top: 15px;
         }
-        .playlist-header { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;}
-        .playlist { display: flex; flex-direction: column; gap: 10px; }
+        .playlist-header { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;}
+        .playlist { display: flex; flex-direction: column; gap: 8px; max-height: 250px; overflow-y: auto; }
         .playlist-item {
-            padding: 15px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 10px;
+            padding: 12px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
             cursor: pointer;
             transition: 0.3s;
             display: flex; justify-content: space-between; align-items: center;
             border: 1px solid transparent;
+            font-size: 0.95rem;
         }
-        .playlist-item:hover { background: rgba(255,255,255,0.1); }
+        .playlist-item:hover { background: rgba(255,255,255,0.08); }
         .playlist-item.active {
             border-color: var(--accent);
             background: rgba(191, 0, 255, 0.1);
         }
         .item-title { font-weight: 600; }
-        .item-duration { color: var(--text-muted); font-size: 0.9rem; }
+        .item-duration { color: var(--text-muted); font-size: 0.8rem; }
 
-        /* --- ABOUT SECTION (NUOVA) --- */
+        /* --- ABOUT SECTION (MODIFICATA - QUOTE BOX) --- */
         #about {
             background-color: #080808;
             border-bottom: 1px solid #222;
         }
         
-        .about-content {
-            max-width: 800px;
+        .about-box {
+            max-width: 900px;
             margin: 0 auto;
-            text-align: center;
+            background: linear-gradient(145deg, #111111, #0d0d0d); /* Sfondo leggermente staccato */
+            padding: 50px;
+            border-left: 4px solid var(--accent); /* Bordo viola citazione */
+            border-radius: 0 15px 15px 0; /* Arrotondato solo a destra */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         
         .about-text {
             font-size: 1.1rem;
             color: #ccc;
             line-height: 1.8;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+            text-align: justify; /* Testo ordinato */
         }
+        
+        .about-text:last-child { margin-bottom: 0; }
         
         .highlight {
             color: var(--accent);
@@ -360,6 +384,14 @@
         }
 
         /* --- MEDIA QUERIES (RESPONSIVE) --- */
+        @media (max-width: 900px) {
+            /* Sotto i 900px i player vanno uno sotto l'altro */
+            .dual-player-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+        }
+
         @media (max-width: 768px) {
             .hamburger { 
                 display: block; 
@@ -392,7 +424,8 @@
 
             .section-padding { padding: 60px 5%; }
             .hero { padding-top: 100px; }
-            .player-container { padding: 25px 15px; margin: 30px auto; }
+            .about-box { padding: 30px; }
+            .player-container { padding: 30px 20px; }
             .switch-btn { padding: 10px 20px; font-size: 0.85rem; }
             footer h2 { font-size: 2rem !important; }
         }
@@ -424,8 +457,7 @@
         <div class="logo">
             <!-- LOGO IMMAGINE -->
             <img src="img/logo.svg" alt="JB Project Studio">
-            <!-- OPZIONE 2: LOGO TESTUALE (Disattivata/Commentata) -->
-            <!-- Per tornare al testo, togli i commenti qui sotto e metti i commenti all'immagine sopra -->
+            <!-- OPZIONE 2: LOGO TESTUALE -->
             JB PROJECT <span>STUDIO</span>
         </div>
 
@@ -435,8 +467,8 @@
         <nav>
             <ul>
                 <li><a href="#about" class="nav-link">Chi Sono</a></li>
-                <li><a href="#ab-comparison" class="nav-link">A/B Demo</a></li>
-                <li><a href="#finished-works" class="nav-link">Portfolio</a></li>
+                <!-- Voce unica per il Portfolio -->
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
                 <li><a href="#services" class="nav-link">Servizi</a></li>
                 <li><a href="#contact" class="nav-link">Contatti</a></li>
             </ul>
@@ -448,15 +480,16 @@
             <h1>Il Tuo Suono<br><span>Senza Compromessi</span></h1>
             <!-- TESTO HERO AGGIORNATO AL FOCUS ARTISTICO -->
             <p>Produzione Artistica & Musicale. Dal concept al master finale, costruiamo la tua identità sonora unica.</p>
-            <a href="#ab-comparison" class="btn-glow">Ascolta le Demo</a>
+            <a href="#portfolio" class="btn-glow">Ascolta le Demo</a>
         </div>
     </section>
 
-    <!-- ================= NUOVA SEZIONE: CHI SONO (MARKETING) ================= -->
+    <!-- ================= NUOVA SEZIONE: CHI SONO (BOX ORDINATO) ================= -->
     <section id="about" class="section-padding">
         <div class="reveal">
             <h2 class="section-title">Oltre il Tasto Rec</h2>
-            <div class="about-content">
+            <!-- Riquadro stile citazione per ordinare il testo -->
+            <div class="about-box">
                 <p class="about-text">
                     Mi chiamo <span class="highlight">Giordano Boschetti</span>. Dal 1990 coltivo una visione: non limitarsi a registrare, ma <em>scolpire</em> l'identità artistica. 
                     Nel mio studio, unisco la sensibilità dell'artista alla maniacalità dell'ingegnere del suono.
@@ -468,72 +501,77 @@
         </div>
     </section>
 
-    <!-- ================= SEZIONE A/B COMPARISON ================= -->
-    <section id="ab-comparison" class="section-padding">
+    <!-- ================= SEZIONE PORTFOLIO UNIFICATA (SIDE-BY-SIDE) ================= -->
+    <section id="portfolio" class="section-padding">
         <div class="reveal">
-            <h2 class="section-title">Prima & Dopo</h2>
-            <p class="section-subtitle">Usa le cuffie. Senti come il mix grezzo prende vita.</p>
+            <h2 class="section-title">Portfolio & Demo</h2>
+            <p class="section-subtitle">Ascolta la differenza e i lavori finiti.</p>
 
-            <div class="player-container" id="ab-player-root">
-                <div class="track-title-display" id="ab-track-title">Caricamento...</div>
+            <div class="dual-player-grid">
                 
-                <div class="controls-wrapper">
-                    <button class="play-btn-large" id="ab-play-btn">▶</button>
-                    
-                    <div class="ab-switch-container">
-                        <button class="switch-btn active" data-track="A">RAW MIX (Prima)</button>
-                        <button class="switch-btn" data-track="B">FINAL MASTER (Dopo)</button>
+                <!-- PLAYER SINISTRA: A/B COMPARISON -->
+                <div class="player-container" id="ab-player-root">
+                    <div>
+                        <div class="track-title-display" id="ab-track-title">Caricamento...</div>
+                        
+                        <div class="controls-wrapper">
+                            <button class="play-btn-large" id="ab-play-btn">▶</button>
+                            
+                            <div class="ab-switch-container">
+                                <button class="switch-btn active" data-track="A">RAW MIX</button>
+                                <button class="switch-btn" data-track="B">MASTER</button>
+                            </div>
+
+                            <div class="progress-container">
+                                <span id="ab-current-time">0:00</span>
+                                <input type="range" class="progress-bar" id="ab-progress" value="0" min="0" max="100" step="0.1">
+                                <span id="ab-duration">0:00</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="progress-container">
-                        <span id="ab-current-time">0:00</span>
-                        <input type="range" class="progress-bar" id="ab-progress" value="0" min="0" max="100" step="0.1">
-                        <span id="ab-duration">0:00</span>
+                    <div class="playlist-container">
+                        <div class="playlist-header">Confronto Mix</div>
+                        <ul class="playlist" id="ab-playlist-list"></ul>
                     </div>
+
+                    <audio id="audioA" preload="auto"></audio>
+                    <audio id="audioB" preload="auto"></audio>
                 </div>
 
-                <div class="playlist-container">
-                    <div class="playlist-header">Seleziona Traccia Demo</div>
-                    <ul class="playlist" id="ab-playlist-list"></ul>
-                </div>
+                <!-- PLAYER DESTRA: PORTFOLIO FINITO -->
+                <div class="player-container" id="portfolio-player-root">
+                    <div>
+                        <div class="track-title-display" id="port-track-title">Caricamento...</div>
+                        
+                        <div class="controls-wrapper">
+                            <button class="play-btn-large" id="port-play-btn">▶</button>
 
-                <audio id="audioA" preload="auto"></audio>
-                <audio id="audioB" preload="auto"></audio>
-            </div>
-        </div>
-    </section>
+                            <!-- Spacer per allineare visivamente i player -->
+                            <div style="height: 38px;"></div> 
 
-    <!-- ================= SEZIONE PORTFOLIO ================= -->
-    <section id="finished-works" class="section-padding" style="background: #0a0a0a;">
-        <div class="reveal">
-            <h2 class="section-title">Lavori Finiti</h2>
-            <p class="section-subtitle">Ascolta alcuni brani che ho prodotto, arrangiato o finalizzato.</p>
-
-            <div class="player-container" id="portfolio-player-root">
-                <div class="track-title-display" id="port-track-title">Caricamento...</div>
-                
-                <div class="controls-wrapper">
-                    <button class="play-btn-large" id="port-play-btn">▶</button>
-
-                    <div class="progress-container">
-                        <span id="port-current-time">0:00</span>
-                        <input type="range" class="progress-bar" id="port-progress" value="0" min="0" max="100" step="0.1">
-                        <span id="port-duration">0:00</span>
+                            <div class="progress-container">
+                                <span id="port-current-time">0:00</span>
+                                <input type="range" class="progress-bar" id="port-progress" value="0" min="0" max="100" step="0.1">
+                                <span id="port-duration">0:00</span>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="playlist-container">
+                        <div class="playlist-header">Lavori Finiti</div>
+                        <ul class="playlist" id="port-playlist-list"></ul>
+                    </div>
+
+                    <audio id="audioPortfolio" preload="auto"></audio>
                 </div>
 
-                <div class="playlist-container">
-                    <div class="playlist-header">Coda di riproduzione</div>
-                    <ul class="playlist" id="port-playlist-list"></ul>
-                </div>
-
-                 <audio id="audioPortfolio" preload="auto"></audio>
             </div>
         </div>
     </section>
 
     <!-- ================= SEZIONE SERVIZI (RIORGANIZZATA) ================= -->
-    <section id="services" class="section-padding">
+    <section id="services" class="section-padding" style="background: #0a0a0a;">
         <div class="reveal">
             <h2 class="section-title">I Miei Servizi</h2>
             <p class="section-subtitle">Un percorso completo per la tua musica.</p>
