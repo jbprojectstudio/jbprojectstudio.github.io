@@ -70,13 +70,24 @@
             display: flex;
             align-items: center;
         }
-        /* NUOVO STILE PER LOGO IMMAGINE - CORREZIONE "PUNTINO" */
+
+        /* STILE LOGO IMMAGINE - VERSIONE "FULL HEIGHT" */
         .logo img {
-            height: 50px;     /* Forza l'altezza fissa */
-            width: auto;      /* Lascia che la larghezza si adatti */
+            /* 1. Altezza aumentata: ora può sfruttare tutto lo spazio (era 50px) */
+            height: 90px; 
+            
+            /* 2. Margini negativi: annullano il padding della barra (20px sopra/sotto) */
+            margin-top: -20px;
+            margin-bottom: -20px;
+
+            /* 3. Mantiene le proporzioni (si allarga di conseguenza) */
+            width: auto;  
+
             /* min-width: 50px;  /* Sicurezza: impedisce che diventi un puntino */
+            
+            /* 4. Sicurezza: impedisce distorsioni */
             display: block;
-            object-fit: contain; /* Assicura che il logo stia nel box senza tagli */
+            object-fit: contain; 
         }
 
         .logo span { color: var(--accent); text-shadow: 0 0 10px var(--accent-glow); }
