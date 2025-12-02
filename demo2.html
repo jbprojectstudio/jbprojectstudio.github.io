@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JB Project Studio | Sound Engineering</title>
+    <title>JB Project Studio | Giordano Boschetti</title>
     <style>
         /* --- VARIABILI COLORI (BRANDING) --- */
         :root {
@@ -24,11 +24,12 @@
             color: var(--text-main);
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; padding: 0; margin: 0; }
-        h1, h2, h3 { margin: 0; }
+        h1, h2, h3 { margin: 0; line-height: 1.2; }
         button { font-family: inherit; }
 
         /* --- ANIMAZIONI (SCROLL REVEAL) --- */
@@ -49,15 +50,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 5%; /* <--- MODIFICATO: da 20px a 10px */
+            padding: 10px 5%;
             background: rgba(5, 5, 5, 0.9);
             backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            height: 80px; /* Opzionale: fissa l'altezza per evitare scatti */
-            box-sizing: border-box; /* Assicura che il padding non aumenti l'altezza */
+            height: 80px;
+            box-sizing: border-box;
         }
 
         .logo { 
@@ -66,28 +67,18 @@
             letter-spacing: 1px; 
             text-transform: uppercase;
             z-index: 1001;
-            /* Per allineare verticalmente immagine e testo se necessario */
             display: flex;
             align-items: center;
         }
-
-        /* STILE LOGO IMMAGINE - VERSIONE "FULL HEIGHT" */
+        
+        /* STILE LOGO IMMAGINE - FIXED */
         .logo img {
-            /* 1. Altezza aumentata: ora può sfruttare tutto lo spazio (era 50px) */
-            height: 90px; 
-            
-            /* 2. Margini negativi: annullano il padding della barra (20px sopra/sotto) */
+            height: 90px;
             margin-top: -20px;
             margin-bottom: -20px;
-
-            /* 3. Mantiene le proporzioni (si allarga di conseguenza) */
-            width: auto;  
-
-            /* min-width: 50px;  /* Sicurezza: impedisce che diventi un puntino */
-            
-            /* 4. Sicurezza: impedisce distorsioni */
+            width: auto;
             display: block;
-            object-fit: contain; 
+            object-fit: contain;
         }
 
         .logo span { color: var(--accent); text-shadow: 0 0 10px var(--accent-glow); }
@@ -120,6 +111,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
+            /* Sfondo corretto con immagine locale */
             background: linear-gradient(to bottom, rgba(5,5,5,0.3), var(--bg-color)), 
                         linear-gradient(45deg, rgba(191,0,255,0.2), rgba(0,0,0,0.8)),
                         url('img/studio_back.jpg');
@@ -130,24 +122,20 @@
 
         .hero h1 {
             font-size: clamp(2.5rem, 5vw, 5rem);
-            line-height: 1.1;
             margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: -1px;
         }
 
-        /* MODIFICA RICHIESTA 1: Testo pieno */
         .hero h1 span {
-            color: var(--accent); /* Colore pieno */
-            /* rimosso -webkit-text-stroke e color: transparent */
+            color: var(--accent);
             text-shadow: 0 0 20px var(--accent-glow);
         }
         
         .hero p {
             font-size: clamp(1rem, 2vw, 1.3rem);
             color: var(--text-muted);
-            max-width: 600px;
-            /* MODIFICA: margin-bottom era 40px. Ora usiamo la shorthand per centrare orizzontalmente */
+            max-width: 700px;
             margin: 0 auto 40px auto; 
         }
 
@@ -208,7 +196,6 @@
             margin-bottom: 30px;
         }
 
-        /* Play Button Styling */
         .play-btn-large {
             width: 80px; height: 80px;
             border-radius: 50%;
@@ -232,7 +219,6 @@
             100% { box-shadow: 0 0 0 0 rgba(191, 0, 255, 0); }
         }
 
-        /* A/B Switch Styling */
         .ab-switch-container {
             display: flex;
             background: #000;
@@ -261,7 +247,6 @@
             box-shadow: 0 0 15px var(--accent-glow);
         }
 
-        /* MODIFICA RICHIESTA 2 & 3: Progress Bar Styling */
         .progress-container {
             width: 100%;
             max-width: 600px;
@@ -280,19 +265,17 @@
             border-radius: 5px;
             outline: none;
             cursor: pointer;
-            overflow: hidden; /* Per l'effetto riempimento */
+            overflow: hidden;
         }
 
-        /* Thumb (il pallino da trascinare) */
         .progress-bar::-webkit-slider-thumb {
             -webkit-appearance: none;
             width: 15px; height: 15px;
             background: var(--accent);
             border-radius: 50%;
-            box-shadow: -500px 0 0 492px var(--accent); /* Effetto riempimento a sinistra */
+            box-shadow: -500px 0 0 492px var(--accent);
         }
 
-        /* MODIFICA RICHIESTA 2 & 3: Playlist Styling */
         .playlist-container {
             margin-top: 30px;
             border-top: 1px solid #222;
@@ -317,6 +300,29 @@
         .item-title { font-weight: 600; }
         .item-duration { color: var(--text-muted); font-size: 0.9rem; }
 
+        /* --- ABOUT SECTION (NUOVA) --- */
+        #about {
+            background-color: #080808;
+            border-bottom: 1px solid #222;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .about-text {
+            font-size: 1.1rem;
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        
+        .highlight {
+            color: var(--accent);
+            font-weight: bold;
+        }
 
         /* --- SERVIZI (GRID) --- */
         .grid-3 {
@@ -355,13 +361,15 @@
 
         /* --- MEDIA QUERIES (RESPONSIVE) --- */
         @media (max-width: 768px) {
-            .hamburger { display: block; }
+            .hamburger { 
+                display: block; 
+                margin-left: auto; /* FIX: Spinge l'hamburger a destra */
+            }
             .hamburger.active .bar:nth-child(2) { opacity: 0; }
             .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
             .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-/* FIX ALLINEAMENTO HAMBURGER */
-            /* Rimuove il contenitore nav dal flusso, così l'hamburger viene spinto tutto a destra */
+            /* FIX: Rimuove la nav dal flusso per permettere all'hamburger di andare a destra */
             nav {
                 position: absolute;
                 width: 0;
@@ -369,7 +377,7 @@
                 padding: 0;
                 margin: 0;
             }
-            
+
             nav ul {
                 position: fixed; left: -100%; top: 70px;
                 gap: 0; flex-direction: column;
@@ -396,19 +404,12 @@
         const AUDIO_FOLDER = "audio/"; 
 
         // 2. LISTA A/B (MIX vs MASTER)
-        // Istruzioni: Scrivi il nome completo del file FINALE (B) inclusa l'estensione.
-        // Il sistema cercherà automaticamente la versione RAW aggiungendo "_raw" prima dell'estensione.
-        // Esempio: "MioBrano.mp3" -> Cerca "MioBrano_raw.mp3" (A) e "MioBrano.mp3" (B)
-        
         const AB_FILES_LIST = [
             "SoundHelix-Song-8.mp3",  // Demo
             "SoundHelix-Song-15.mp3" 
-            // "RockSong.wav",
         ];
 
         // 3. LISTA PORTFOLIO (LAVORI FINITI)
-        // Istruzioni: Scrivi semplicemente il nome del file con estensione.
-        
         const PORTFOLIO_FILES_LIST = [
             "SoundHelix-Song-10.mp3",
             "SoundHelix-Song-16.mp3"
@@ -421,13 +422,8 @@
 
     <header>
         <div class="logo">
-            <!-- OPZIONE 1: LOGO IMMAGINE (Attiva) -->
-            <!-- Sostituisci 'https://placehold.co/200x50/bf00ff/ffffff?text=LOGO' con il percorso del tuo file (es. 'images/logo.svg') -->
+            <!-- LOGO IMMAGINE -->
             <img src="img/logo.svg" alt="JB Project Studio">
-
-            <!-- OPZIONE 2: LOGO TESTUALE (Disattivata/Commentata) -->
-            <!-- Per tornare al testo, togli i commenti qui sotto e metti i commenti all'immagine sopra -->
-            JB PROJECT <span>STUDIO</span>
         </div>
 
         <div class="hamburger">
@@ -435,6 +431,7 @@
         </div>
         <nav>
             <ul>
+                <li><a href="#about" class="nav-link">Chi Sono</a></li>
                 <li><a href="#ab-comparison" class="nav-link">A/B Demo</a></li>
                 <li><a href="#finished-works" class="nav-link">Portfolio</a></li>
                 <li><a href="#services" class="nav-link">Servizi</a></li>
@@ -446,8 +443,25 @@
     <section class="hero">
         <div class="reveal active"> 
             <h1>Il Tuo Suono<br><span>Senza Compromessi</span></h1>
-            <p>Mixing & Mastering Online. Porta la tua musica al livello professionale che merita.</p>
+            <!-- TESTO HERO AGGIORNATO AL FOCUS ARTISTICO -->
+            <p>Produzione Artistica & Musicale. Dal concept al master finale, costruiamo la tua identità sonora unica.</p>
             <a href="#ab-comparison" class="btn-glow">Ascolta le Demo</a>
+        </div>
+    </section>
+
+    <!-- ================= NUOVA SEZIONE: CHI SONO (MARKETING) ================= -->
+    <section id="about" class="section-padding">
+        <div class="reveal">
+            <h2 class="section-title">Oltre il Tasto Rec</h2>
+            <div class="about-content">
+                <p class="about-text">
+                    Mi chiamo <span class="highlight">Giordano Boschetti</span>. Dal 1990 coltivo una visione: non limitarsi a registrare, ma <em>scolpire</em> l'identità artistica. 
+                    Nel mio studio a Viterbo (e online), unisco la sensibilità del musicista alla precisione dell'ingegnere del suono.
+                </p>
+                <p class="about-text">
+                    Che si tratti di chitarre, tastiere o beat elettronici, il mio obiettivo non è solo farti "suonare bene", ma creare un prodotto che ti rappresenti e che sia <span class="highlight">competitivo nel mercato attuale</span>. Non cerco clienti, ma progetti in cui credere.
+                </p>
+            </div>
         </div>
     </section>
 
@@ -455,7 +469,7 @@
     <section id="ab-comparison" class="section-padding">
         <div class="reveal">
             <h2 class="section-title">Prima & Dopo (Mixing)</h2>
-            <p class="section-subtitle">Usa le cuffie. Passa istantaneamente tra il mix grezzo e il mio lavoro.</p>
+            <p class="section-subtitle">Usa le cuffie. Senti come il mix grezzo prende vita.</p>
 
             <div class="player-container" id="ab-player-root">
                 <div class="track-title-display" id="ab-track-title">Caricamento...</div>
@@ -475,32 +489,27 @@
                     </div>
                 </div>
 
-                <!-- Playlist Interna A/B -->
                 <div class="playlist-container">
                     <div class="playlist-header">Seleziona Traccia Demo</div>
-                    <ul class="playlist" id="ab-playlist-list">
-                        <!-- Le voci della playlist vengono generate via JS -->
-                    </ul>
+                    <ul class="playlist" id="ab-playlist-list"></ul>
                 </div>
 
-                <!-- Audio Elements Nascosti -->
                 <audio id="audioA" preload="auto"></audio>
                 <audio id="audioB" preload="auto"></audio>
             </div>
         </div>
     </section>
 
-    <!-- ================= NUOVA SEZIONE PORTFOLIO (LAVORI FINITI) ================= -->
+    <!-- ================= SEZIONE PORTFOLIO ================= -->
     <section id="finished-works" class="section-padding" style="background: #0a0a0a;">
         <div class="reveal">
             <h2 class="section-title">Lavori Finiti</h2>
-            <p class="section-subtitle">Ascolta alcuni brani completi che ho prodotto, mixato o masterizzato.</p>
+            <p class="section-subtitle">Ascolta alcuni brani che ho prodotto, arrangiato o finalizzato.</p>
 
             <div class="player-container" id="portfolio-player-root">
                 <div class="track-title-display" id="port-track-title">Caricamento...</div>
                 
                 <div class="controls-wrapper">
-                    <!-- Nota: Qui non ci sono i tasti A/B -->
                     <button class="play-btn-large" id="port-play-btn">▶</button>
 
                     <div class="progress-container">
@@ -510,12 +519,9 @@
                     </div>
                 </div>
 
-                 <!-- Playlist Interna Portfolio -->
                 <div class="playlist-container">
                     <div class="playlist-header">Coda di riproduzione</div>
-                    <ul class="playlist" id="port-playlist-list">
-                         <!-- Generate via JS -->
-                    </ul>
+                    <ul class="playlist" id="port-playlist-list"></ul>
                 </div>
 
                  <audio id="audioPortfolio" preload="auto"></audio>
@@ -523,28 +529,32 @@
         </div>
     </section>
 
-    <!-- ================= SEZIONE SERVIZI ================= -->
+    <!-- ================= SEZIONE SERVIZI (RIORGANIZZATA) ================= -->
     <section id="services" class="section-padding">
         <div class="reveal">
             <h2 class="section-title">I Miei Servizi</h2>
+            <p class="section-subtitle">Un percorso completo per la tua musica.</p>
             
             <div class="grid-3">
+                <!-- 1. PRODUZIONE ARTISTICA (MAIN SKILL) -->
+                <div class="card">
+                    <div class="icon-box">🎨</div>
+                    <h3>Produzione Artistica</h3>
+                    <p>Il cuore del progetto. Non registriamo e basta: definiamo insieme la direzione stilistica, l'intenzione e l'identità del tuo suono per renderlo unico e riconoscibile.</p>
+                </div>
+
+                <!-- 2. PRODUZIONE MUSICALE -->
+                <div class="card">
+                    <div class="icon-box">🎹</div>
+                    <h3>Produzione Musicale</h3>
+                    <p>Dall'arrangiamento al Beat Making. Costruisco la strumentale attorno alla tua voce, valorizzando il mood senza mai sovrastare l'artista. Suono reale e programmazione digitale.</p>
+                </div>
+
+                <!-- 3. MIX & MASTERING -->
                 <div class="card">
                     <div class="icon-box">🎚️</div>
-                    <h3>Mixing Online</h3>
-                    <p>Bilanciamento frequenziale, dinamica e profondità. Tratto le tue tracce con catene ibride Analogico/Digitale per il massimo calore e punch.</p>
-                </div>
-
-                <div class="card">
-                    <div class="icon-box">🔊</div>
-                    <h3>Mastering</h3>
-                    <p>Il tocco finale per rendere il brano competitivo su Spotify e radio. Loudness controllata senza sacrificare la dinamica musicale.</p>
-                </div>
-
-                <div class="card">
-                    <div class="icon-box">🎙️</div>
-                    <h3>Produzione</h3>
-                    <p>Dall'idea alla pre-produzione. Arrangiamento, beat making e registrazione voci nel mio studio trattato acusticamente.</p>
+                    <h3>Mix & Mastering</h3>
+                    <p>Competitività e calore. Unisco il punch del digitale al colore dell'analogico per un suono pronto per le piattaforme di streaming, radio e club.</p>
                 </div>
             </div>
         </div>
@@ -589,11 +599,10 @@
             }
         }
 
-        // --- 2. LOGICA DI PARSING INTELLIGENTE (Nuova) ---
-        
+        // --- 2. LOGICA PLAYER & DATI ---
         function getFileParts(filename) {
             const lastDotIndex = filename.lastIndexOf('.');
-            if (lastDotIndex === -1) return { name: filename, ext: '' }; // Fallback se manca estensione
+            if (lastDotIndex === -1) return { name: filename, ext: '' }; 
             return {
                 name: filename.substring(0, lastDotIndex),
                 ext: filename.substring(lastDotIndex)
@@ -603,21 +612,16 @@
         function parseABList(list) {
             return list.map(fullFileName => {
                 const parts = getFileParts(fullFileName);
-                // Pulisce il titolo (toglie trattini, underscore e l'estensione per la visualizzazione)
                 let cleanTitle = parts.name.replace(/-/g, ' ').replace(/_/g, ' ');
-
                 let isDemo = fullFileName.includes("SoundHelix");
 
                 if (isDemo) {
-                    // Logica demo (da rimuovere quando usi i tuoi file)
                     return {
                         title: cleanTitle,
                         srcA: `https://www.soundhelix.com/examples/mp3/${parts.name}.mp3`,
                         srcB: `https://www.soundhelix.com/examples/mp3/${parts.name.replace('8', '1').replace('15', '3')}.mp3`
                     };
                 } else {
-                    // LOGICA REALE: Costruisce il nome RAW dinamicamente mantenendo l'estensione originale
-                    // Es: "song.flac" diventa -> srcA: "song_raw.flac", srcB: "song.flac"
                     return {
                         title: cleanTitle,
                         srcA: `${AUDIO_FOLDER}${parts.name}_raw${parts.ext}`,
@@ -632,7 +636,6 @@
                 const parts = getFileParts(fullFileName);
                 let cleanTitle = parts.name.replace(/-/g, ' ').replace(/_/g, ' ');
                 let isDemo = fullFileName.includes("SoundHelix");
-                
                 return {
                     title: cleanTitle,
                     src: isDemo ? `https://www.soundhelix.com/examples/mp3/${fullFileName}` : `${AUDIO_FOLDER}${fullFileName}`
@@ -640,12 +643,9 @@
             });
         }
 
-        // Generazione Array Dati (Usa le variabili definite nell'HEAD)
         const abTracksData = parseABList(AB_FILES_LIST);
         const portfolioTracksData = parsePortfolioList(PORTFOLIO_FILES_LIST);
 
-
-        // --- UTILITÀ: Formatta secondi in MM:SS ---
         function formatTime(seconds) {
             if(!seconds || isNaN(seconds)) return "0:00";
             minutes = Math.floor(seconds / 60);
@@ -655,8 +655,7 @@
             return minutes + ":" + seconds;
         }
 
-
-        // --- 3. LOGICA PLAYER A/B (Complessa) ---
+        // --- 3. LOGICA PLAYER A/B ---
         const abPlayer = {
             audioA: document.getElementById('audioA'),
             audioB: document.getElementById('audioB'),
@@ -667,31 +666,27 @@
             durDisplay: document.getElementById('ab-duration'),
             playlistList: document.getElementById('ab-playlist-list'),
             switchBtns: document.querySelectorAll('.switch-btn'),
-            
             currentTrackIndex: 0,
-            activeAudio: null, // Sarà audioA o audioB
+            activeAudio: null, 
             isPlaying: false,
-            isDragging: false, // Per evitare saltellamenti mentre si trascina
+            isDragging: false,
 
             init: function() {
-                this.activeAudio = this.audioA; // Inizia con A
+                this.activeAudio = this.audioA;
                 this.renderPlaylist();
                 this.loadTrack(0);
                 
-                // Event Listeners Base
                 this.playBtn.addEventListener('click', () => this.togglePlay());
                 this.switchBtns.forEach(btn => {
                     btn.addEventListener('click', (e) => this.switchAB(e.target.dataset.track));
                 });
 
-                // Event Listeners Progress Bar (Sync su entrambi)
                 [this.audioA, this.audioB].forEach(audio => {
                     audio.addEventListener('timeupdate', () => this.updateProgress());
                     audio.addEventListener('loadedmetadata', () => {
                         this.durDisplay.innerText = formatTime(this.activeAudio.duration);
                         this.progressBar.max = this.activeAudio.duration;
                     });
-                    // Se una traccia finisce, resetta
                     audio.addEventListener('ended', () => {
                          this.isPlaying = false;
                          this.playBtn.innerHTML = "▶";
@@ -701,14 +696,11 @@
                     });
                 });
 
-                // Dragging della progress bar
                 this.progressBar.addEventListener('input', () => {
                     this.isDragging = true;
-                     // Aggiorna tempo visivo mentre trascini
                     this.currTimeDisplay.innerText = formatTime(this.progressBar.value);
                 });
                 this.progressBar.addEventListener('change', () => {
-                    // Applica il cambio quando rilasci
                     const targetTime = this.progressBar.value;
                     this.audioA.currentTime = targetTime;
                     this.audioB.currentTime = targetTime;
@@ -730,26 +722,18 @@
             loadTrack: function(index) {
                 this.currentTrackIndex = index;
                 const track = abTracksData[index];
-                
-                // Resetta stati
                 this.isPlaying = false;
                 this.playBtn.innerHTML = "▶";
                 this.playBtn.classList.remove("playing");
                 this.audioA.pause();
                 this.audioB.pause();
                 this.progressBar.value = 0;
-
-                // Carica nuove sorgenti
                 this.audioA.src = track.srcA;
                 this.audioB.src = track.srcB;
                 this.titleDisplay.innerText = track.title;
-                
-                // Aggiorna UI playlist
                 document.querySelectorAll('#ab-playlist-list .playlist-item').forEach((item, i) => {
                     item.classList.toggle('active', i === index);
                 });
-                
-                // Reset switch su A
                 this.switchAB('A');
             },
 
@@ -759,11 +743,9 @@
                     this.playBtn.innerHTML = "▶";
                     this.playBtn.classList.remove("playing");
                 } else {
-                    // Sync il tempo prima di ripartire
                     let currentTime = this.activeAudio.currentTime;
                     this.audioA.currentTime = currentTime;
                     this.audioB.currentTime = currentTime;
-
                     this.activeAudio.play();
                     this.playBtn.innerHTML = "⏸";
                     this.playBtn.classList.add("playing");
@@ -774,11 +756,8 @@
             switchAB: function(target) {
                 let currentTime = this.activeAudio.currentTime;
                 let wasPlaying = !this.activeAudio.paused;
-                
                 this.activeAudio.pause();
-
                 this.switchBtns.forEach(btn => btn.classList.remove('active'));
-
                 if (target === 'A') {
                     this.activeAudio = this.audioA;
                     document.querySelector('.switch-btn[data-track="A"]').classList.add('active');
@@ -786,7 +765,6 @@
                     this.activeAudio = this.audioB;
                     document.querySelector('.switch-btn[data-track="B"]').classList.add('active');
                 }
-
                 this.activeAudio.currentTime = currentTime;
                 if (wasPlaying) this.activeAudio.play();
             },
@@ -796,14 +774,12 @@
                 const currentTime = this.activeAudio.currentTime;
                 this.progressBar.value = currentTime;
                 this.currTimeDisplay.innerText = formatTime(currentTime);
-                // Aggiorna anche il duration display se non l'ha ancora fatto il metadata
                 this.durDisplay.innerText = formatTime(this.activeAudio.duration);
                 this.progressBar.max = this.activeAudio.duration;
             }
         };
 
-
-        // --- 4. LOGICA PLAYER PORTFOLIO (Standard) ---
+        // --- 4. LOGICA PLAYER PORTFOLIO ---
         const portPlayer = {
             audio: document.getElementById('audioPortfolio'),
             playBtn: document.getElementById('port-play-btn'),
@@ -812,16 +788,13 @@
             currTimeDisplay: document.getElementById('port-current-time'),
             durDisplay: document.getElementById('port-duration'),
             playlistList: document.getElementById('port-playlist-list'),
-            
             currentTrackIndex: 0,
             isDragging: false,
 
             init: function() {
                 this.renderPlaylist();
                 this.loadTrack(0);
-
                 this.playBtn.addEventListener('click', () => this.togglePlay());
-                
                 this.audio.addEventListener('timeupdate', () => this.updateProgress());
                 this.audio.addEventListener('loadedmetadata', () => {
                     this.durDisplay.innerText = formatTime(this.audio.duration);
@@ -832,7 +805,6 @@
                     this.playBtn.classList.remove("playing");
                     this.progressBar.value = 0;
                 });
-
                 this.progressBar.addEventListener('input', () => {
                     this.isDragging = true;
                     this.currTimeDisplay.innerText = formatTime(this.progressBar.value);
@@ -857,15 +829,12 @@
             loadTrack: function(index) {
                 this.currentTrackIndex = index;
                 const track = portfolioTracksData[index];
-                
                 this.audio.pause();
                 this.playBtn.innerHTML = "▶";
                 this.playBtn.classList.remove("playing");
                 this.progressBar.value = 0;
-
                 this.audio.src = track.src;
                 this.titleDisplay.innerText = track.title;
-                
                 document.querySelectorAll('#port-playlist-list .playlist-item').forEach((item, i) => {
                     item.classList.toggle('active', i === index);
                 });
@@ -891,15 +860,12 @@
             }
         };
 
-        // --- INIZIALIZZAZIONE ALL'AVVIO ---
+        // --- INIZIALIZZAZIONE ---
         document.addEventListener('DOMContentLoaded', () => {
             abPlayer.init();
             portPlayer.init();
-            // Triggera un reveal iniziale
             reveal();
         });
-
     </script>
-
 </body>
 </html>
