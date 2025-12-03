@@ -874,18 +874,21 @@
     </footer>
 
     <script>
+        // --- 1. UTILITIES & NAVIGAZIONE ---
         const hamburger = document.querySelector(".hamburger");
         const navMenu = document.querySelector("nav ul");
         const navLink = document.querySelectorAll(".nav-link");
 
-        hamburger.addEventListener("click", () => {
-            hamburger.classList.toggle("active");
-            navMenu.classList.toggle("active");
-        });
+        if(hamburger) {
+            hamburger.addEventListener("click", () => {
+                hamburger.classList.toggle("active");
+                navMenu.classList.toggle("active");
+            });
+        }
 
         navLink.forEach(n => n.addEventListener("click", () => {
-            hamburger.classList.remove("active");
-            navMenu.classList.remove("active");
+            if(hamburger) hamburger.classList.remove("active");
+            if(navMenu) navMenu.classList.remove("active");
         }));
 
         window.addEventListener('scroll', reveal);
@@ -905,16 +908,38 @@
             return { name: filename.substring(0, lastDotIndex), ext: filename.substring(lastDotIndex) };
         }
 
+        // Funzione per costruire il percorso corretto (gestisce spazi e caratteri speciali)
+        function getSafePath(filename) {
+            // AUDIO_FOLDER è definita nel blocco di configurazione in alto (nell'HEAD)
+            return AUDIO_FOLDER + encodeURIComponent(filename);
+        }
+
+        function formatTime(seconds) {
+            if(!seconds || isNaN(seconds)) return "0:00";
+            let minutes = Math.floor(seconds / 60);
+            minutes = (minutes >= 10) ? minutes : "0" + minutes;
+            let secs = Math.floor(seconds % 60);
+            secs = (secs >= 10) ? secs : "0" + secs;
+            return minutes + ":" + secs;
+        }
+
+        // --- 2. COSTRUZIONE LISTE (PULITA) ---
+        
         function parseABList(list) {
             return list.map(fullFileName => {
                 const parts = getFileParts(fullFileName);
+                // Pulisce il titolo visivo
                 let cleanTitle = parts.name.replace(/-/g, ' ').replace(/_/g, ' ');
-                let isDemo = fullFileName.includes("SoundHelix");
-                if (isDemo) {
-                    return { title: cleanTitle, srcA: `https://www.soundhelix.com/examples/mp3/${parts.name}.mp3`, srcB: `https://www.soundhelix.com/examples/mp3/${parts.name.replace('8', '1').replace('15', '3')}.mp3` };
-                } else {
-                    return { title: cleanTitle, srcA: `${AUDIO_FOLDER}${parts.name}_raw${parts.ext}`, srcB: `${AUDIO_FOLDER}${fullFileName}` };
-                }
+                
+                // Costruzione automatica del nome file RAW
+                // Esempio: se il file è "canzone.mp3", cerca "canzone_raw.mp3"
+                const rawFileName = `${parts.name}_raw${parts.ext}`;
+
+                return {
+                    title: cleanTitle,
+                    srcA: getSafePath(rawFileName),
+                    srcB: getSafePath(fullFileName)
+                };
             });
         }
 
@@ -922,168 +947,333 @@
             return list.map(fullFileName => {
                 const parts = getFileParts(fullFileName);
                 let cleanTitle = parts.name.replace(/-/g, ' ').replace(/_/g, ' ');
-                let isDemo = fullFileName.includes("SoundHelix");
-                return { title: cleanTitle, src: isDemo ? `https://www.soundhelix.com/examples/mp3/${fullFileName}` : `${AUDIO_FOLDER}${fullFileName}` };
+                
+                return {
+                    title: cleanTitle,
+                    src: getSafePath(fullFileName)
+                };
             });
         }
 
-        const abTracksData = parseABList(AB_FILES_LIST);
-        const portfolioTracksData = parsePortfolioList(PORTFOLIO_FILES_LIST);
+        // Generazione dati usando le variabili definite nell'HEAD
+        // Se le variabili non sono definite (es. errore config), usa array vuoti per non rompere il sito
+        const abTracksData = (typeof AB_FILES_LIST !== 'undefined') ? parseABList(AB_FILES_LIST) : [];
+        const portfolioTracksData = (typeof PORTFOLIO_FILES_LIST !== 'undefined') ? parsePortfolioList(PORTFOLIO_FILES_LIST) : [];
 
-        function formatTime(seconds) {
-            if(!seconds || isNaN(seconds)) return "0:00";
-            minutes = Math.floor(seconds / 60);
-            minutes = (minutes >= 10) ? minutes : "0" + minutes;
-            seconds = Math.floor(seconds % 60);
-            seconds = (seconds >= 10) ? seconds : "0" + seconds;
-            return minutes + ":" + seconds;
-        }
-
+        // --- 3. PLAYER A/B LOGIC ---
         const abPlayer = {
-            audioA: document.getElementById('audioA'), audioB: document.getElementById('audioB'),
-            playBtn: document.getElementById('ab-play-btn'), titleDisplay: document.getElementById('ab-track-title'),
-            progressBar: document.getElementById('ab-progress'), currTimeDisplay: document.getElementById('ab-current-time'),
-            durDisplay: document.getElementById('ab-duration'), playlistList: document.getElementById('ab-playlist-list'),
-            switchBtns: document.querySelectorAll('.switch-btn'), currentTrackIndex: 0, activeAudio: null, isPlaying: false, isDragging: false,
+            audioA: null, audioB: null,
+            playBtn: null, titleDisplay: null,
+            progressBar: null, currTimeDisplay: null, durDisplay: null,
+            playlistList: null, switchBtns: null,
+            
+            currentTrackIndex: 0,
+            activeAudio: null, 
+            isPlaying: false,
+            isDragging: false,
 
             init: function() {
+                this.audioA = document.getElementById('audioA');
+                this.audioB = document.getElementById('audioB');
+                this.playBtn = document.getElementById('ab-play-btn');
+                this.titleDisplay = document.getElementById('ab-track-title');
+                this.progressBar = document.getElementById('ab-progress');
+                this.currTimeDisplay = document.getElementById('ab-current-time');
+                this.durDisplay = document.getElementById('ab-duration');
+                this.playlistList = document.getElementById('ab-playlist-list');
+                this.switchBtns = document.querySelectorAll('.switch-btn');
+
+                if (!this.audioA || !this.audioB) return;
+
                 this.activeAudio = this.audioA;
                 this.renderPlaylist();
-                this.loadTrack(0);
+                if(abTracksData.length > 0) this.loadTrack(0);
+
                 this.playBtn.addEventListener('click', () => this.togglePlay());
-                this.switchBtns.forEach(btn => { btn.addEventListener('click', (e) => this.switchAB(e.target.dataset.track)); });
+                
+                this.switchBtns.forEach(btn => {
+                    btn.addEventListener('click', (e) => this.switchAB(e.target.dataset.track));
+                });
+
                 [this.audioA, this.audioB].forEach(audio => {
                     audio.addEventListener('timeupdate', () => this.updateProgress());
                     audio.addEventListener('loadedmetadata', () => {
-                        this.durDisplay.innerText = formatTime(this.activeAudio.duration);
-                        this.progressBar.max = this.activeAudio.duration;
+                        if(this.activeAudio) {
+                            this.durDisplay.innerText = formatTime(this.activeAudio.duration);
+                            this.progressBar.max = this.activeAudio.duration;
+                        }
                     });
                     audio.addEventListener('ended', () => {
-                         this.isPlaying = false; this.playBtn.innerHTML = "▶"; this.playBtn.classList.remove("playing");
-                         this.audioA.currentTime = 0; this.audioB.currentTime = 0;
+                         this.isPlaying = false;
+                         this.playBtn.innerHTML = "▶";
+                         this.playBtn.classList.remove("playing");
+                         this.audioA.currentTime = 0;
+                         this.audioB.currentTime = 0;
                     });
                 });
-                this.progressBar.addEventListener('input', () => { this.isDragging = true; this.currTimeDisplay.innerText = formatTime(this.progressBar.value); });
-                this.progressBar.addEventListener('change', () => { const targetTime = this.progressBar.value; this.audioA.currentTime = targetTime; this.audioB.currentTime = targetTime; this.isDragging = false; });
+
+                this.progressBar.addEventListener('input', () => {
+                    this.isDragging = true;
+                    this.currTimeDisplay.innerText = formatTime(this.progressBar.value);
+                });
+                this.progressBar.addEventListener('change', () => {
+                    const targetTime = this.progressBar.value;
+                    this.audioA.currentTime = targetTime;
+                    this.audioB.currentTime = targetTime;
+                    this.isDragging = false;
+                });
             },
+
             renderPlaylist: function() {
+                if(!this.playlistList) return;
                 this.playlistList.innerHTML = '';
                 abTracksData.forEach((track, index) => {
-                    let li = document.createElement('li'); li.className = 'playlist-item';
+                    let li = document.createElement('li');
+                    li.className = 'playlist-item';
                     li.innerHTML = `<span class="item-title">${track.title}</span>`;
                     li.addEventListener('click', () => this.loadTrack(index));
                     this.playlistList.appendChild(li);
                 });
             },
+
             forcePause: function() {
-                this.audioA.pause(); this.audioB.pause(); this.isPlaying = false;
-                this.playBtn.innerHTML = "▶"; this.playBtn.classList.remove("playing");
+                if(this.activeAudio) {
+                    this.audioA.pause();
+                    this.audioB.pause();
+                    this.isPlaying = false;
+                    this.playBtn.innerHTML = "▶";
+                    this.playBtn.classList.remove("playing");
+                }
             },
+
             loadTrack: function(index) {
-                portPlayer.forcePause();
-                this.currentTrackIndex = index; const track = abTracksData[index];
-                this.isPlaying = false; this.playBtn.innerHTML = "▶"; this.playBtn.classList.remove("playing");
-                this.audioA.pause(); this.audioB.pause(); this.progressBar.value = 0;
-                this.audioA.src = track.srcA; this.audioB.src = track.srcB; this.titleDisplay.innerText = track.title;
-                document.querySelectorAll('#ab-playlist-list .playlist-item').forEach((item, i) => { item.classList.toggle('active', i === index); });
+                if(typeof portPlayer !== 'undefined') portPlayer.forcePause();
+                
+                this.currentTrackIndex = index;
+                const track = abTracksData[index];
+                
+                this.isPlaying = false;
+                this.playBtn.innerHTML = "▶";
+                this.playBtn.classList.remove("playing");
+                
+                this.audioA.pause();
+                this.audioB.pause();
+                this.progressBar.value = 0;
+
+                this.audioA.src = track.srcA;
+                this.audioB.src = track.srcB;
+                this.titleDisplay.innerText = track.title;
+
+                if(this.playlistList) {
+                    this.playlistList.querySelectorAll('.playlist-item').forEach((item, i) => {
+                        item.classList.toggle('active', i === index);
+                    });
+                }
                 this.switchAB('A');
             },
+
             togglePlay: function() {
-                if (this.isPlaying) { this.activeAudio.pause(); this.playBtn.innerHTML = "▶"; this.playBtn.classList.remove("playing"); }
-                else { portPlayer.forcePause(); let currentTime = this.activeAudio.currentTime; this.audioA.currentTime = currentTime; this.audioB.currentTime = currentTime; this.activeAudio.play(); this.playBtn.innerHTML = "⏸"; this.playBtn.classList.add("playing"); }
+                if (this.isPlaying) {
+                    this.activeAudio.pause();
+                    this.playBtn.innerHTML = "▶";
+                    this.playBtn.classList.remove("playing");
+                } else {
+                    if(typeof portPlayer !== 'undefined') portPlayer.forcePause();
+                    
+                    let currentTime = this.activeAudio.currentTime;
+                    // Sincronizza sempre prima di ripartire
+                    this.audioA.currentTime = currentTime;
+                    this.audioB.currentTime = currentTime;
+                    
+                    this.activeAudio.play();
+                    this.playBtn.innerHTML = "⏸";
+                    this.playBtn.classList.add("playing");
+                }
                 this.isPlaying = !this.isPlaying;
             },
+
             switchAB: function(target) {
-                let currentTime = this.activeAudio.currentTime; let wasPlaying = !this.activeAudio.paused;
+                let currentTime = this.activeAudio.currentTime;
+                let wasPlaying = !this.activeAudio.paused;
+                
                 this.activeAudio.pause();
+
                 this.switchBtns.forEach(btn => btn.classList.remove('active'));
-                if (target === 'A') { this.activeAudio = this.audioA; document.querySelector('.switch-btn[data-track="A"]').classList.add('active'); }
-                else { this.activeAudio = this.audioB; document.querySelector('.switch-btn[data-track="B"]').classList.add('active'); }
+
+                if (target === 'A') {
+                    this.activeAudio = this.audioA;
+                    document.querySelector('.switch-btn[data-track="A"]').classList.add('active');
+                } else {
+                    this.activeAudio = this.audioB;
+                    document.querySelector('.switch-btn[data-track="B"]').classList.add('active');
+                }
+
                 this.activeAudio.currentTime = currentTime;
                 if (wasPlaying) this.activeAudio.play();
             },
+
             updateProgress: function() {
                 if (this.isDragging || !this.activeAudio.duration) return;
                 const currentTime = this.activeAudio.currentTime;
                 this.progressBar.value = currentTime;
                 this.currTimeDisplay.innerText = formatTime(currentTime);
+                // Aggiorna sempre per sicurezza
                 this.durDisplay.innerText = formatTime(this.activeAudio.duration);
                 this.progressBar.max = this.activeAudio.duration;
             }
         };
 
+        // --- 4. LOGICA PLAYER PORTFOLIO ---
         const portPlayer = {
-            audio: document.getElementById('audioPortfolio'), playBtn: document.getElementById('port-play-btn'),
-            titleDisplay: document.getElementById('port-track-title'), progressBar: document.getElementById('port-progress'),
-            currTimeDisplay: document.getElementById('port-current-time'), durDisplay: document.getElementById('port-duration'),
-            playlistList: document.getElementById('port-playlist-list'), currentTrackIndex: 0, isDragging: false,
+            audio: null, playBtn: null, titleDisplay: null,
+            progressBar: null, currTimeDisplay: null, durDisplay: null,
+            playlistList: null,
+            
+            currentTrackIndex: 0,
+            isDragging: false,
 
             init: function() {
-                this.renderPlaylist(); this.loadTrack(0);
+                this.audio = document.getElementById('audioPortfolio');
+                this.playBtn = document.getElementById('port-play-btn');
+                this.titleDisplay = document.getElementById('port-track-title');
+                this.progressBar = document.getElementById('port-progress');
+                this.currTimeDisplay = document.getElementById('port-current-time');
+                this.durDisplay = document.getElementById('port-duration');
+                this.playlistList = document.getElementById('port-playlist-list');
+
+                if (!this.audio) return;
+
+                this.renderPlaylist();
+                if(portfolioTracksData.length > 0) this.loadTrack(0);
+
                 this.playBtn.addEventListener('click', () => this.togglePlay());
+                
                 this.audio.addEventListener('timeupdate', () => this.updateProgress());
-                this.audio.addEventListener('loadedmetadata', () => { this.durDisplay.innerText = formatTime(this.audio.duration); this.progressBar.max = this.audio.duration; });
-                this.audio.addEventListener('ended', () => { this.playBtn.innerHTML = "▶"; this.playBtn.classList.remove("playing"); this.progressBar.value = 0; });
-                this.progressBar.addEventListener('input', () => { this.isDragging = true; this.currTimeDisplay.innerText = formatTime(this.progressBar.value); });
-                this.progressBar.addEventListener('change', () => { this.audio.currentTime = this.progressBar.value; this.isDragging = false; });
+                this.audio.addEventListener('loadedmetadata', () => {
+                    this.durDisplay.innerText = formatTime(this.audio.duration);
+                    this.progressBar.max = this.audio.duration;
+                });
+                this.audio.addEventListener('ended', () => {
+                    this.playBtn.innerHTML = "▶";
+                    this.playBtn.classList.remove("playing");
+                    this.progressBar.value = 0;
+                });
+
+                this.progressBar.addEventListener('input', () => {
+                    this.isDragging = true;
+                    this.currTimeDisplay.innerText = formatTime(this.progressBar.value);
+                });
+                this.progressBar.addEventListener('change', () => {
+                    this.audio.currentTime = this.progressBar.value;
+                    this.isDragging = false;
+                });
             },
+
             renderPlaylist: function() {
+                if(!this.playlistList) return;
                 this.playlistList.innerHTML = '';
                 portfolioTracksData.forEach((track, index) => {
-                    let li = document.createElement('li'); li.className = 'playlist-item';
+                    let li = document.createElement('li');
+                    li.className = 'playlist-item';
                     li.innerHTML = `<span class="item-title">${track.title}</span>`;
                     li.addEventListener('click', () => this.loadTrack(index));
                     this.playlistList.appendChild(li);
                 });
             },
-            forcePause: function() { this.audio.pause(); this.playBtn.innerHTML = "▶"; this.playBtn.classList.remove("playing"); },
+
+            forcePause: function() {
+                if(this.audio) {
+                    this.audio.pause();
+                    this.playBtn.innerHTML = "▶";
+                    this.playBtn.classList.remove("playing");
+                }
+            },
+
             loadTrack: function(index) {
-                abPlayer.forcePause();
-                this.currentTrackIndex = index; const track = portfolioTracksData[index];
-                this.audio.pause(); this.playBtn.innerHTML = "▶"; this.playBtn.classList.remove("playing"); this.progressBar.value = 0;
-                this.audio.src = track.src; this.titleDisplay.innerText = track.title;
-                document.querySelectorAll('#port-playlist-list .playlist-item').forEach((item, i) => { item.classList.toggle('active', i === index); });
+                if(typeof abPlayer !== 'undefined') abPlayer.forcePause();
+
+                this.currentTrackIndex = index;
+                const track = portfolioTracksData[index];
+                
+                this.audio.pause();
+                this.playBtn.innerHTML = "▶";
+                this.playBtn.classList.remove("playing");
+                this.progressBar.value = 0;
+
+                this.audio.src = track.src;
+                this.titleDisplay.innerText = track.title;
+                
+                if(this.playlistList) {
+                    this.playlistList.querySelectorAll('.playlist-item').forEach((item, i) => {
+                        item.classList.toggle('active', i === index);
+                    });
+                }
             },
+
             togglePlay: function() {
-                if (this.audio.paused) { abPlayer.forcePause(); this.audio.play(); this.playBtn.innerHTML = "⏸"; this.playBtn.classList.add("playing"); }
-                else { this.audio.pause(); this.playBtn.innerHTML = "▶"; this.playBtn.classList.remove("playing"); }
+                if (this.audio.paused) {
+                    if(typeof abPlayer !== 'undefined') abPlayer.forcePause();
+                    this.audio.play();
+                    this.playBtn.innerHTML = "⏸";
+                    this.playBtn.classList.add("playing");
+                } else {
+                    this.audio.pause();
+                    this.playBtn.innerHTML = "▶";
+                    this.playBtn.classList.remove("playing");
+                }
             },
+
             updateProgress: function() {
                 if (this.isDragging || !this.audio.duration) return;
-                const currentTime = this.activeAudio.currentTime;
+                const currentTime = this.audio.currentTime;
                 this.progressBar.value = currentTime;
                 this.currTimeDisplay.innerText = formatTime(currentTime);
             }
         };
 
+        // --- 5. RENDER RECENSIONI ---
         function renderReviews() {
             const container = document.getElementById('reviews-grid');
+            if(!container || typeof REVIEWS_DATA === 'undefined') return;
+            
             container.innerHTML = '';
+            
             REVIEWS_DATA.forEach(review => {
                 const initial = review.name.charAt(0);
                 const cardHTML = `
                     <div class="review-card">
                         <div class="review-header">
                             <div class="review-avatar">${initial}</div>
-                            <div class="review-author"><h4>${review.name}</h4><span>${review.role}</span></div>
+                            <div class="review-author">
+                                <h4>${review.name}</h4>
+                                <span>${review.role}</span>
+                            </div>
                             <svg class="card-g-icon" viewBox="0 0 24 24"><path fill="#fff" d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
                         </div>
                         <p class="review-text">"${review.text}"</p>
-                    </div>`;
+                    </div>
+                `;
                 container.innerHTML += cardHTML;
             });
         }
 
         function scrollReviews(direction) {
             const container = document.getElementById('reviews-grid');
-            // MODIFICA: Scorre di un'intera larghezza visibile (Pagina) invece che singola card
-            // Questo permette di passare al gruppo successivo (3 su pc, 1 su mobile)
-            const scrollAmount = container.clientWidth;
-            container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+            if(container) {
+                const scrollAmount = container.clientWidth;
+                container.scrollBy({
+                    left: direction * scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
         }
 
+        // --- INIZIALIZZAZIONE ---
         document.addEventListener('DOMContentLoaded', () => {
-            abPlayer.init(); portPlayer.init(); renderReviews(); reveal();
+            abPlayer.init();
+            portPlayer.init();
+            renderReviews(); 
+            reveal();
         });
     </script>
 </body>
