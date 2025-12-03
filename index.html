@@ -3,142 +3,1587 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JB Project Studio - Coming Soon</title>
+    <title>JB Project Studio | Studio di registrazione a Viterbo</title>
     <style>
-        /* RESET E BASE */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* --- RESET GLOBALE (Fondamentale per il layout) --- */
+        * {
+            box-sizing: border-box; /* Include padding e bordi nelle dimensioni */
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- VARIABILI COLORI (BRANDING) --- */
+        :root {
+            --bg-color: #050505;
+            --card-bg: #111111;
+            --accent: #bf00ff;
+            --accent-glow: rgba(191, 0, 255, 0.4);
+            --whatsapp: #25D366;
+            --whatsapp-glow: rgba(37, 211, 102, 0.4);
+            --text-main: #ffffff;
+            --text-muted: #b3b3b3;
+            --google-blue: #4285F4; /* Colori Google per le recensioni */
+            --google-orange: #FBBC05;
+        }
+
+        /* --- BASE --- */
+        html { scroll-behavior: smooth; }
         
         body {
-            background-color: #121212; /* Sfondo scuro Pro */
-            color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        h1, h2, h3 { line-height: 1.2; }
+        button { font-family: inherit; }
+
+        /* --- ANIMAZIONI (SCROLL REVEAL) --- */
+        .reveal {
+            position: relative;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 1s ease;
+        }
+
+        .reveal.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* --- NAVBAR --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 5%;
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            height: 80px;
+        }
+
+        .logo { 
+            font-size: 1.2rem; 
+            font-weight: 800; 
+            letter-spacing: 1px; 
+            text-transform: uppercase;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            gap: 15px; 
+        }
+        
+        /* STILE LOGO IMMAGINE */
+        .logo img {
+            height: 90px; 
+            width: auto;
+            margin-top: -20px;   
+            margin-bottom: -20px; 
+            display: block;
+            object-fit: contain;
+        }
+
+        .logo span { color: var(--accent); text-shadow: 0 0 10px var(--accent-glow); }
+
+        nav ul { display: flex; gap: 30px; }
+        nav a { font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        nav a:hover { color: var(--accent); text-shadow: 0 0 8px var(--accent); }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            transition: all 0.3s ease-in-out;
+            background-color: white;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(5,5,5,0.3), var(--bg-color)), 
+                        linear-gradient(45deg, rgba(191,0,255,0.2), rgba(0,0,0,0.8)),
+                        url('img/studio_back.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 20px 20px 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 5rem);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+            text-shadow: 0 0 20px var(--accent-glow);
+        }
+        
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 40px auto; 
+        }
+
+        .btn-glow {
+            padding: 15px 45px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+            background: transparent;
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            box-shadow: 0 0 15px var(--accent-glow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+        }
+
+        .btn-glow:hover {
+            background: var(--accent);
+            color: #000;
+            box-shadow: 0 0 40px var(--accent-glow);
+            transform: scale(1.05);
+        }
+
+        .btn-whatsapp {
+            border-color: var(--whatsapp);
+            box-shadow: 0 0 15px var(--whatsapp-glow);
+        }
+        .btn-whatsapp:hover {
+            background: var(--whatsapp);
+            box-shadow: 0 0 40px var(--whatsapp-glow);
+            color: #fff;
+        }
+
+        /* --- SEZIONE GENERALE --- */
+        .section-padding { padding: 100px 5%; }
+        .section-title { text-align: center; font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 10px; }
+        .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 40px; }
+
+        /* --- ABOUT BOX (MODIFICATO PER IMMAGINE) --- */
+        #about {
+            background-color: #080808;
+            border-bottom: 1px solid #222;
+        }
+
+        .about-box {
+            max-width: 1000px; /* Aumentato leggermente per accomodare l'immagine */
+            margin: 0 auto;
+            background: linear-gradient(145deg, #111111, #0d0d0d);
+            padding: 50px;
+            border-left: 4px solid var(--accent);
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            /* Layout Flex per affiancare foto e testo */
+            display: flex;
+            align-items: center; /* Centra verticalmente */
+            gap: 40px; /* Spazio tra foto e testo */
+        }
+
+        .about-img-wrapper {
+            flex: 0 0 35%; /* La foto occupa il 35% dello spazio */
+            max-width: 350px;
+            position: relative;
+        }
+
+        .about-img-wrapper img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+            /* Effetto bianco e nero leggero opzionale, rimuovi il filter se vuoi colori pieni */
+            filter: grayscale(20%); 
+            transition: 0.3s;
+        }
+        
+        .about-img-wrapper img:hover {
+            filter: grayscale(0%);
+            border-color: var(--accent);
+        }
+
+        .about-content {
+            flex: 1; /* Il testo occupa lo spazio rimanente */
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .about-text:last-child { margin-bottom: 0; }
+        .highlight { color: var(--accent); font-weight: bold; }
+
+        /* --- DUAL PLAYER LAYOUT --- */
+        .dual-player-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: start;
+        }
+
+        .player-container {
+            background: var(--card-bg);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%; 
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .player-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+
+        .track-title-display { 
+            font-size: 1.3rem; 
+            font-weight: bold; 
+            margin-bottom: 5px; 
+            text-align: center; 
+            color: var(--accent); 
+            min-height: 1.5em; 
+        }
+
+        /* --- DESCRIZIONE TRACK --- */
+        .track-description-display {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 25px; 
+            font-style: italic;
+            min-height: 1.2em;
+        }
+
+        .controls-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .play-btn-large {
+            width: 70px; height: 70px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: none;
+            color: #fff;
+            font-size: 28px;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 20px var(--accent-glow);
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+        
+        .play-btn-large:hover { box-shadow: 0 0 40px var(--accent-glow); }
+        .play-btn-large:active { transform: scale(0.95); }
+        .play-btn-large.playing { animation: pulse-border 2s infinite; }
+
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0 0 rgba(191, 0, 255, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(191, 0, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(191, 0, 255, 0); }
+        }
+
+        .ab-switch-container {
+            display: flex;
+            background: #000;
+            border-radius: 30px;
+            padding: 5px;
+            border: 1px solid #333;
+            flex-wrap: wrap;
             justify-content: center;
-            text-align: center;
+        }
+
+        .switch-btn {
+            padding: 8px 25px;
+            border-radius: 25px;
+            border: none;
+            background: transparent;
+            color: #888;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            white-space: nowrap;
+            font-size: 0.9rem;
+        }
+
+        .switch-btn.active {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .progress-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .progress-bar {
+            flex-grow: 1;
+            -webkit-appearance: none;
+            height: 5px;
+            background: #333;
+            border-radius: 5px;
+            outline: none;
+            cursor: pointer;
             overflow: hidden;
         }
 
-        /* CONTENITORE CENTRALE */
-        .container {
-            padding: 2rem;
-            max-width: 600px;
+        .progress-bar::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px; height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: -500px 0 0 492px var(--accent);
         }
 
-        /* LOGO / TITOLO */
-        h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            background: -webkit-linear-gradient(#eee, #999);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* SOTTOTITOLO */
-        p.subtitle {
-            font-size: 1.2rem;
-            color: #888;
-            margin-bottom: 2rem;
-            font-weight: 300;
-        }
-
-        /* ANIMAZIONE EQUALIZZATORE */
-        .equalizer {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            height: 60px;
-            margin-bottom: 30px;
-            gap: 6px;
-        }
-
-        .bar {
-            width: 8px;
-            background: #00e5ff; /* Colore "Cyber Blue" */
-            border-radius: 4px;
-            animation: bounce 1s infinite ease-in-out;
-            box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
-        }
-
-        .bar:nth-child(1) { height: 20px; animation-duration: 0.8s; }
-        .bar:nth-child(2) { height: 40px; animation-duration: 1.1s; }
-        .bar:nth-child(3) { height: 50px; animation-duration: 0.9s; }
-        .bar:nth-child(4) { height: 30px; animation-duration: 1.2s; }
-        .bar:nth-child(5) { height: 20px; animation-duration: 0.7s; }
-
-        @keyframes bounce {
-            0%, 100% { transform: scaleY(0.5); opacity: 0.5; }
-            50% { transform: scaleY(1.2); opacity: 1; }
-        }
-
-        /* BOTTONE CONTATTI */
-        .btn {
-            display: inline-block;
-            padding: 15px 30px;
-            background-color: transparent;
-            color: #00e5ff;
-            border: 2px solid #00e5ff;
-            text-decoration: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-        }
-
-        .btn:hover {
-            background-color: #00e5ff;
-            color: #000;
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
-        }
-
-        /* INFO FOOTER */
-        .footer-info {
-            margin-top: 40px;
-            font-size: 0.9rem;
-            color: #555;
+        /* --- PLAYLIST & SCROLL ELEGANTE --- */
+        .playlist-container {
+            margin-top: 20px;
+            border-top: 1px solid #222;
+            padding-top: 15px;
         }
         
-        .footer-info a {
-            color: #777;
-            text-decoration: none;
-            margin: 0 10px;
+        .playlist-header { 
+            font-size: 0.85rem; 
+            color: var(--text-muted); 
+            margin-bottom: 10px; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+        }
+
+        /* Qui gestiamo l'altezza e lo scroll */
+        .playlist { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 8px; 
+            
+            /* Altezza fissa sufficiente per ~4 tracce */
+            max-height: 240px; 
+            
+            /* Abilita lo scroll verticale */
+            overflow-y: auto; 
+            
+            /* Spazio a destra per non far sovrapporre testo e scrollbar */
+            padding-right: 5px; 
+
+            /* Styling Scrollbar per Firefox */
+            scrollbar-width: thin; 
+            scrollbar-color: var(--accent) #1a1a1a;
+        }
+
+        /* Styling Scrollbar per Chrome, Edge, Safari */
+        .playlist::-webkit-scrollbar {
+            width: 6px; /* Larghezza sottile */
+        }
+
+        .playlist::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05); /* Sfondo traccia discreto */
+            border-radius: 10px;
+        }
+
+        .playlist::-webkit-scrollbar-thumb {
+            background-color: var(--accent); /* Colore viola del brand */
+            border-radius: 10px;
+            border: 1px solid rgba(0,0,0,0.2); /* Leggero bordo per definizione */
+        }
+
+        .playlist::-webkit-scrollbar-thumb:hover {
+            background-color: #d633ff; /* Leggermente più chiaro all'hover */
+        }
+
+        .playlist-item {
+            padding: 12px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex; justify-content: space-between; align-items: center;
+            border: 1px solid transparent;
+            font-size: 0.95rem;
+            /* Flex-shrink 0 impedisce che si schiaccino */
+            flex-shrink: 0; 
+        }
+        
+        .playlist-item:hover { background: rgba(255,255,255,0.08); }
+        
+        .playlist-item.active {
+            border-color: var(--accent);
+            background: rgba(191, 0, 255, 0.1);
+        }
+        
+        .item-title { font-weight: 600; }
+        .item-duration { color: var(--text-muted); font-size: 0.8rem; }
+
+        /* --- SERVIZI (GRID) --- */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #151515, #0a0a0a);
+            padding: 40px 30px;
+            border-radius: 15px;
+            border: 1px solid #222;
+            transition: 0.4s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(191, 0, 255, 0.1);
+        }
+
+        .card h3 { font-size: 1.8rem; margin-bottom: 15px; color: #fff; }
+        .card p { color: #aaa; font-size: 0.95rem; line-height: 1.6; }
+        .icon-box { font-size: 2rem; color: var(--accent); margin-bottom: 20px; }
+
+        /* --- RECENSIONI (SLIDER STYLE) --- */
+        #reviews-grid {
+            display: flex; 
+            gap: 30px;
+            overflow-x: auto; 
+            scroll-snap-type: x mandatory; 
+            padding: 20px 10px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; 
+            /* No scroll-behavior smooth qui per controllo JS */
+        }
+        
+        #reviews-grid::-webkit-scrollbar { display: none; } 
+
+        .reviews-slider-wrapper {
+            position: relative;
+            max-width: 1200px; 
+            margin: 0 auto;
+            padding: 0 50px; 
+        }
+
+        .google-summary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 50px;
+            display: inline-flex; 
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 1px solid #333;
+        }
+        .g-icon {
+            width: 30px; height: 30px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .g-icon svg { width: 18px; height: 18px; }
+        .g-score { font-size: 1.2rem; font-weight: bold; color: #fff; }
+        .g-stars { color: var(--google-orange); letter-spacing: 2px; }
+
+        .review-card {
+            background: var(--card-bg);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 30px;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            flex: 0 0 calc((100% - 60px) / 3); 
+            scroll-snap-align: start;
+            position: relative;
+        }
+        
+        .review-header { display: flex; align-items: center; gap: 15px; }
+        
+        .review-avatar {
+            width: 40px; height: 40px;
+            background: #333;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-transform: uppercase; 
+        }
+
+        .review-author h4 { font-size: 1rem; margin: 0; }
+        .review-author span { font-size: 0.8rem; color: #777; }
+        
+        .review-text { font-size: 0.95rem; color: #ccc; font-style: italic; }
+        
+        /* Icona G nella card */
+        .card-g-icon {
+            position: absolute;
+            top: 20px; right: 20px;
+            width: 20px; height: 20px;
+            opacity: 0.5;
+            fill: #fff; 
+        }
+
+        /* Frecce Slider */
+        .slider-btn {
+            background: rgba(0,0,0,0.6);
+            border: 1px solid #444;
+            color: var(--accent);
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            position: absolute;
+            top: 55%;
+            transform: translateY(-50%);
+            z-index: 10;
+            transition: 0.3s;
+            font-size: 1.2rem;
+        }
+        .slider-btn:hover { background: var(--accent); color: #000; }
+        
+        .slider-btn.prev { left: 0; }
+        .slider-btn.next { right: 0; }
+
+        /* --- FOOTER & CONTACT --- */
+        footer {
+            background: #000;
+            padding: 60px 5%;
+            border-top: 1px solid #333;
+            text-align: center;
+        }
+
+        #contact {
+            background: #080808;
+            padding: 80px 5%;
+            border-top: 1px solid #222;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr; 
+            gap: 60px;
+            align-items: start; 
+        }
+
+        .contact-info { text-align: left; }
+        .contact-info h2 { font-size: 3rem; margin-bottom: 20px; line-height: 1.1; }
+        .contact-info p { font-size: 1.1rem; color: #aaa; margin-bottom: 40px; max-width: 500px; }
+
+        .buttons-group {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .buttons-group .btn-glow {
+            width: 100%; 
+            text-align: center;
+            display: block; 
+        }
+
+        .social-links {
+            margin-top: 0;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center; 
+            margin-bottom: 40px; 
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            color: #fff;
+        }
+        .social-link svg { width: 20px; height: 20px; fill: currentColor; }
+        .social-link:hover {
+            background: var(--accent);
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .map-section {
+            width: 100%;
+            height: 100%;
+            min-height: 350px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #333;
+            position: relative; 
+            background-color: #1a1a1a; 
+        }
+
+        .map-section iframe {
+            position: absolute; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .address-box {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+        }
+
+        .footer-brands-title {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .brands-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+            opacity: 0.5; 
+        }
+
+        .brand-item { font-size: 1.2rem; color: #444; font-weight: bold; }
+        .copyright { font-size: 0.8rem; color: #555; }
+
+        /* --- MEDIA QUERIES (RESPONSIVE) --- */
+        @media (max-width: 900px) {
+            .dual-player-grid { grid-template-columns: 1fr; gap: 50px; }
+            .grid-3 { grid-template-columns: 1fr; }
+
+            /* ABOUT SECTION MOBILE - STACK VERTICALE */
+            .about-box { 
+                flex-direction: column; 
+                text-align: center; 
+            }
+            .about-text { text-align: center; }
+            .about-img-wrapper { 
+                max-width: 250px; /* Foto più piccola su mobile */
+                margin: 0 auto; 
+            }
+
+            /* Tablet: 2 card visibili */
+            .review-card { flex: 0 0 calc((100% - 30px) / 2); }
+
+            .contact-container { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+            .contact-info { text-align: center; margin: 0 auto; }
+            .contact-info p { margin: 0 auto 40px auto; }
+            .buttons-group { margin: 0 auto; align-items: center; }
+            .social-links { justify-content: center; } 
+            
+            .slider-btn { display: none; }
+            .reviews-slider-wrapper { padding: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger { display: block; margin-left: auto; }
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+            nav { position: absolute; width: 0; height: 0; padding: 0; margin: 0; }
+            nav ul {
+                position: fixed; left: -100%; top: 80px;
+                gap: 0; flex-direction: column;
+                background-color: var(--bg-color);
+                width: 100%; text-align: center;
+                transition: 0.3s;
+                border-bottom: 1px solid #222;
+                padding-bottom: 20px;
+            }
+            nav ul.active { left: 0; }
+            nav li { margin: 16px 0; }
+
+            .section-padding { padding: 60px 5%; }
+            .hero { padding-top: 100px; }
+            .about-box { padding: 30px; }
+            .player-container { padding: 30px 20px; }
+            
+            /* --- FIX SLIDER MOBILE --- */
+            
+            /* Aggiungiamo padding laterale al wrapper per fare spazio alle frecce */
+            .reviews-slider-wrapper { 
+                padding: 0 45px; 
+            }
+
+            /* Mobile: 1 card visibile (100% width) */
+            .review-card { 
+                flex: 0 0 100%; 
+                min-width: 100%; 
+                padding: 20px;
+                scroll-snap-align: center; /* <<< FIX: Centra perfettamente la card */
+            }
+            
+            /* Riattiviamo le frecce su mobile, ma più piccole e distanziate */
+            .slider-btn { 
+                display: flex; 
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+            
+            /* Spostiamole un po' dai bordi estremi per estetica */
+            .slider-btn.prev { left: 5px; }
+            .slider-btn.next { right: 5px; }
+
+            .switch-btn { padding: 10px 20px; font-size: 0.85rem; }
+            footer h2 { font-size: 2.5rem !important; }
         }
     </style>
+
+    <!-- ================= CONFIGURAZIONE FACILE (MODIFICA QUI) ================= -->
+    <script>
+        // 1. CARTELLA FILE AUDIO (Lasciare vuota se si usano link esterni completi)
+        const AUDIO_FOLDER = "audio/"; 
+
+        // 2. LISTA A/B (MIX vs MASTER)
+        const AB_FILES_LIST = [
+            // ESEMPIO DEMO (Link esterni funzionanti)
+            {
+                title: "Demo Song (SoundHelix)",
+                description: "Produzione Completa | Mix & Master", // <--- NUOVA DESCRIZIONE
+                master: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                raw: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" 
+            },
+            
+            // Esempio 2
+            {
+                title: "Rock Anthem Demo",
+                description: "Solo Mastering (Commissione)", // <--- NUOVA DESCRIZIONE
+                master: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+                raw: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" 
+            },
+            {
+                title: "Traccia Extra 1",
+                description: "Esempio Scroll", 
+                master: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                raw: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" 
+            },
+            {
+                title: "Traccia Extra 2",
+                description: "Esempio Scroll", 
+                master: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+                raw: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" 
+            },
+            {
+                title: "Traccia Extra 3",
+                description: "Esempio Scroll", 
+                master: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                raw: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" 
+            },
+
+            // I TUOI FILE (Se usi le stringhe semplici, la descrizione sarà vuota)
+            // "Steve - Algofobia.mp3",
+            // "Steve - Algofobia_raw.mp3"
+        ];
+
+        // 3. LISTA PORTFOLIO (LAVORI FINITI)
+        const PORTFOLIO_FILES_LIST = [
+            // ESEMPIO DEMO
+            {
+                title: "Portfolio Demo Track",
+                description: "Produzione Artistica & Arrangiamento", // <--- NUOVA DESCRIZIONE
+                src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+            },
+            {
+                title: "Jazz Session",
+                description: "Mix & Master", 
+                src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+            },
+            {
+                title: "Electronic Vibe",
+                description: "Beatmaking", 
+                src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+            },
+            {
+                title: "Acoustic Pop",
+                description: "Registrazione Vocale", 
+                src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
+            },
+            {
+                title: "Traccia Extra Portfolio",
+                description: "Demo Scroll", 
+                src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+            },
+            
+            // I TUOI FILE
+            // "Steve - Algofobia.mp3",
+            // "MZeta - apocalisse.mp3"
+        ];
+
+        // 4. LISTA RECENSIONI
+        const REVIEWS_DATA = [
+            {
+                name: "Alex M.",
+                role: "Cantautore neomelodico",
+                text: "Che dire è un vero professionista, ma nella musica non basta la professione, ci vuole anche un vero produttore artistico, che ti segua nelle varie fasi della produzione, e lui è davvero un portento, riesce a capirti, e tirar fuori quello che neanche tu sapevi di avere, sarà dura trovar meglio, sono felice di lavorare con lui, lo straconsiglio, mi ringrazierete."
+            },
+            {
+                name: "Francesco D.",
+                role: "Rapper",
+                text: "Produttore musicale nonché produttore artistico serio, competente, disponibile e molto attento ai gusti e alle esigenze dell'artista."
+            },
+            {
+                name: "Luca B.",
+                role: "Musicista/Band",
+                text: "oserei dire super, alta professionalità e competenza. Dato delle tracce e mi ha restituito un prodotto spettacolo. lo seguo in tutto anche nei suoi corsi, consigliatissimo e poi onesto e sincero, doti rare di questi tempi"
+            },
+            {
+                name: "Sebastiano M.",
+                role: "Rapper",
+                text: "Mix e Master decisamente di alto livello, ha saputo accompagnarmi durante tutta la fase di mix spiegandomi dettagliatamente cosa stava facendo e nel mentre illustrandomi tutte le varie modifiche che stava apportando al mix. Dispiaciuto solo del fatto che per motivi logistici non ho potuto assistere al mix da lui in studio ma da remoto a distanza...sarebbe stata davvero una grande esperienza. I lavori di JB parlano da soli!!!! Consigliatissimo!!!!."
+            }
+        ];
+    </script>
+    <!-- ================= FINE CONFIGURAZIONE ================= -->
+
 </head>
 <body>
 
-    <div class="container">
-        <div class="equalizer">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
+    <header>
+        <div class="logo">
+            <img src="img/logo.svg" alt="JB Project Studio">
+            JB PROJECT <span>STUDIO</span>
         </div>
 
-        <h1>JB Project Studio</h1>
+        <div class="hamburger">
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#about" class="nav-link">Chi Sono</a></li>
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="#services" class="nav-link">Servizi</a></li>
+                <li><a href="#reviews" class="nav-link">Recensioni</a></li>
+                <li><a href="#contact" class="nav-link">Contatti</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="reveal active"> 
+            <h1>Il Tuo Suono<br><span>La tua identità</span></h1>
+            <p>Produzione Artistica & Musicale. Dal concept al master finale.</p>
+            <a href="#portfolio" class="btn-glow">Ascolta</a>
+        </div>
+    </section>
+
+    <!-- SEZIONE ABOUT MODIFICATA CON IMMAGINE -->
+    <section id="about" class="section-padding">
+        <div class="reveal">
+            <h2 class="section-title">Oltre il Tasto Rec</h2>
+            <div class="about-box">
+                <!-- IMMAGINE -->
+                <div class="about-img-wrapper">
+                    <img src="img/jo.jpg" alt="Giordano Boschetti" width="713" height="911">
+                </div>
+                
+                <!-- TESTO -->
+                <div class="about-content">
+                    <p class="about-text">Mi chiamo <span class="highlight">Giordano Boschetti</span>. Dal 1990 coltivo una visione: non limitarsi a registrare, ma <em>scolpire</em> l'identità artistica.</p>
+                    <p class="about-text">Che si tratti di chitarre, tastiere o beat elettronici, il mio obiettivo non è solo farti "suonare bene", ma creare un prodotto che ti rappresenti. <span>Non cerco clienti, ma progetti in cui credere.</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="section-padding">
+        <div class="reveal">
+            <h2 class="section-title">Portfolio & Demo</h2>
+            <p class="section-subtitle">Ascolta la differenza e i lavori finiti.</p>
+
+            <div class="dual-player-grid">
+                <!-- PLAYER 1 -->
+                <div class="player-container" id="ab-player-root">
+                    <div>
+                        <div class="track-title-display" id="ab-track-title">Caricamento...</div>
+                        <!-- NUOVO DIV PER DESCRIZIONE -->
+                        <div class="track-description-display" id="ab-track-description"></div>
+                        
+                        <div class="controls-wrapper">
+                            <button class="play-btn-large" id="ab-play-btn">▶</button>
+                            <div class="ab-switch-container">
+                                <button class="switch-btn active" data-track="A">RAW MIX</button>
+                                <button class="switch-btn" data-track="B">MASTER</button>
+                            </div>
+                            <div class="progress-container">
+                                <span id="ab-current-time">0:00</span>
+                                <input type="range" class="progress-bar" id="ab-progress" value="0" min="0" max="100" step="0.1">
+                                <span id="ab-duration">0:00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="playlist-container">
+                        <div class="playlist-header">Confronto Mix</div>
+                        <ul class="playlist" id="ab-playlist-list"></ul>
+                    </div>
+                    <audio id="audioA" preload="auto"></audio>
+                    <audio id="audioB" preload="auto"></audio>
+                </div>
+
+                <!-- PLAYER 2 -->
+                <div class="player-container" id="portfolio-player-root">
+                    <div>
+                        <div class="track-title-display" id="port-track-title">Caricamento...</div>
+                        <!-- NUOVO DIV PER DESCRIZIONE -->
+                        <div class="track-description-display" id="port-track-description"></div>
+
+                        <div class="controls-wrapper">
+                            <button class="play-btn-large" id="port-play-btn">▶</button>
+                            <div style="height: 38px;"></div> 
+                            <div class="progress-container">
+                                <span id="port-current-time">0:00</span>
+                                <input type="range" class="progress-bar" id="port-progress" value="0" min="0" max="100" step="0.1">
+                                <span id="port-duration">0:00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="playlist-container">
+                        <div class="playlist-header">Lavori Finiti</div>
+                        <ul class="playlist" id="port-playlist-list"></ul>
+                    </div>
+                    <audio id="audioPortfolio" preload="auto"></audio>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section-padding" style="background: #0a0a0a;">
+        <div class="reveal">
+            <h2 class="section-title">I Miei Servizi</h2>
+            <p class="section-subtitle">Un percorso completo per la tua musica.</p>
+            <div class="grid-3">
+                <div class="card"><div class="icon-box">🎨</div><h3>Produzione Artistica</h3><p>Il cuore del progetto. Non registriamo e basta: definiamo insieme la direzione stilistica.</p></div>
+                <div class="card"><div class="icon-box">🎹</div><h3>Produzione Musicale</h3><p>Dall'arrangiamento al Beat Making. Costruisco la strumentale attorno alla tua voce.</p></div>
+                <div class="card"><div class="icon-box">🎚️</div><h3>Mix & Mastering</h3><p>Competitività e calore. Unisco il punch del digitale al colore dell'analogico.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="section-padding">
+        <div class="reveal">
+            <h2 class="section-title">Dicono di Me</h2>
+            <p class="section-subtitle">Alcune parole dagli artisti con cui ho lavorato.</p>
+            
+            <div class="reviews-slider-wrapper">
+                <div class="google-summary">
+                    <div class="g-icon">
+                        <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.04-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                    </div>
+                    <div class="g-score">5.0</div>
+                    <div class="g-stars">★★★★★</div>
+                </div>
+
+                <button class="slider-btn prev" onclick="scrollReviews(-1)">&#10094;</button>
+                <div id="reviews-grid"></div> 
+                <button class="slider-btn next" onclick="scrollReviews(1)">&#10095;</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="reveal contact-container">
+            <div class="contact-info">
+                <h2>Lavoriamo Insieme</h2>
+                <p>Il feeling è tutto. Prenota un <strong>colloquio conoscitivo gratuito</strong> in studio (o una call online).</p>
+                <div class="buttons-group">
+                    <a href="https://wa.me/39INSERISCINUMERO" class="btn-glow btn-whatsapp" target="_blank">💬 Scrivimi su WhatsApp</a>
+                    <a href="mailto:info@jbprojectstudio.com" class="btn-glow">📧 Richiedi Preventivo</a>
+                </div>
+            </div>
+            <div style="width: 100%;">
+                <div class="map-section">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2940.6145657400943!2d12.165913776484722!3d42.520998224918195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1328f1e36b6fb107%3A0x75eb6eff7eea1aea!2sJB%20Project%20Studio%20(Giordano%20Boschetti)!5e0!3m2!1sit!2sit!4v1764718453290!5m2!1sit!2sit" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="address-box"><p><strong>JB Project Studio</strong> - Viterbo (VT)<br>Ricevo su appuntamento</p></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="#" class="social-link" title="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+            <a href="#" class="social-link" title="Facebook"><svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
+            <a href="#" class="social-link" title="YouTube"><svg viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></a>
+        </div>
+        <div class="copyright">&copy; 2025 JB Project Studio - P.IVA: 02426720567 | All rights reserved.</div> 
+    </footer>
+
+<script>
+        // --- 1. UTILITIES & NAVIGAZIONE ---
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector("nav ul");
+        const navLink = document.querySelectorAll(".nav-link");
+
+        if(hamburger) {
+            hamburger.addEventListener("click", () => {
+                hamburger.classList.toggle("active");
+                navMenu.classList.toggle("active");
+            });
+        }
+
+        navLink.forEach(n => n.addEventListener("click", () => {
+            if(hamburger) hamburger.classList.remove("active");
+            if(navMenu) navMenu.classList.remove("active");
+        }));
+
+        window.addEventListener('scroll', reveal);
+        function reveal() {
+            var reveals = document.querySelectorAll('.reveal');
+            for (var i = 0; i < reveals.length; i++) {
+                var windowheight = window.innerHeight;
+                var revealtop = reveals[i].getBoundingClientRect().top;
+                var revealpoint = 150;
+                if (revealtop < windowheight - revealpoint) reveals[i].classList.add('active');
+            }
+        }
+
+        function getFileParts(filename) {
+            if (!filename) return { name: "", ext: "" };
+            const lastDotIndex = filename.lastIndexOf('.');
+            if (lastDotIndex === -1) return { name: filename, ext: '' }; 
+            return { name: filename.substring(0, lastDotIndex), ext: filename.substring(lastDotIndex) };
+        }
+
+        // Funzione per costruire il percorso corretto (gestisce spazi e caratteri speciali e link esterni)
+        function getSafePath(filename) {
+            // Se è già un URL completo (http/https), lo restituisce così com'è
+            if (filename.startsWith('http')) return filename;
+            
+            // Altrimenti aggiunge la cartella locale e codifica
+            return AUDIO_FOLDER + encodeURIComponent(filename.trim());
+        }
+
+        function formatTime(seconds) {
+            if(!seconds || isNaN(seconds)) return "0:00";
+            let minutes = Math.floor(seconds / 60);
+            minutes = (minutes >= 10) ? minutes : "0" + minutes;
+            let secs = Math.floor(seconds % 60);
+            secs = (secs >= 10) ? secs : "0" + secs;
+            return minutes + ":" + secs;
+        }
+
+        // --- 2. COSTRUZIONE LISTE (PULITA & FILTRATA) ---
         
-        <p class="subtitle">
-            Il sito è in fase di <strong>Remastering</strong>.<br>
-            Torniamo online a breve con una nuova esperienza.
-        </p>
+        function parseABList(list) {
+            const parsed = [];
+            
+            list.forEach(item => {
+                // Caso A: Stringa semplice (File locale con convenzione _raw)
+                if (typeof item === 'string') {
+                    if (item.toLowerCase().includes('_raw.')) return; // Salta se è già il file raw
 
-        <a href="mailto:info@jbprojectstudio.com" class="btn">Richiedi Preventivo</a>
+                    const parts = getFileParts(item);
+                    let cleanTitle = parts.name.replace(/-/g, ' ').replace(/_/g, ' ');
+                    
+                    // Costruzione automatica nome file RAW
+                    const rawFileName = `${parts.name}_raw${parts.ext}`;
+                    
+                    parsed.push({
+                        title: cleanTitle,
+                        description: "", // Vuoto per stringhe
+                        srcA: getSafePath(rawFileName),
+                        srcB: getSafePath(item)
+                    });
+                } 
+                // Caso B: Oggetto esplicito (per link esterni o configurazioni custom)
+                else if (typeof item === 'object') {
+                    parsed.push({
+                        title: item.title,
+                        description: item.description || "", // Legge la descrizione
+                        srcA: item.raw,
+                        srcB: item.master
+                    });
+                }
+            });
+            return parsed;
+        }
 
-        <div class="footer-info">
-            <p>Viterbo, Italia | Mixing & Mastering Online</p>
-            <br>
-            <a href="https://instagram.com" target="_blank">Instagram</a>
-            <a href="https://facebook.com" target="_blank">Facebook</a>
-        </div>
-    </div>
+        function parsePortfolioList(list) {
+            return list.map(item => {
+                // Caso A: Stringa semplice (File locale)
+                if (typeof item === 'string') {
+                    const parts = getFileParts(item);
+                    let cleanTitle = parts.name.replace(/-/g, ' ').replace(/_/g, ' ');
+                    return {
+                        title: cleanTitle,
+                        description: "", // Vuoto per stringhe
+                        src: getSafePath(item)
+                    };
+                } 
+                // Caso B: Oggetto esplicito (Link esterno)
+                else {
+                      return {
+                        title: item.title,
+                        description: item.description || "", // Legge la descrizione
+                        src: item.src
+                    };
+                }
+            });
+        }
 
+        // Generazione dati
+        const abTracksData = (typeof AB_FILES_LIST !== 'undefined') ? parseABList(AB_FILES_LIST) : [];
+        const portfolioTracksData = (typeof PORTFOLIO_FILES_LIST !== 'undefined') ? parsePortfolioList(PORTFOLIO_FILES_LIST) : [];
+
+        // --- 3. PLAYER A/B LOGIC ---
+        const abPlayer = {
+            audioA: null, audioB: null,
+            playBtn: null, titleDisplay: null, descDisplay: null, // Aggiunto descDisplay
+            progressBar: null, currTimeDisplay: null, durDisplay: null,
+            playlistList: null, switchBtns: null,
+            
+            currentTrackIndex: 0,
+            activeAudio: null, 
+            isPlaying: false,
+            isDragging: false,
+
+            init: function() {
+                this.audioA = document.getElementById('audioA');
+                this.audioB = document.getElementById('audioB');
+                this.playBtn = document.getElementById('ab-play-btn');
+                this.titleDisplay = document.getElementById('ab-track-title');
+                this.descDisplay = document.getElementById('ab-track-description'); // Selezione elemento
+                this.progressBar = document.getElementById('ab-progress');
+                this.currTimeDisplay = document.getElementById('ab-current-time');
+                this.durDisplay = document.getElementById('ab-duration');
+                this.playlistList = document.getElementById('ab-playlist-list');
+                this.switchBtns = document.querySelectorAll('.switch-btn');
+
+                if (!this.audioA || !this.audioB) return;
+
+                // Default
+                this.activeAudio = this.audioA;
+                this.renderPlaylist();
+                if(abTracksData.length > 0) {
+                    // Carica il primo ma NON suona (solo init)
+                    this.setTrackData(0, false);
+                }
+
+                this.playBtn.addEventListener('click', () => this.togglePlay());
+                
+                this.switchBtns.forEach(btn => {
+                    btn.addEventListener('click', (e) => this.switchAB(e.target.dataset.track));
+                });
+
+                [this.audioA, this.audioB].forEach(audio => {
+                    audio.addEventListener('timeupdate', () => this.updateProgress());
+                    audio.addEventListener('loadedmetadata', () => {
+                        if(this.activeAudio && !isNaN(this.activeAudio.duration)) {
+                            this.durDisplay.innerText = formatTime(this.activeAudio.duration);
+                            this.progressBar.max = this.activeAudio.duration;
+                        }
+                    });
+                    // Error handling
+                    audio.addEventListener('error', (e) => {
+                        console.error("Errore caricamento audio:", audio.src);
+                    });
+                    audio.addEventListener('ended', () => {
+                          this.isPlaying = false;
+                          this.playBtn.innerHTML = "▶";
+                          this.playBtn.classList.remove("playing");
+                          this.audioA.currentTime = 0;
+                          this.audioB.currentTime = 0;
+                    });
+                });
+
+                this.progressBar.addEventListener('input', () => {
+                    this.isDragging = true;
+                    this.currTimeDisplay.innerText = formatTime(this.progressBar.value);
+                });
+                this.progressBar.addEventListener('change', () => {
+                    const targetTime = this.progressBar.value;
+                    this.audioA.currentTime = targetTime;
+                    this.audioB.currentTime = targetTime;
+                    this.isDragging = false;
+                });
+            },
+
+            renderPlaylist: function() {
+                if(!this.playlistList) return;
+                this.playlistList.innerHTML = '';
+                abTracksData.forEach((track, index) => {
+                    let li = document.createElement('li');
+                    li.className = 'playlist-item';
+                    li.innerHTML = `<span class="item-title">${track.title}</span>`;
+                    // Click sulla playlist -> Carica E SUONA
+                    li.addEventListener('click', () => this.loadTrack(index));
+                    this.playlistList.appendChild(li);
+                });
+            },
+
+            forcePause: function() {
+                if(this.activeAudio) {
+                    this.audioA.pause();
+                    this.audioB.pause();
+                    this.isPlaying = false;
+                    this.playBtn.innerHTML = "▶";
+                    this.playBtn.classList.remove("playing");
+                }
+            },
+
+            // Funzione interna per settare i dati senza per forza suonare
+            setTrackData: function(index, autoPlay) {
+                this.currentTrackIndex = index;
+                const track = abTracksData[index];
+                
+                // Ferma tutto prima di cambiare
+                this.audioA.pause();
+                this.audioB.pause();
+                this.progressBar.value = 0;
+
+                this.audioA.src = track.srcA;
+                this.audioB.src = track.srcB;
+                this.titleDisplay.innerText = track.title;
+                
+                // Setta descrizione
+                if(this.descDisplay) {
+                    this.descDisplay.innerText = track.description || "";
+                }
+
+                // Update UI Playlist
+                if(this.playlistList) {
+                    this.playlistList.querySelectorAll('.playlist-item').forEach((item, i) => {
+                        item.classList.toggle('active', i === index);
+                    });
+                }
+
+                // Reset su A (RAW)
+                this.activeAudio = this.audioA;
+                this.switchBtns.forEach(btn => btn.classList.remove('active'));
+                if(document.querySelector('.switch-btn[data-track="A"]')) {
+                    document.querySelector('.switch-btn[data-track="A"]').classList.add('active');
+                }
+
+                if (autoPlay) {
+                    this.playAudio();
+                } else {
+                    this.isPlaying = false;
+                    this.playBtn.innerHTML = "▶";
+                    this.playBtn.classList.remove("playing");
+                }
+            },
+
+            // Chiamata dalla playlist (Click utente)
+            loadTrack: function(index) {
+                if(typeof portPlayer !== 'undefined') portPlayer.forcePause();
+                this.setTrackData(index, true); // true = AutoPlay
+            },
+
+            playAudio: function() {
+                this.isPlaying = true;
+                this.playBtn.innerHTML = "⏸";
+                this.playBtn.classList.add("playing");
+                
+                // Sync
+                let t = this.audioA.currentTime; 
+                this.audioB.currentTime = t;
+                
+                let playPromise = this.activeAudio.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log("Autoplay prevent o errore:", error);
+                        this.titleDisplay.innerText = "Errore File / Autoplay";
+                        this.isPlaying = false;
+                        this.playBtn.innerHTML = "▶";
+                        this.playBtn.classList.remove("playing");
+                    });
+                }
+            },
+
+            togglePlay: function() {
+                if (this.isPlaying) {
+                    this.activeAudio.pause();
+                    this.isPlaying = false;
+                    this.playBtn.innerHTML = "▶";
+                    this.playBtn.classList.remove("playing");
+                } else {
+                    if(typeof portPlayer !== 'undefined') portPlayer.forcePause();
+                    this.playAudio();
+                }
+            },
+
+            switchAB: function(target) {
+                let currentTime = this.activeAudio.currentTime;
+                let wasPlaying = !this.activeAudio.paused;
+                
+                this.activeAudio.pause();
+
+                this.switchBtns.forEach(btn => btn.classList.remove('active'));
+
+                if (target === 'A') {
+                    this.activeAudio = this.audioA;
+                    let btn = document.querySelector('.switch-btn[data-track="A"]');
+                    if(btn) btn.classList.add('active');
+                } else {
+                    this.activeAudio = this.audioB;
+                    let btn = document.querySelector('.switch-btn[data-track="B"]');
+                    if(btn) btn.classList.add('active');
+                }
+
+                this.activeAudio.currentTime = currentTime;
+                if (wasPlaying) this.activeAudio.play();
+            },
+
+            updateProgress: function() {
+                if (this.isDragging || !this.activeAudio.duration) return;
+                const currentTime = this.activeAudio.currentTime;
+                this.progressBar.value = currentTime;
+                this.currTimeDisplay.innerText = formatTime(currentTime);
+                // Aggiorna durata se disponibile
+                if(!isNaN(this.activeAudio.duration)) {
+                    this.durDisplay.innerText = formatTime(this.activeAudio.duration);
+                    this.progressBar.max = this.activeAudio.duration;
+                }
+            }
+        };
+
+        // --- 4. LOGICA PLAYER PORTFOLIO ---
+        const portPlayer = {
+            audio: null, playBtn: null, titleDisplay: null, descDisplay: null, // Aggiunto descDisplay
+            progressBar: null, currTimeDisplay: null, durDisplay: null,
+            playlistList: null,
+            
+            currentTrackIndex: 0,
+            isDragging: false,
+
+            init: function() {
+                this.audio = document.getElementById('audioPortfolio');
+                this.playBtn = document.getElementById('port-play-btn');
+                this.titleDisplay = document.getElementById('port-track-title');
+                this.descDisplay = document.getElementById('port-track-description'); // Selezione elemento
+                this.progressBar = document.getElementById('port-progress');
+                this.currTimeDisplay = document.getElementById('port-current-time');
+                this.durDisplay = document.getElementById('port-duration');
+                this.playlistList = document.getElementById('port-playlist-list');
+
+                if (!this.audio) return;
+
+                this.renderPlaylist();
+                if(portfolioTracksData.length > 0) this.setTrackData(0, false);
+
+                this.playBtn.addEventListener('click', () => this.togglePlay());
+                
+                this.audio.addEventListener('timeupdate', () => this.updateProgress());
+                this.audio.addEventListener('loadedmetadata', () => {
+                      if(!isNaN(this.audio.duration)) {
+                        this.durDisplay.innerText = formatTime(this.audio.duration);
+                        this.progressBar.max = this.audio.duration;
+                      }
+                });
+                this.audio.addEventListener('error', () => {
+                    console.error("Errore file portfolio:", this.audio.src);
+                });
+                this.audio.addEventListener('ended', () => {
+                    this.playBtn.innerHTML = "▶";
+                    this.playBtn.classList.remove("playing");
+                    this.progressBar.value = 0;
+                });
+
+                this.progressBar.addEventListener('input', () => {
+                    this.isDragging = true;
+                    this.currTimeDisplay.innerText = formatTime(this.progressBar.value);
+                });
+                this.progressBar.addEventListener('change', () => {
+                    this.audio.currentTime = this.progressBar.value;
+                    this.isDragging = false;
+                });
+            },
+
+            renderPlaylist: function() {
+                if(!this.playlistList) return;
+                this.playlistList.innerHTML = '';
+                portfolioTracksData.forEach((track, index) => {
+                    let li = document.createElement('li');
+                    li.className = 'playlist-item';
+                    li.innerHTML = `<span class="item-title">${track.title}</span>`;
+                    li.addEventListener('click', () => this.loadTrack(index));
+                    this.playlistList.appendChild(li);
+                });
+            },
+
+            forcePause: function() {
+                if(this.audio) {
+                    this.audio.pause();
+                    this.playBtn.innerHTML = "▶";
+                    this.playBtn.classList.remove("playing");
+                }
+            },
+
+            setTrackData: function(index, autoPlay) {
+                this.currentTrackIndex = index;
+                const track = portfolioTracksData[index];
+                
+                this.audio.pause();
+                this.progressBar.value = 0;
+                this.audio.src = track.src;
+                this.titleDisplay.innerText = track.title;
+                
+                // Setta descrizione
+                if(this.descDisplay) {
+                    this.descDisplay.innerText = track.description || "";
+                }
+                
+                if(this.playlistList) {
+                    this.playlistList.querySelectorAll('.playlist-item').forEach((item, i) => {
+                        item.classList.toggle('active', i === index);
+                    });
+                }
+
+                if(autoPlay) {
+                    this.playAudio();
+                } else {
+                    this.playBtn.innerHTML = "▶";
+                    this.playBtn.classList.remove("playing");
+                }
+            },
+
+            loadTrack: function(index) {
+                if(typeof abPlayer !== 'undefined') abPlayer.forcePause();
+                this.setTrackData(index, true);
+            },
+
+            playAudio: function() {
+                let playPromise = this.audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        this.playBtn.innerHTML = "⏸";
+                        this.playBtn.classList.add("playing");
+                    }).catch(error => {
+                        console.log("Autoplay error:", error);
+                        this.titleDisplay.innerText = "Errore File";
+                    });
+                }
+            },
+
+            togglePlay: function() {
+                if (this.audio.paused) {
+                    if(typeof abPlayer !== 'undefined') abPlayer.forcePause();
+                    this.playAudio();
+                } else {
+                    this.audio.pause();
+                    this.playBtn.innerHTML = "▶";
+                    this.playBtn.classList.remove("playing");
+                }
+            },
+
+            updateProgress: function() {
+                if (this.isDragging || !this.audio.duration) return;
+                const currentTime = this.audio.currentTime;
+                this.progressBar.value = currentTime;
+                this.currTimeDisplay.innerText = formatTime(currentTime);
+            }
+        };
+
+        // --- 5. RENDER RECENSIONI ---
+        function renderReviews() {
+            const container = document.getElementById('reviews-grid');
+            if(!container || typeof REVIEWS_DATA === 'undefined') return;
+            
+            container.innerHTML = '';
+            
+            REVIEWS_DATA.forEach(review => {
+                const initial = review.name.charAt(0);
+                const cardHTML = `
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">${initial}</div>
+                            <div class="review-author">
+                                <h4>${review.name}</h4>
+                                <span>${review.role}</span>
+                            </div>
+                            <svg class="card-g-icon" viewBox="0 0 24 24"><path fill="#fff" d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
+                        </div>
+                        <p class="review-text">"${review.text}"</p>
+                    </div>
+                `;
+                container.innerHTML += cardHTML;
+            });
+        }
+
+        function scrollReviews(direction) {
+            const container = document.getElementById('reviews-grid');
+            if(container) {
+                const scrollAmount = container.clientWidth;
+                container.scrollBy({
+                    left: direction * scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // --- INIZIALIZZAZIONE ---
+        document.addEventListener('DOMContentLoaded', () => {
+            abPlayer.init();
+            portPlayer.init();
+            renderReviews(); 
+            reveal();
+        });
+    </script>
 </body>
-</html> 
+</html>
