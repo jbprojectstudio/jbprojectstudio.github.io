@@ -381,9 +381,17 @@
         .card p { color: #aaa; font-size: 0.95rem; line-height: 1.6; }
         .icon-box { font-size: 2rem; color: var(--accent); margin-bottom: 20px; }
 
-        /* --- FOOTER & CONTACT (NUOVO LAYOUT) --- */
+        /* --- FOOTER & CONTACT (FIXED MAP ALIGNMENT) --- */
         footer {
             background: #000;
+            padding: 60px 5%;
+            border-top: 1px solid #333;
+            text-align: center;
+        }
+
+        /* SEZIONE CONTATTI */
+        #contact {
+            background: #080808;
             padding: 80px 5%;
             border-top: 1px solid #222;
         }
@@ -392,17 +400,18 @@
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1fr; /* Due colonne: Contatti | Mappa */
+            grid-template-columns: 1fr 1fr; 
             gap: 60px;
-            align-items: center;
+            /* FIX VISIVO: Allinea la mappa in alto, al livello del titolo "Lavoriamo Insieme" */
+            align-items: start; 
         }
 
         .contact-info { text-align: left; }
         
-        .contact-info h2 { font-size: 3rem; margin-bottom: 20px; }
+        .contact-info h2 { font-size: 3rem; margin-bottom: 20px; line-height: 1.1; }
         .contact-info p { font-size: 1.1rem; color: #aaa; margin-bottom: 40px; max-width: 500px; }
 
-        /* GRUPPO PULSANTI UNIFORMATO */
+        /* GRUPPO PULSANTI */
         .buttons-group {
             display: flex;
             flex-direction: column;
@@ -418,15 +427,14 @@
             display: block; 
         }
 
-        /* --- NUOVI STILI SOCIAL --- */
+        /* NUOVI STILI SOCIAL (Centrati nel Footer) */
         .social-links {
-            /* Spostato nel footer, centrato di default */
             margin-top: 0;
             display: flex;
             gap: 20px;
             align-items: center;
-            justify-content: center; /* Centrato per il footer */
-            margin-bottom: 40px; /* Spazio sotto i social */
+            justify-content: center; 
+            margin-bottom: 40px; 
         }
 
         .social-link {
@@ -454,7 +462,7 @@
             box-shadow: 0 0 15px var(--accent-glow);
         }
 
-        /* FIX MAPPA */
+        /* MAPPA */
         .map-section {
             width: 100%;
             height: 100%;
@@ -462,31 +470,24 @@
             border-radius: 20px;
             overflow: hidden;
             border: 1px solid #333;
-            position: relative; /* Ancora per l'iframe assoluto */
-            background-color: #1a1a1a; /* Sfondo scuro di caricamento */
+            position: relative; 
+            background-color: #1a1a1a; 
         }
 
         .map-section iframe {
-            position: absolute; /* Forza il riempimento del contenitore */
+            position: absolute; 
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             border: 0;
+            /* Nessun filtro */
         }
 
         .address-box {
             margin-top: 20px;
             font-size: 0.9rem;
             color: #666;
-            text-align: center;
-        }
-
-        /* --- FOOTER ISTITUZIONALE (SEPARATO) --- */
-        footer {
-            background: #000;
-            padding: 60px 5%;
-            border-top: 1px solid #333;
             text-align: center;
         }
 
@@ -505,14 +506,13 @@
             gap: 40px;
             flex-wrap: wrap;
             margin-bottom: 40px;
-            opacity: 0.5; /* Li rendiamo discreti */
+            opacity: 0.5; 
         }
 
         .brand-item {
             font-size: 1.2rem;
-            color: #444; /* Colore "disattivato" per placeholder */
+            color: #444; 
             font-weight: bold;
-            /* In futuro qui metterai le immagini dei loghi */
         }
 
         .copyright {
@@ -617,7 +617,7 @@
                     Nel mio studio, unisco la sensibilità dell'artista alla maniacalità dell'ingegnere del suono.
                 </p>
                 <p class="about-text">
-                    Che si tratti di chitarre, tastiere o beat elettronici, il mio obiettivo non è solo farti "suonare bene", ma creare un prodotto che ti rappresenti. <span class="highlight">Non cerco clienti, ma progetti in cui credere.</span>
+                    Che si tratti di chitarre, tastiere o beat elettronici, il mio obiettivo non è solo farti "suonare bene", ma creare un prodotto che ti rappresenti. <span>Non cerco clienti, ma progetti in cui credere.</span>
                 </p>
             </div>
         </div>
@@ -719,7 +719,7 @@
         </div>
     </section>
 
-    <!-- ================= SEZIONE CONTATTI (EX FOOTER PART 1) ================= -->
+    <!-- ================= SEZIONE CONTATTI ================= -->
     <section id="contact">
         <div class="reveal contact-container">
             
@@ -729,6 +729,7 @@
                 <p>Il feeling è tutto. Prenota un <strong>colloquio conoscitivo gratuito</strong> in studio (o una call online) per raccontarmi il tuo progetto senza impegno.</p>
                 
                 <div class="buttons-group">
+                    <!-- LINK WHATSAPP: Inserisci il tuo numero dopo 39 -->
                     <a href="https://wa.me/39INSERISCINUMERO" class="btn-glow btn-whatsapp" target="_blank">
                         💬 Scrivimi su WhatsApp
                     </a>
@@ -929,7 +930,16 @@
                 });
             },
 
+            forcePause: function() {
+                this.audioA.pause();
+                this.audioB.pause();
+                this.isPlaying = false;
+                this.playBtn.innerHTML = "▶";
+                this.playBtn.classList.remove("playing");
+            },
+
             loadTrack: function(index) {
+                portPlayer.forcePause(); // STOP ALTRI PLAYER
                 this.currentTrackIndex = index;
                 const track = abTracksData[index];
                 this.isPlaying = false;
@@ -953,6 +963,7 @@
                     this.playBtn.innerHTML = "▶";
                     this.playBtn.classList.remove("playing");
                 } else {
+                    portPlayer.forcePause(); // STOP ALTRI PLAYER
                     let currentTime = this.activeAudio.currentTime;
                     this.audioA.currentTime = currentTime;
                     this.audioB.currentTime = currentTime;
@@ -1036,7 +1047,14 @@
                 });
             },
 
+            forcePause: function() {
+                this.audio.pause();
+                this.playBtn.innerHTML = "▶";
+                this.playBtn.classList.remove("playing");
+            },
+
             loadTrack: function(index) {
+                abPlayer.forcePause(); // STOP ALTRI PLAYER
                 this.currentTrackIndex = index;
                 const track = portfolioTracksData[index];
                 this.audio.pause();
@@ -1052,6 +1070,7 @@
 
             togglePlay: function() {
                 if (this.audio.paused) {
+                    abPlayer.forcePause(); // STOP ALTRI PLAYER
                     this.audio.play();
                     this.playBtn.innerHTML = "⏸";
                     this.playBtn.classList.add("playing");
@@ -1064,7 +1083,7 @@
 
             updateProgress: function() {
                 if (this.isDragging || !this.audio.duration) return;
-                const currentTime = this.activeAudio.currentTime;
+                const currentTime = this.audio.currentTime;
                 this.progressBar.value = currentTime;
                 this.currTimeDisplay.innerText = formatTime(currentTime);
             }
