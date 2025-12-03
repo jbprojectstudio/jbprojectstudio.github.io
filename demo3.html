@@ -246,18 +246,18 @@
         .track-title-display { 
             font-size: 1.3rem; 
             font-weight: bold; 
-            margin-bottom: 5px; /* Ridotto il margine inferiore per avvicinare la descrizione */
+            margin-bottom: 5px; 
             text-align: center; 
             color: var(--accent); 
             min-height: 1.5em; 
         }
 
-        /* --- NUOVA CLASSE PER LA DESCRIZIONE --- */
+        /* --- DESCRIZIONE TRACK --- */
         .track-description-display {
             font-size: 0.95rem;
             color: var(--text-muted);
             text-align: center;
-            margin-bottom: 25px; /* Spazio prima dei controlli */
+            margin-bottom: 25px; 
             font-style: italic;
             min-height: 1.2em;
         }
@@ -350,13 +350,61 @@
             box-shadow: -500px 0 0 492px var(--accent);
         }
 
+        /* --- PLAYLIST & SCROLL ELEGANTE --- */
         .playlist-container {
             margin-top: 20px;
             border-top: 1px solid #222;
             padding-top: 15px;
         }
-        .playlist-header { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;}
-        .playlist { display: flex; flex-direction: column; gap: 8px; max-height: 250px; overflow-y: auto; }
+        
+        .playlist-header { 
+            font-size: 0.85rem; 
+            color: var(--text-muted); 
+            margin-bottom: 10px; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+        }
+
+        /* Qui gestiamo l'altezza e lo scroll */
+        .playlist { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 8px; 
+            
+            /* Altezza fissa sufficiente per ~4 tracce */
+            max-height: 240px; 
+            
+            /* Abilita lo scroll verticale */
+            overflow-y: auto; 
+            
+            /* Spazio a destra per non far sovrapporre testo e scrollbar */
+            padding-right: 5px; 
+
+            /* Styling Scrollbar per Firefox */
+            scrollbar-width: thin; 
+            scrollbar-color: var(--accent) #1a1a1a;
+        }
+
+        /* Styling Scrollbar per Chrome, Edge, Safari */
+        .playlist::-webkit-scrollbar {
+            width: 6px; /* Larghezza sottile */
+        }
+
+        .playlist::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05); /* Sfondo traccia discreto */
+            border-radius: 10px;
+        }
+
+        .playlist::-webkit-scrollbar-thumb {
+            background-color: var(--accent); /* Colore viola del brand */
+            border-radius: 10px;
+            border: 1px solid rgba(0,0,0,0.2); /* Leggero bordo per definizione */
+        }
+
+        .playlist::-webkit-scrollbar-thumb:hover {
+            background-color: #d633ff; /* Leggermente più chiaro all'hover */
+        }
+
         .playlist-item {
             padding: 12px;
             background: rgba(255,255,255,0.03);
@@ -366,12 +414,17 @@
             display: flex; justify-content: space-between; align-items: center;
             border: 1px solid transparent;
             font-size: 0.95rem;
+            /* Flex-shrink 0 impedisce che si schiaccino */
+            flex-shrink: 0; 
         }
+        
         .playlist-item:hover { background: rgba(255,255,255,0.08); }
+        
         .playlist-item.active {
             border-color: var(--accent);
             background: rgba(191, 0, 255, 0.1);
         }
+        
         .item-title { font-weight: 600; }
         .item-duration { color: var(--text-muted); font-size: 0.8rem; }
 
@@ -479,7 +532,6 @@
 
         .review-author h4 { font-size: 1rem; margin: 0; }
         .review-author span { font-size: 0.8rem; color: #777; }
-        /* Rimosse stelle e data dalla card singola */
         
         .review-text { font-size: 0.95rem; color: #ccc; font-style: italic; }
         
@@ -724,6 +776,24 @@
                 master: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
                 raw: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" 
             },
+            {
+                title: "Traccia Extra 1",
+                description: "Esempio Scroll", 
+                master: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                raw: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" 
+            },
+            {
+                title: "Traccia Extra 2",
+                description: "Esempio Scroll", 
+                master: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+                raw: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" 
+            },
+            {
+                title: "Traccia Extra 3",
+                description: "Esempio Scroll", 
+                master: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                raw: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" 
+            },
 
             // I TUOI FILE (Se usi le stringhe semplici, la descrizione sarà vuota)
             // "Steve - Algofobia.mp3",
@@ -736,6 +806,26 @@
             {
                 title: "Portfolio Demo Track",
                 description: "Produzione Artistica & Arrangiamento", // <--- NUOVA DESCRIZIONE
+                src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+            },
+            {
+                title: "Jazz Session",
+                description: "Mix & Master", 
+                src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+            },
+            {
+                title: "Electronic Vibe",
+                description: "Beatmaking", 
+                src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+            },
+            {
+                title: "Acoustic Pop",
+                description: "Registrazione Vocale", 
+                src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
+            },
+            {
+                title: "Traccia Extra Portfolio",
+                description: "Demo Scroll", 
                 src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
             },
             
@@ -892,7 +982,7 @@
             <div class="reviews-slider-wrapper">
                 <div class="google-summary">
                     <div class="g-icon">
-                        <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                        <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.04-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
                     </div>
                     <div class="g-score">5.0</div>
                     <div class="g-stars">★★★★★</div>
