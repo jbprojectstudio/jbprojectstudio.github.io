@@ -243,7 +243,24 @@
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
         }
 
-        .track-title-display { font-size: 1.3rem; font-weight: bold; margin-bottom: 20px; text-align: center; color: var(--accent); min-height: 1.5em; }
+        .track-title-display { 
+            font-size: 1.3rem; 
+            font-weight: bold; 
+            margin-bottom: 5px; /* Ridotto il margine inferiore per avvicinare la descrizione */
+            text-align: center; 
+            color: var(--accent); 
+            min-height: 1.5em; 
+        }
+
+        /* --- NUOVA CLASSE PER LA DESCRIZIONE --- */
+        .track-description-display {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 25px; /* Spazio prima dei controlli */
+            font-style: italic;
+            min-height: 1.2em;
+        }
 
         .controls-wrapper {
             display: flex;
@@ -691,19 +708,26 @@
         const AUDIO_FOLDER = "audio/"; 
 
         // 2. LISTA A/B (MIX vs MASTER)
-        // NOTA: Ho commentato i tuoi file originali e messo dei DEMO funzionanti.
-        // Quando avrai caricato i tuoi file nella cartella, scommenta le righe sotto e rimuovi quelle demo.
         const AB_FILES_LIST = [
             // ESEMPIO DEMO (Link esterni funzionanti)
             {
                 title: "Demo Song (SoundHelix)",
+                description: "Produzione Completa | Mix & Master", // <--- NUOVA DESCRIZIONE
                 master: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
                 raw: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" 
             },
             
-            // I TUOI FILE (Scommenta quando pronti)
-            "Steve - Algofobia.mp3",
-            "Steve - Algofobia_raw.mp3"
+            // Esempio 2
+            {
+                title: "Rock Anthem Demo",
+                description: "Solo Mastering (Commissione)", // <--- NUOVA DESCRIZIONE
+                master: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+                raw: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" 
+            },
+
+            // I TUOI FILE (Se usi le stringhe semplici, la descrizione sarà vuota)
+            // "Steve - Algofobia.mp3",
+            // "Steve - Algofobia_raw.mp3"
         ];
 
         // 3. LISTA PORTFOLIO (LAVORI FINITI)
@@ -711,12 +735,13 @@
             // ESEMPIO DEMO
             {
                 title: "Portfolio Demo Track",
+                description: "Produzione Artistica & Arrangiamento", // <--- NUOVA DESCRIZIONE
                 src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
             },
-
+            
             // I TUOI FILE
-             "Steve - Algofobia.mp3",
-             "MZeta - apocalisse.mp3"
+            // "Steve - Algofobia.mp3",
+            // "MZeta - apocalisse.mp3"
         ];
 
         // 4. LISTA RECENSIONI
@@ -796,6 +821,9 @@
                 <div class="player-container" id="ab-player-root">
                     <div>
                         <div class="track-title-display" id="ab-track-title">Caricamento...</div>
+                        <!-- NUOVO DIV PER DESCRIZIONE -->
+                        <div class="track-description-display" id="ab-track-description"></div>
+                        
                         <div class="controls-wrapper">
                             <button class="play-btn-large" id="ab-play-btn">▶</button>
                             <div class="ab-switch-container">
@@ -821,6 +849,9 @@
                 <div class="player-container" id="portfolio-player-root">
                     <div>
                         <div class="track-title-display" id="port-track-title">Caricamento...</div>
+                        <!-- NUOVO DIV PER DESCRIZIONE -->
+                        <div class="track-description-display" id="port-track-description"></div>
+
                         <div class="controls-wrapper">
                             <button class="play-btn-large" id="port-play-btn">▶</button>
                             <div style="height: 38px;"></div> 
@@ -899,10 +930,6 @@
             <a href="#" class="social-link" title="Facebook"><svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
             <a href="#" class="social-link" title="YouTube"><svg viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></a>
         </div>
-       <!-- <div class="footer-brands-title">Trusted Brands & Partners</div>
-        <div class="brands-grid">
-            <div class="brand-item">LOGO 1</div><div class="brand-item">LOGO 2</div><div class="brand-item">LOGO 3</div><div class="brand-item">LOGO 4</div>
-        </div> -->
         <div class="copyright">&copy; 2025 JB Project Studio - P.IVA: 02426720567 | All rights reserved.</div> 
     </footer>
 
@@ -978,6 +1005,7 @@
                     
                     parsed.push({
                         title: cleanTitle,
+                        description: "", // Vuoto per stringhe
                         srcA: getSafePath(rawFileName),
                         srcB: getSafePath(item)
                     });
@@ -986,6 +1014,7 @@
                 else if (typeof item === 'object') {
                     parsed.push({
                         title: item.title,
+                        description: item.description || "", // Legge la descrizione
                         srcA: item.raw,
                         srcB: item.master
                     });
@@ -1002,13 +1031,15 @@
                     let cleanTitle = parts.name.replace(/-/g, ' ').replace(/_/g, ' ');
                     return {
                         title: cleanTitle,
+                        description: "", // Vuoto per stringhe
                         src: getSafePath(item)
                     };
                 } 
                 // Caso B: Oggetto esplicito (Link esterno)
                 else {
-                     return {
+                      return {
                         title: item.title,
+                        description: item.description || "", // Legge la descrizione
                         src: item.src
                     };
                 }
@@ -1022,7 +1053,7 @@
         // --- 3. PLAYER A/B LOGIC ---
         const abPlayer = {
             audioA: null, audioB: null,
-            playBtn: null, titleDisplay: null,
+            playBtn: null, titleDisplay: null, descDisplay: null, // Aggiunto descDisplay
             progressBar: null, currTimeDisplay: null, durDisplay: null,
             playlistList: null, switchBtns: null,
             
@@ -1036,6 +1067,7 @@
                 this.audioB = document.getElementById('audioB');
                 this.playBtn = document.getElementById('ab-play-btn');
                 this.titleDisplay = document.getElementById('ab-track-title');
+                this.descDisplay = document.getElementById('ab-track-description'); // Selezione elemento
                 this.progressBar = document.getElementById('ab-progress');
                 this.currTimeDisplay = document.getElementById('ab-current-time');
                 this.durDisplay = document.getElementById('ab-duration');
@@ -1071,11 +1103,11 @@
                         console.error("Errore caricamento audio:", audio.src);
                     });
                     audio.addEventListener('ended', () => {
-                         this.isPlaying = false;
-                         this.playBtn.innerHTML = "▶";
-                         this.playBtn.classList.remove("playing");
-                         this.audioA.currentTime = 0;
-                         this.audioB.currentTime = 0;
+                          this.isPlaying = false;
+                          this.playBtn.innerHTML = "▶";
+                          this.playBtn.classList.remove("playing");
+                          this.audioA.currentTime = 0;
+                          this.audioB.currentTime = 0;
                     });
                 });
 
@@ -1127,6 +1159,11 @@
                 this.audioA.src = track.srcA;
                 this.audioB.src = track.srcB;
                 this.titleDisplay.innerText = track.title;
+                
+                // Setta descrizione
+                if(this.descDisplay) {
+                    this.descDisplay.innerText = track.description || "";
+                }
 
                 // Update UI Playlist
                 if(this.playlistList) {
@@ -1227,7 +1264,7 @@
 
         // --- 4. LOGICA PLAYER PORTFOLIO ---
         const portPlayer = {
-            audio: null, playBtn: null, titleDisplay: null,
+            audio: null, playBtn: null, titleDisplay: null, descDisplay: null, // Aggiunto descDisplay
             progressBar: null, currTimeDisplay: null, durDisplay: null,
             playlistList: null,
             
@@ -1238,6 +1275,7 @@
                 this.audio = document.getElementById('audioPortfolio');
                 this.playBtn = document.getElementById('port-play-btn');
                 this.titleDisplay = document.getElementById('port-track-title');
+                this.descDisplay = document.getElementById('port-track-description'); // Selezione elemento
                 this.progressBar = document.getElementById('port-progress');
                 this.currTimeDisplay = document.getElementById('port-current-time');
                 this.durDisplay = document.getElementById('port-duration');
@@ -1304,6 +1342,11 @@
                 this.progressBar.value = 0;
                 this.audio.src = track.src;
                 this.titleDisplay.innerText = track.title;
+                
+                // Setta descrizione
+                if(this.descDisplay) {
+                    this.descDisplay.innerText = track.description || "";
+                }
                 
                 if(this.playlistList) {
                     this.playlistList.querySelectorAll('.playlist-item').forEach((item, i) => {
