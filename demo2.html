@@ -5,23 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JB Project Studio | Giordano Boschetti</title>
     <style>
+        /* --- RESET GLOBALE (Fondamentale per il layout) --- */
+        * {
+            box-sizing: border-box; /* Include padding e bordi nelle dimensioni */
+            margin: 0;
+            padding: 0;
+        }
+
         /* --- VARIABILI COLORI (BRANDING) --- */
         :root {
             --bg-color: #050505;
             --card-bg: #111111;
             --accent: #bf00ff;
             --accent-glow: rgba(191, 0, 255, 0.4);
-            --whatsapp: #25D366; /* Colore WhatsApp */
+            --whatsapp: #25D366;
             --whatsapp-glow: rgba(37, 211, 102, 0.4);
             --text-main: #ffffff;
             --text-muted: #b3b3b3;
         }
 
-        /* --- BASE & RESET --- */
+        /* --- BASE --- */
         html { scroll-behavior: smooth; }
         
         body {
-            margin: 0; padding: 0;
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -30,8 +36,8 @@
         }
 
         a { text-decoration: none; color: inherit; transition: 0.3s; }
-        ul { list-style: none; padding: 0; margin: 0; }
-        h1, h2, h3 { margin: 0; line-height: 1.2; }
+        ul { list-style: none; }
+        h1, h2, h3 { line-height: 1.2; }
         button { font-family: inherit; }
 
         /* --- ANIMAZIONI (SCROLL REVEAL) --- */
@@ -60,7 +66,6 @@
             z-index: 1000;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             height: 80px;
-            box-sizing: border-box;
         }
 
         .logo { 
@@ -74,7 +79,6 @@
             gap: 15px; 
         }
         
-        /* STILE LOGO IMMAGINE */
         .logo img {
             height: 50px; 
             width: auto;
@@ -84,12 +88,10 @@
 
         .logo span { color: var(--accent); text-shadow: 0 0 10px var(--accent-glow); }
 
-        /* Desktop Menu */
         nav ul { display: flex; gap: 30px; }
         nav a { font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
         nav a:hover { color: var(--accent); text-shadow: 0 0 8px var(--accent); }
 
-        /* Hamburger Icon */
         .hamburger {
             display: none;
             cursor: pointer;
@@ -162,7 +164,6 @@
             transform: scale(1.05);
         }
 
-        /* STILE TASTO WHATSAPP */
         .btn-whatsapp {
             border-color: var(--whatsapp);
             box-shadow: 0 0 15px var(--whatsapp-glow);
@@ -178,7 +179,7 @@
         .section-title { text-align: center; font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 10px; }
         .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 40px; }
 
-        /* --- ABOUT BOX STYLE --- */
+        /* --- ABOUT BOX --- */
         #about {
             background-color: #080808;
             border-bottom: 1px solid #222;
@@ -203,10 +204,9 @@
         }
 
         .about-text:last-child { margin-bottom: 0; }
-        
         .highlight { color: var(--accent); font-weight: bold; }
 
-        /* --- DUAL PLAYER LAYOUT (GRID) --- */
+        /* --- DUAL PLAYER LAYOUT --- */
         .dual-player-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -222,7 +222,6 @@
             border-radius: 20px;
             padding: 40px;
             width: 100%; 
-            box-sizing: border-box;
             position: relative;
             overflow: hidden;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
@@ -381,26 +380,26 @@
         .card p { color: #aaa; font-size: 0.95rem; line-height: 1.6; }
         .icon-box { font-size: 2rem; color: var(--accent); margin-bottom: 20px; }
 
-        /* --- RECENSIONI (SLIDER STYLE AGGIORNATO) --- */
+        /* --- RECENSIONI (SLIDER STYLE) --- */
         #reviews-grid {
-            display: flex; /* Flex per scorrimento orizzontale */
+            display: flex; 
             gap: 30px;
-            overflow-x: auto; /* Abilita scroll */
-            scroll-snap-type: x mandatory; /* Scatto fluido */
+            overflow-x: auto; 
+            scroll-snap-type: x mandatory; 
             padding: 20px 10px;
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; /* No scrollbar Firefox */
-            
-            /* AGGIUNTA: Questa riga forza l'animazione fluida (soft) */
-            scroll-behavior: smooth;
+            scrollbar-width: none; 
+            /* RIMOSSO scroll-behavior: smooth; per affidare lo scroll al JS */
         }
         
-        #reviews-grid::-webkit-scrollbar { display: none; } /* No scrollbar Chrome */
+        #reviews-grid::-webkit-scrollbar { display: none; } 
 
         .reviews-slider-wrapper {
             position: relative;
-            max-width: 1200px; /* Allineato con il resto */
+            max-width: 1200px; 
             margin: 0 auto;
+            /* AGGIUNTO Padding per le frecce */
+            padding: 0 50px; 
         }
 
         .review-card {
@@ -412,11 +411,9 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
-            
-            /* LOGICA RESPONSIVE 3-COLONNE (Desktop) */
-            /* Calcolo: (100% - (gap * 2)) / 3 colonne */
+            /* Calcolo per 3 colonne desktop */
             flex: 0 0 calc((100% - 60px) / 3); 
-            scroll-snap-align: start; /* Allinea a sinistra */
+            scroll-snap-align: start;
         }
         
         .review-header { display: flex; align-items: center; gap: 15px; }
@@ -456,8 +453,10 @@
             font-size: 1.2rem;
         }
         .slider-btn:hover { background: var(--accent); color: #000; }
-        .slider-btn.prev { left: -20px; }
-        .slider-btn.next { right: -20px; }
+        
+        /* Posizionamento frecce nel padding del wrapper */
+        .slider-btn.prev { left: 0; }
+        .slider-btn.next { right: 0; }
 
         /* --- FOOTER & CONTACT --- */
         footer {
@@ -467,7 +466,6 @@
             text-align: center;
         }
 
-        /* SEZIONE CONTATTI */
         #contact {
             background: #080808;
             padding: 80px 5%;
@@ -480,15 +478,13 @@
             display: grid;
             grid-template-columns: 1fr 1fr; 
             gap: 60px;
-            align-items: start; /* FIX: Allinea Mappa e Testo in alto */
+            align-items: start; 
         }
 
         .contact-info { text-align: left; }
-        
         .contact-info h2 { font-size: 3rem; margin-bottom: 20px; line-height: 1.1; }
         .contact-info p { font-size: 1.1rem; color: #aaa; margin-bottom: 40px; max-width: 500px; }
 
-        /* GRUPPO PULSANTI */
         .buttons-group {
             display: flex;
             flex-direction: column;
@@ -500,11 +496,9 @@
         .buttons-group .btn-glow {
             width: 100%; 
             text-align: center;
-            box-sizing: border-box; 
             display: block; 
         }
 
-        /* NUOVI STILI SOCIAL (Centrati nel Footer) */
         .social-links {
             margin-top: 0;
             display: flex;
@@ -525,13 +519,7 @@
             transition: all 0.3s ease;
             color: #fff;
         }
-
-        .social-link svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
-
+        .social-link svg { width: 20px; height: 20px; fill: currentColor; }
         .social-link:hover {
             background: var(--accent);
             color: #000;
@@ -539,7 +527,6 @@
             box-shadow: 0 0 15px var(--accent-glow);
         }
 
-        /* MAPPA */
         .map-section {
             width: 100%;
             height: 100%;
@@ -575,7 +562,6 @@
             margin-bottom: 20px;
         }
 
-        /* Placeholder per i Brand */
         .brands-grid {
             display: flex;
             justify-content: center;
@@ -585,24 +571,15 @@
             opacity: 0.5; 
         }
 
-        .brand-item {
-            font-size: 1.2rem;
-            color: #444; 
-            font-weight: bold;
-        }
-
-        .copyright {
-            font-size: 0.8rem;
-            color: #555;
-        }
+        .brand-item { font-size: 1.2rem; color: #444; font-weight: bold; }
+        .copyright { font-size: 0.8rem; color: #555; }
 
         /* --- MEDIA QUERIES (RESPONSIVE) --- */
         @media (max-width: 900px) {
             .dual-player-grid { grid-template-columns: 1fr; gap: 50px; }
-            
             .grid-3 { grid-template-columns: 1fr; }
 
-            /* Recensioni responsive: 2 colonne su tablet */
+            /* Tablet: 2 card visibili */
             .review-card { flex: 0 0 calc((100% - 30px) / 2); }
 
             .contact-container { grid-template-columns: 1fr; gap: 40px; text-align: center; }
@@ -610,6 +587,10 @@
             .contact-info p { margin: 0 auto 40px auto; }
             .buttons-group { margin: 0 auto; align-items: center; }
             .social-links { justify-content: center; } 
+            
+            /* Su mobile/tablet nascondiamo le frecce (si usa lo swipe) e togliamo il padding del wrapper */
+            .slider-btn { display: none; }
+            .reviews-slider-wrapper { padding: 0; }
         }
 
         @media (max-width: 768px) {
@@ -636,60 +617,30 @@
             .about-box { padding: 30px; }
             .player-container { padding: 30px 20px; }
             
-            /* MODIFICA QUI: Recensioni al 100% su mobile (senza tagli) */
-            .review-card { flex: 0 0 100%; min-width: 100%; }
-            
-            /* MODIFICA QUI: Mostriamo le frecce anche su mobile se preferisci lo scorrimento a click, 
-               oppure lasciale nascoste se usi solo il dito. Qui le riattivo per sicurezza. */
-            .slider-btn { display: flex; } 
+            /* Mobile: 1 card visibile (100% width) */
+            .review-card { 
+                flex: 0 0 100%; 
+                min-width: 100%; 
+                padding: 20px; /* Padding ridotto su mobile */
+            }
 
             .switch-btn { padding: 10px 20px; font-size: 0.85rem; }
             footer h2 { font-size: 2.5rem !important; }
         }
     </style>
 
-    <!-- ================= CONFIGURAZIONE FACILE (MODIFICA QUI) ================= -->
+    <!-- ================= CONFIGURAZIONE FACILE ================= -->
     <script>
-        // 1. CARTELLA FILE AUDIO
         const AUDIO_FOLDER = "audio/"; 
-
-        // 2. LISTA A/B (MIX vs MASTER)
-        const AB_FILES_LIST = [
-            "SoundHelix-Song-8.mp3", 
-            "SoundHelix-Song-15.mp3" 
-        ];
-
-        // 3. LISTA PORTFOLIO (LAVORI FINITI)
-        const PORTFOLIO_FILES_LIST = [
-            "SoundHelix-Song-10.mp3",
-            "SoundHelix-Song-16.mp3"
-        ];
-
-        // 4. LISTA RECENSIONI
+        const AB_FILES_LIST = [ "SoundHelix-Song-8.mp3", "SoundHelix-Song-15.mp3" ];
+        const PORTFOLIO_FILES_LIST = [ "SoundHelix-Song-10.mp3", "SoundHelix-Song-16.mp3" ];
         const REVIEWS_DATA = [
-            {
-                name: "Marco R.",
-                role: "Musicista / Band",
-                text: "Giordano ha capito subito il sound che cercavamo. Non solo un tecnico, ma un vero produttore che ci ha guidato nelle scelte migliori. Consigliatissimo!"
-            },
-            {
-                name: "Luca S.",
-                role: "Cantautore",
-                text: "Il mix è uscito potente e definito. La differenza tra il mio provino e il master finale è incredibile. Professionale e disponibile."
-            },
-            {
-                name: "Sara B.",
-                role: "Vocalist",
-                text: "Lavorare con JB Project Studio è stata un'esperienza formativa. Grande cura dei dettagli e un orecchio musicale pazzesco."
-            },
-            {
-                name: "Elena V.",
-                role: "Producer",
-                text: "Un tocco magico sulle basse frequenze. Finalmente il mio brano suona come volevo. Grande professionalità."
-            }
+            { name: "Marco R.", role: "Musicista / Band", text: "Giordano ha capito subito il sound che cercavamo. Consigliatissimo!" },
+            { name: "Luca S.", role: "Cantautore", text: "Il mix è uscito potente e definito. Professionale e disponibile." },
+            { name: "Sara B.", role: "Vocalist", text: "Lavorare con JB Project Studio è stata un'esperienza formativa. Orecchio pazzesco." },
+            { name: "Elena V.", role: "Producer", text: "Un tocco magico sulle basse frequenze. Finalmente il mio brano suona come volevo." }
         ];
     </script>
-    <!-- ================= FINE CONFIGURAZIONE ================= -->
 
 </head>
 <body>
@@ -699,7 +650,6 @@
             <img src="img/logo.svg" alt="JB Project Studio">
             JB PROJECT <span>STUDIO</span>
         </div>
-
         <div class="hamburger">
             <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </div>
@@ -717,48 +667,37 @@
     <section class="hero">
         <div class="reveal active"> 
             <h1>Il Tuo Suono<br><span>Senza Compromessi</span></h1>
-            <p>Produzione Artistica & Musicale. Dal concept al master finale, costruiamo la tua identità sonora unica.</p>
+            <p>Produzione Artistica & Musicale. Dal concept al master finale.</p>
             <a href="#portfolio" class="btn-glow">Ascolta le Demo</a>
         </div>
     </section>
 
-    <!-- ================= SEZIONE: CHI SONO (BOX ORDINATO) ================= -->
     <section id="about" class="section-padding">
         <div class="reveal">
             <h2 class="section-title">Oltre il Tasto Rec</h2>
             <div class="about-box">
-                <p class="about-text">
-                    Mi chiamo <span class="highlight">Giordano Boschetti</span>. Dal 1990 coltivo una visione: non limitarsi a registrare, ma <em>scolpire</em> l'identità artistica. 
-                    Nel mio studio, unisco la sensibilità dell'artista alla maniacalità dell'ingegnere del suono.
-                </p>
-                <p class="about-text">
-                    Che si tratti di chitarre, tastiere o beat elettronici, il mio obiettivo non è solo farti "suonare bene", ma creare un prodotto che ti rappresenti. <span>Non cerco clienti, ma progetti in cui credere.</span>
-                </p>
+                <p class="about-text">Mi chiamo <span class="highlight">Giordano Boschetti</span>. Dal 1990 coltivo una visione: non limitarsi a registrare, ma <em>scolpire</em> l'identità artistica.</p>
+                <p class="about-text">Che si tratti di chitarre, tastiere o beat elettronici, il mio obiettivo non è solo farti "suonare bene", ma creare un prodotto che ti rappresenti. <span>Non cerco clienti, ma progetti in cui credere.</span></p>
             </div>
         </div>
     </section>
 
-    <!-- ================= SEZIONE PORTFOLIO UNIFICATA (SIDE-BY-SIDE) ================= -->
     <section id="portfolio" class="section-padding">
         <div class="reveal">
             <h2 class="section-title">Portfolio & Demo</h2>
             <p class="section-subtitle">Ascolta la differenza e i lavori finiti.</p>
 
             <div class="dual-player-grid">
-                
-                <!-- PLAYER SINISTRA: A/B COMPARISON -->
+                <!-- PLAYER 1 -->
                 <div class="player-container" id="ab-player-root">
                     <div>
                         <div class="track-title-display" id="ab-track-title">Caricamento...</div>
-                        
                         <div class="controls-wrapper">
                             <button class="play-btn-large" id="ab-play-btn">▶</button>
-                            
                             <div class="ab-switch-container">
                                 <button class="switch-btn active" data-track="A">RAW MIX</button>
                                 <button class="switch-btn" data-track="B">MASTER</button>
                             </div>
-
                             <div class="progress-container">
                                 <span id="ab-current-time">0:00</span>
                                 <input type="range" class="progress-bar" id="ab-progress" value="0" min="0" max="100" step="0.1">
@@ -766,26 +705,21 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="playlist-container">
                         <div class="playlist-header">Confronto Mix</div>
                         <ul class="playlist" id="ab-playlist-list"></ul>
                     </div>
-
                     <audio id="audioA" preload="auto"></audio>
                     <audio id="audioB" preload="auto"></audio>
                 </div>
 
-                <!-- PLAYER DESTRA: PORTFOLIO FINITO -->
+                <!-- PLAYER 2 -->
                 <div class="player-container" id="portfolio-player-root">
                     <div>
                         <div class="track-title-display" id="port-track-title">Caricamento...</div>
-                        
                         <div class="controls-wrapper">
                             <button class="play-btn-large" id="port-play-btn">▶</button>
-
                             <div style="height: 38px;"></div> 
-
                             <div class="progress-container">
                                 <span id="port-current-time">0:00</span>
                                 <input type="range" class="progress-bar" id="port-progress" value="0" min="0" max="100" step="0.1">
@@ -793,128 +727,73 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="playlist-container">
                         <div class="playlist-header">Lavori Finiti</div>
                         <ul class="playlist" id="port-playlist-list"></ul>
                     </div>
-
                     <audio id="audioPortfolio" preload="auto"></audio>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- ================= SEZIONE SERVIZI ================= -->
     <section id="services" class="section-padding" style="background: #0a0a0a;">
         <div class="reveal">
             <h2 class="section-title">I Miei Servizi</h2>
             <p class="section-subtitle">Un percorso completo per la tua musica.</p>
-            
             <div class="grid-3">
-                <div class="card">
-                    <div class="icon-box">🎨</div>
-                    <h3>Produzione Artistica</h3>
-                    <p>Il cuore del progetto. Non registriamo e basta: definiamo insieme la direzione stilistica, l'intenzione e l'identità del tuo suono per renderlo unico e riconoscibile.</p>
-                </div>
-
-                <div class="card">
-                    <div class="icon-box">🎹</div>
-                    <h3>Produzione Musicale</h3>
-                    <p>Dall'arrangiamento al Beat Making. Costruisco la strumentale attorno alla tua voce, valorizzando il mood senza mai sovrastare l'artista. Suono reale e programmazione digitale.</p>
-                </div>
-
-                <div class="card">
-                    <div class="icon-box">🎚️</div>
-                    <h3>Mix & Mastering</h3>
-                    <p>Competitività e calore. Unisco il punch del digitale al colore dell'analogico per un suono pronto per le piattaforme di streaming, radio e club.</p>
-                </div>
+                <div class="card"><div class="icon-box">🎨</div><h3>Produzione Artistica</h3><p>Il cuore del progetto. Non registriamo e basta: definiamo insieme la direzione stilistica.</p></div>
+                <div class="card"><div class="icon-box">🎹</div><h3>Produzione Musicale</h3><p>Dall'arrangiamento al Beat Making. Costruisco la strumentale attorno alla tua voce.</p></div>
+                <div class="card"><div class="icon-box">🎚️</div><h3>Mix & Mastering</h3><p>Competitività e calore. Unisco il punch del digitale al colore dell'analogico.</p></div>
             </div>
         </div>
     </section>
 
-    <!-- ================= SEZIONE RECENSIONI (SLIDER) ================= -->
     <section id="reviews" class="section-padding">
         <div class="reveal">
             <h2 class="section-title">Dicono di Me</h2>
             <p class="section-subtitle">Alcune parole dagli artisti con cui ho lavorato.</p>
-
             <div class="reviews-slider-wrapper">
                 <button class="slider-btn prev" onclick="scrollReviews(-1)">&#10094;</button>
-                <!-- Container SLIDER -->
                 <div id="reviews-grid"></div> 
                 <button class="slider-btn next" onclick="scrollReviews(1)">&#10095;</button>
             </div>
         </div>
     </section>
 
-    <!-- ================= SEZIONE CONTATTI ================= -->
     <section id="contact">
         <div class="reveal contact-container">
-            
-            <!-- Colonna Sinistra: Testo e Pulsanti -->
             <div class="contact-info">
                 <h2>Lavoriamo Insieme</h2>
-                <p>Il feeling è tutto. Prenota un <strong>colloquio conoscitivo gratuito</strong> in studio (o una call online) per raccontarmi il tuo progetto senza impegno.</p>
-                
+                <p>Il feeling è tutto. Prenota un <strong>colloquio conoscitivo gratuito</strong> in studio (o una call online).</p>
                 <div class="buttons-group">
-                    <!-- LINK WHATSAPP: Inserisci il tuo numero dopo 39 -->
-                    <a href="https://wa.me/39INSERISCINUMERO" class="btn-glow btn-whatsapp" target="_blank">
-                        💬 Scrivimi su WhatsApp
-                    </a>
-                    
-                    <a href="mailto:info@jbprojectstudio.com" class="btn-glow">
-                        📧 Richiedi Preventivo
-                    </a>
+                    <a href="https://wa.me/39INSERISCINUMERO" class="btn-glow btn-whatsapp" target="_blank">💬 Scrivimi su WhatsApp</a>
+                    <a href="mailto:info@jbprojectstudio.com" class="btn-glow">📧 Richiedi Preventivo</a>
                 </div>
             </div>
-
-            <!-- Colonna Destra: Mappa e Indirizzo -->
             <div style="width: 100%;">
                 <div class="map-section">
-                    <!-- MAPPA EMBED GOOGLE: Sostituisci "src" con il tuo embed reale -->
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2940.6145657400943!2d12.165913776484722!3d42.520998224918195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1328f1e36b6fb107%3A0x75eb6eff7eea1aea!2sJB%20Project%20Studio%20(Giordano%20Boschetti)!5e0!3m2!1sit!2sit!4v1764718453290!5m2!1sit!2sit" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-                <div class="address-box">
-                    <p><strong>JB Project Studio</strong> - Viterbo (VT)<br>Ricevo su appuntamento</p>
-                </div>
+                <div class="address-box"><p><strong>JB Project Studio</strong> - Viterbo (VT)<br>Ricevo su appuntamento</p></div>
             </div>
         </div>
     </section>
 
-    <!-- ================= FOOTER VERO (ISTITUZIONALE) ================= -->
     <footer>
-        
-        <!-- SOCIAL LINKS (Ora qui, centrati sopra i brand) -->
         <div class="social-links">
-            <a href="#" class="social-link" title="Instagram">
-                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            </a>
-            <a href="#" class="social-link" title="Facebook">
-                <svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
-            </a>
-            <a href="#" class="social-link" title="YouTube">
-                <svg viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
-            </a>
+            <a href="#" class="social-link" title="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+            <a href="#" class="social-link" title="Facebook"><svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
+            <a href="#" class="social-link" title="YouTube"><svg viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></a>
         </div>
-
-        <!-- PLACEHOLDER BRANDS (Futuro) -->
         <div class="footer-brands-title">Trusted Brands & Partners</div>
         <div class="brands-grid">
-            <div class="brand-item">LOGO 1</div>
-            <div class="brand-item">LOGO 2</div>
-            <div class="brand-item">LOGO 3</div>
-            <div class="brand-item">LOGO 4</div>
+            <div class="brand-item">LOGO 1</div><div class="brand-item">LOGO 2</div><div class="brand-item">LOGO 3</div><div class="brand-item">LOGO 4</div>
         </div>
-
-        <div class="copyright">
-            &copy; 2025 JB Project Studio - P.IVA: XXXXXXXXXXX | All rights reserved.
-        </div>
+        <div class="copyright">&copy; 2025 JB Project Studio - P.IVA: XXXXXXXXXXX | All rights reserved.</div>
     </footer>
 
     <script>
-        // --- 1. SCRIPT NAVBAR MOBILE & SCROLL ---
         const hamburger = document.querySelector(".hamburger");
         const navMenu = document.querySelector("nav ul");
         const navLink = document.querySelectorAll(".nav-link");
@@ -940,14 +819,10 @@
             }
         }
 
-        // --- 2. LOGICA PLAYER & DATI ---
         function getFileParts(filename) {
             const lastDotIndex = filename.lastIndexOf('.');
             if (lastDotIndex === -1) return { name: filename, ext: '' }; 
-            return {
-                name: filename.substring(0, lastDotIndex),
-                ext: filename.substring(lastDotIndex)
-            };
+            return { name: filename.substring(0, lastDotIndex), ext: filename.substring(lastDotIndex) };
         }
 
         function parseABList(list) {
@@ -955,19 +830,10 @@
                 const parts = getFileParts(fullFileName);
                 let cleanTitle = parts.name.replace(/-/g, ' ').replace(/_/g, ' ');
                 let isDemo = fullFileName.includes("SoundHelix");
-
                 if (isDemo) {
-                    return {
-                        title: cleanTitle,
-                        srcA: `https://www.soundhelix.com/examples/mp3/${parts.name}.mp3`,
-                        srcB: `https://www.soundhelix.com/examples/mp3/${parts.name.replace('8', '1').replace('15', '3')}.mp3`
-                    };
+                    return { title: cleanTitle, srcA: `https://www.soundhelix.com/examples/mp3/${parts.name}.mp3`, srcB: `https://www.soundhelix.com/examples/mp3/${parts.name.replace('8', '1').replace('15', '3')}.mp3` };
                 } else {
-                    return {
-                        title: cleanTitle,
-                        srcA: `${AUDIO_FOLDER}${parts.name}_raw${parts.ext}`,
-                        srcB: `${AUDIO_FOLDER}${fullFileName}`
-                    };
+                    return { title: cleanTitle, srcA: `${AUDIO_FOLDER}${parts.name}_raw${parts.ext}`, srcB: `${AUDIO_FOLDER}${fullFileName}` };
                 }
             });
         }
@@ -977,10 +843,7 @@
                 const parts = getFileParts(fullFileName);
                 let cleanTitle = parts.name.replace(/-/g, ' ').replace(/_/g, ' ');
                 let isDemo = fullFileName.includes("SoundHelix");
-                return {
-                    title: cleanTitle,
-                    src: isDemo ? `https://www.soundhelix.com/examples/mp3/${fullFileName}` : `${AUDIO_FOLDER}${fullFileName}`
-                };
+                return { title: cleanTitle, src: isDemo ? `https://www.soundhelix.com/examples/mp3/${fullFileName}` : `${AUDIO_FOLDER}${fullFileName}` };
             });
         }
 
@@ -996,32 +859,19 @@
             return minutes + ":" + seconds;
         }
 
-        // --- 3. LOGICA PLAYER A/B ---
         const abPlayer = {
-            audioA: document.getElementById('audioA'),
-            audioB: document.getElementById('audioB'),
-            playBtn: document.getElementById('ab-play-btn'),
-            titleDisplay: document.getElementById('ab-track-title'),
-            progressBar: document.getElementById('ab-progress'),
-            currTimeDisplay: document.getElementById('ab-current-time'),
-            durDisplay: document.getElementById('ab-duration'),
-            playlistList: document.getElementById('ab-playlist-list'),
-            switchBtns: document.querySelectorAll('.switch-btn'),
-            currentTrackIndex: 0,
-            activeAudio: null, 
-            isPlaying: false,
-            isDragging: false,
+            audioA: document.getElementById('audioA'), audioB: document.getElementById('audioB'),
+            playBtn: document.getElementById('ab-play-btn'), titleDisplay: document.getElementById('ab-track-title'),
+            progressBar: document.getElementById('ab-progress'), currTimeDisplay: document.getElementById('ab-current-time'),
+            durDisplay: document.getElementById('ab-duration'), playlistList: document.getElementById('ab-playlist-list'),
+            switchBtns: document.querySelectorAll('.switch-btn'), currentTrackIndex: 0, activeAudio: null, isPlaying: false, isDragging: false,
 
             init: function() {
                 this.activeAudio = this.audioA;
                 this.renderPlaylist();
                 this.loadTrack(0);
-                
                 this.playBtn.addEventListener('click', () => this.togglePlay());
-                this.switchBtns.forEach(btn => {
-                    btn.addEventListener('click', (e) => this.switchAB(e.target.dataset.track));
-                });
-
+                this.switchBtns.forEach(btn => { btn.addEventListener('click', (e) => this.switchAB(e.target.dataset.track)); });
                 [this.audioA, this.audioB].forEach(audio => {
                     audio.addEventListener('timeupdate', () => this.updateProgress());
                     audio.addEventListener('loadedmetadata', () => {
@@ -1029,97 +879,49 @@
                         this.progressBar.max = this.activeAudio.duration;
                     });
                     audio.addEventListener('ended', () => {
-                         this.isPlaying = false;
-                         this.playBtn.innerHTML = "▶";
-                         this.playBtn.classList.remove("playing");
-                         this.audioA.currentTime = 0;
-                         this.audioB.currentTime = 0;
+                         this.isPlaying = false; this.playBtn.innerHTML = "▶"; this.playBtn.classList.remove("playing");
+                         this.audioA.currentTime = 0; this.audioB.currentTime = 0;
                     });
                 });
-
-                this.progressBar.addEventListener('input', () => {
-                    this.isDragging = true;
-                    this.currTimeDisplay.innerText = formatTime(this.progressBar.value);
-                });
-                this.progressBar.addEventListener('change', () => {
-                    const targetTime = this.progressBar.value;
-                    this.audioA.currentTime = targetTime;
-                    this.audioB.currentTime = targetTime;
-                    this.isDragging = false;
-                });
+                this.progressBar.addEventListener('input', () => { this.isDragging = true; this.currTimeDisplay.innerText = formatTime(this.progressBar.value); });
+                this.progressBar.addEventListener('change', () => { const targetTime = this.progressBar.value; this.audioA.currentTime = targetTime; this.audioB.currentTime = targetTime; this.isDragging = false; });
             },
-
             renderPlaylist: function() {
                 this.playlistList.innerHTML = '';
                 abTracksData.forEach((track, index) => {
-                    let li = document.createElement('li');
-                    li.className = 'playlist-item';
+                    let li = document.createElement('li'); li.className = 'playlist-item';
                     li.innerHTML = `<span class="item-title">${track.title}</span>`;
                     li.addEventListener('click', () => this.loadTrack(index));
                     this.playlistList.appendChild(li);
                 });
             },
-
             forcePause: function() {
-                this.audioA.pause();
-                this.audioB.pause();
-                this.isPlaying = false;
-                this.playBtn.innerHTML = "▶";
-                this.playBtn.classList.remove("playing");
+                this.audioA.pause(); this.audioB.pause(); this.isPlaying = false;
+                this.playBtn.innerHTML = "▶"; this.playBtn.classList.remove("playing");
             },
-
             loadTrack: function(index) {
-                portPlayer.forcePause(); // STOP ALTRI PLAYER
-                this.currentTrackIndex = index;
-                const track = abTracksData[index];
-                this.isPlaying = false;
-                this.playBtn.innerHTML = "▶";
-                this.playBtn.classList.remove("playing");
-                this.audioA.pause();
-                this.audioB.pause();
-                this.progressBar.value = 0;
-                this.audioA.src = track.srcA;
-                this.audioB.src = track.srcB;
-                this.titleDisplay.innerText = track.title;
-                document.querySelectorAll('#ab-playlist-list .playlist-item').forEach((item, i) => {
-                    item.classList.toggle('active', i === index);
-                });
+                portPlayer.forcePause();
+                this.currentTrackIndex = index; const track = abTracksData[index];
+                this.isPlaying = false; this.playBtn.innerHTML = "▶"; this.playBtn.classList.remove("playing");
+                this.audioA.pause(); this.audioB.pause(); this.progressBar.value = 0;
+                this.audioA.src = track.srcA; this.audioB.src = track.srcB; this.titleDisplay.innerText = track.title;
+                document.querySelectorAll('#ab-playlist-list .playlist-item').forEach((item, i) => { item.classList.toggle('active', i === index); });
                 this.switchAB('A');
             },
-
             togglePlay: function() {
-                if (this.isPlaying) {
-                    this.activeAudio.pause();
-                    this.playBtn.innerHTML = "▶";
-                    this.playBtn.classList.remove("playing");
-                } else {
-                    portPlayer.forcePause(); // STOP ALTRI PLAYER
-                    let currentTime = this.activeAudio.currentTime;
-                    this.audioA.currentTime = currentTime;
-                    this.audioB.currentTime = currentTime;
-                    this.activeAudio.play();
-                    this.playBtn.innerHTML = "⏸";
-                    this.playBtn.classList.add("playing");
-                }
+                if (this.isPlaying) { this.activeAudio.pause(); this.playBtn.innerHTML = "▶"; this.playBtn.classList.remove("playing"); }
+                else { portPlayer.forcePause(); let currentTime = this.activeAudio.currentTime; this.audioA.currentTime = currentTime; this.audioB.currentTime = currentTime; this.activeAudio.play(); this.playBtn.innerHTML = "⏸"; this.playBtn.classList.add("playing"); }
                 this.isPlaying = !this.isPlaying;
             },
-
             switchAB: function(target) {
-                let currentTime = this.activeAudio.currentTime;
-                let wasPlaying = !this.activeAudio.paused;
+                let currentTime = this.activeAudio.currentTime; let wasPlaying = !this.activeAudio.paused;
                 this.activeAudio.pause();
                 this.switchBtns.forEach(btn => btn.classList.remove('active'));
-                if (target === 'A') {
-                    this.activeAudio = this.audioA;
-                    document.querySelector('.switch-btn[data-track="A"]').classList.add('active');
-                } else {
-                    this.activeAudio = this.audioB;
-                    document.querySelector('.switch-btn[data-track="B"]').classList.add('active');
-                }
+                if (target === 'A') { this.activeAudio = this.audioA; document.querySelector('.switch-btn[data-track="A"]').classList.add('active'); }
+                else { this.activeAudio = this.audioB; document.querySelector('.switch-btn[data-track="B"]').classList.add('active'); }
                 this.activeAudio.currentTime = currentTime;
                 if (wasPlaying) this.activeAudio.play();
             },
-
             updateProgress: function() {
                 if (this.isDragging || !this.activeAudio.duration) return;
                 const currentTime = this.activeAudio.currentTime;
@@ -1130,87 +932,42 @@
             }
         };
 
-        // --- 4. LOGICA PLAYER PORTFOLIO ---
         const portPlayer = {
-            audio: document.getElementById('audioPortfolio'),
-            playBtn: document.getElementById('port-play-btn'),
-            titleDisplay: document.getElementById('port-track-title'),
-            progressBar: document.getElementById('port-progress'),
-            currTimeDisplay: document.getElementById('port-current-time'),
-            durDisplay: document.getElementById('port-duration'),
-            playlistList: document.getElementById('port-playlist-list'),
-            currentTrackIndex: 0,
-            isDragging: false,
+            audio: document.getElementById('audioPortfolio'), playBtn: document.getElementById('port-play-btn'),
+            titleDisplay: document.getElementById('port-track-title'), progressBar: document.getElementById('port-progress'),
+            currTimeDisplay: document.getElementById('port-current-time'), durDisplay: document.getElementById('port-duration'),
+            playlistList: document.getElementById('port-playlist-list'), currentTrackIndex: 0, isDragging: false,
 
             init: function() {
-                this.renderPlaylist();
-                this.loadTrack(0);
+                this.renderPlaylist(); this.loadTrack(0);
                 this.playBtn.addEventListener('click', () => this.togglePlay());
                 this.audio.addEventListener('timeupdate', () => this.updateProgress());
-                this.audio.addEventListener('loadedmetadata', () => {
-                    this.durDisplay.innerText = formatTime(this.audio.duration);
-                    this.progressBar.max = this.audio.duration;
-                });
-                this.audio.addEventListener('ended', () => {
-                    this.playBtn.innerHTML = "▶";
-                    this.playBtn.classList.remove("playing");
-                    this.progressBar.value = 0;
-                });
-                this.progressBar.addEventListener('input', () => {
-                    this.isDragging = true;
-                    this.currTimeDisplay.innerText = formatTime(this.progressBar.value);
-                });
-                this.progressBar.addEventListener('change', () => {
-                    this.audio.currentTime = this.progressBar.value;
-                    this.isDragging = false;
-                });
+                this.audio.addEventListener('loadedmetadata', () => { this.durDisplay.innerText = formatTime(this.audio.duration); this.progressBar.max = this.audio.duration; });
+                this.audio.addEventListener('ended', () => { this.playBtn.innerHTML = "▶"; this.playBtn.classList.remove("playing"); this.progressBar.value = 0; });
+                this.progressBar.addEventListener('input', () => { this.isDragging = true; this.currTimeDisplay.innerText = formatTime(this.progressBar.value); });
+                this.progressBar.addEventListener('change', () => { this.audio.currentTime = this.progressBar.value; this.isDragging = false; });
             },
-
             renderPlaylist: function() {
                 this.playlistList.innerHTML = '';
                 portfolioTracksData.forEach((track, index) => {
-                    let li = document.createElement('li');
-                    li.className = 'playlist-item';
+                    let li = document.createElement('li'); li.className = 'playlist-item';
                     li.innerHTML = `<span class="item-title">${track.title}</span>`;
                     li.addEventListener('click', () => this.loadTrack(index));
                     this.playlistList.appendChild(li);
                 });
             },
-
-            forcePause: function() {
-                this.audio.pause();
-                this.playBtn.innerHTML = "▶";
-                this.playBtn.classList.remove("playing");
-            },
-
+            forcePause: function() { this.audio.pause(); this.playBtn.innerHTML = "▶"; this.playBtn.classList.remove("playing"); },
             loadTrack: function(index) {
-                abPlayer.forcePause(); // STOP ALTRI PLAYER
-                this.currentTrackIndex = index;
-                const track = portfolioTracksData[index];
-                this.audio.pause();
-                this.playBtn.innerHTML = "▶";
-                this.playBtn.classList.remove("playing");
-                this.progressBar.value = 0;
-                this.audio.src = track.src;
-                this.titleDisplay.innerText = track.title;
-                document.querySelectorAll('#port-playlist-list .playlist-item').forEach((item, i) => {
-                    item.classList.toggle('active', i === index);
-                });
+                abPlayer.forcePause();
+                this.currentTrackIndex = index; const track = portfolioTracksData[index];
+                this.audio.pause(); this.playBtn.innerHTML = "▶"; this.playBtn.classList.remove("playing"); this.progressBar.value = 0;
+                this.audio.src = track.src; this.titleDisplay.innerText = track.title;
+                document.querySelectorAll('#port-playlist-list .playlist-item').forEach((item, i) => { item.classList.toggle('active', i === index); });
             },
-
             togglePlay: function() {
-                if (this.audio.paused) {
-                    abPlayer.forcePause(); // STOP ALTRI PLAYER
-                    this.audio.play();
-                    this.playBtn.innerHTML = "⏸";
-                    this.playBtn.classList.add("playing");
-                } else {
-                    this.audio.pause();
-                    this.playBtn.innerHTML = "▶";
-                    this.playBtn.classList.remove("playing");
-                }
+                if (this.audio.paused) { abPlayer.forcePause(); this.audio.play(); this.playBtn.innerHTML = "⏸"; this.playBtn.classList.add("playing"); }
+                else { this.audio.pause(); this.playBtn.innerHTML = "▶"; this.playBtn.classList.remove("playing"); }
             },
-
             updateProgress: function() {
                 if (this.isDragging || !this.audio.duration) return;
                 const currentTime = this.audio.currentTime;
@@ -1219,50 +976,32 @@
             }
         };
 
-        // --- 5. RENDER RECENSIONI (SLIDER) ---
         function renderReviews() {
             const container = document.getElementById('reviews-grid');
             container.innerHTML = '';
-            
             REVIEWS_DATA.forEach(review => {
                 const initial = review.name.charAt(0);
                 const cardHTML = `
                     <div class="review-card">
                         <div class="review-header">
                             <div class="review-avatar">${initial}</div>
-                            <div class="review-author">
-                                <h4>${review.name}</h4>
-                                <span>${review.role}</span>
-                            </div>
+                            <div class="review-author"><h4>${review.name}</h4><span>${review.role}</span></div>
                         </div>
                         <div class="review-stars">★★★★★</div>
                         <p class="review-text">"${review.text}"</p>
-                    </div>
-                `;
+                    </div>`;
                 container.innerHTML += cardHTML;
             });
         }
 
-        // --- 6. SCROLL REVIEWS (AGGIORNATA PER PAGINAZIONE) ---
         function scrollReviews(direction) {
             const container = document.getElementById('reviews-grid');
-            
-            // MODIFICA: Scorre di un'intera larghezza visibile (Pagina) invece che singola card
-            // Questo permette di passare al gruppo successivo (3 su pc, 1 su mobile)
             const scrollAmount = container.clientWidth;
-            
-            container.scrollBy({
-                left: direction * scrollAmount,
-                behavior: 'smooth'
-            });
+            container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
         }
 
-        // --- INIZIALIZZAZIONE ---
         document.addEventListener('DOMContentLoaded', () => {
-            abPlayer.init();
-            portPlayer.init();
-            renderReviews(); 
-            reveal();
+            abPlayer.init(); portPlayer.init(); renderReviews(); reveal();
         });
     </script>
 </body>
