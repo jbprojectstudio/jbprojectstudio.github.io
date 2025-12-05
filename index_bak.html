@@ -48,27 +48,24 @@
     </script>
 
     <style>
-        /* --- RESET GLOBALE --- */
+        /* --- RESET GLOBALE (Fondamentale per il layout) --- */
         * {
-            box-sizing: border-box;
+            box-sizing: border-box; /* Include padding e bordi nelle dimensioni */
             margin: 0;
             padding: 0;
         }
 
-        /* --- VARIABILI COLORI (AGGIORNATO VIOLA) --- */
+        /* --- VARIABILI COLORI (BRANDING) --- */
         :root {
             --bg-color: #050505;
             --card-bg: #111111;
-            
-            /* NUOVO COLORE VIOLA (MENO ROSA/LILLA) */
-            --accent: #8c00ff; 
-            --accent-glow: rgba(140, 0, 255, 0.4);
-            
+            --accent: #bf00ff;
+            --accent-glow: rgba(191, 0, 255, 0.4);
             --whatsapp: #25D366;
             --whatsapp-glow: rgba(37, 211, 102, 0.4);
             --text-main: #ffffff;
             --text-muted: #b3b3b3;
-            --google-blue: #4285F4;
+            --google-blue: #4285F4; /* Colori Google per le recensioni */
             --google-orange: #FBBC05;
         }
 
@@ -88,7 +85,7 @@
         h1, h2, h3 { line-height: 1.2; }
         button { font-family: inherit; }
 
-        /* --- ANIMAZIONI --- */
+        /* --- ANIMAZIONI (SCROLL REVEAL) --- */
         .reveal {
             position: relative;
             transform: translateY(50px);
@@ -127,6 +124,7 @@
             gap: 15px; 
         }
         
+        /* STILE LOGO IMMAGINE */
         .logo img {
             height: 90px; 
             width: auto;
@@ -165,7 +163,7 @@
             align-items: center;
             text-align: center;
             background: linear-gradient(to bottom, rgba(5,5,5,0.3), var(--bg-color)), 
-                        linear-gradient(45deg, rgba(140,0,255,0.2), rgba(0,0,0,0.8)),
+                        linear-gradient(45deg, rgba(191,0,255,0.2), rgba(0,0,0,0.8)),
                         url('img/studio_back.jpg');
             background-size: cover;
             background-position: center;
@@ -209,7 +207,7 @@
 
         .btn-glow:hover {
             background: var(--accent);
-            color: #fff;
+            color: #000;
             box-shadow: 0 0 40px var(--accent-glow);
             transform: scale(1.05);
         }
@@ -229,27 +227,28 @@
         .section-title { text-align: center; font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 10px; }
         .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 40px; }
 
-        /* --- ABOUT BOX --- */
+        /* --- ABOUT BOX (MODIFICATO PER IMMAGINE) --- */
         #about {
             background-color: #080808;
             border-bottom: 1px solid #222;
         }
 
         .about-box {
-            max-width: 1000px;
+            max-width: 1000px; /* Aumentato leggermente per accomodare l'immagine */
             margin: 0 auto;
             background: linear-gradient(145deg, #111111, #0d0d0d);
             padding: 50px;
             border-left: 4px solid var(--accent);
             border-radius: 0 15px 15px 0;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            /* Layout Flex per affiancare foto e testo */
             display: flex;
-            align-items: center;
-            gap: 40px;
+            align-items: center; /* Centra verticalmente */
+            gap: 40px; /* Spazio tra foto e testo */
         }
 
         .about-img-wrapper {
-            flex: 0 0 35%;
+            flex: 0 0 35%; /* La foto occupa il 35% dello spazio */
             max-width: 350px;
             position: relative;
         }
@@ -260,6 +259,7 @@
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0,0,0,0.5);
             border: 1px solid #333;
+            /* Effetto bianco e nero leggero opzionale, rimuovi il filter se vuoi colori pieni */
             filter: grayscale(20%); 
             transition: 0.3s;
         }
@@ -269,7 +269,9 @@
             border-color: var(--accent);
         }
 
-        .about-content { flex: 1; }
+        .about-content {
+            flex: 1; /* Il testo occupa lo spazio rimanente */
+        }
 
         .about-text {
             font-size: 1.1rem;
@@ -323,6 +325,7 @@
             min-height: 1.5em; 
         }
 
+        /* --- DESCRIZIONE TRACK --- */
         .track-description-display {
             font-size: 0.95rem;
             color: var(--text-muted);
@@ -358,9 +361,9 @@
         .play-btn-large.playing { animation: pulse-border 2s infinite; }
 
         @keyframes pulse-border {
-            0% { box-shadow: 0 0 0 0 rgba(140, 0, 255, 0.7); }
-            70% { box-shadow: 0 0 0 20px rgba(140, 0, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(140, 0, 255, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(191, 0, 255, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(191, 0, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(191, 0, 255, 0); }
         }
 
         .ab-switch-container {
@@ -404,6 +407,7 @@
         .progress-bar {
             flex-grow: 1;
             -webkit-appearance: none;
+            appearance: none;
             height: 5px;
             background: #333;
             border-radius: 5px;
@@ -420,7 +424,7 @@
             box-shadow: -500px 0 0 492px var(--accent);
         }
 
-        /* --- PLAYLIST --- */
+        /* --- PLAYLIST & SCROLL ELEGANTE --- */
         .playlist-container {
             margin-top: 20px;
             border-top: 1px solid #222;
@@ -435,21 +439,45 @@
             letter-spacing: 1px;
         }
 
+        /* Qui gestiamo l'altezza e lo scroll */
         .playlist { 
             display: flex; 
             flex-direction: column; 
             gap: 8px; 
+            
+            /* Altezza fissa sufficiente per ~4 tracce */
             max-height: 240px; 
+            
+            /* Abilita lo scroll verticale */
             overflow-y: auto; 
+            
+            /* Spazio a destra per non far sovrapporre testo e scrollbar */
             padding-right: 5px; 
+
+            /* Styling Scrollbar per Firefox */
             scrollbar-width: thin; 
             scrollbar-color: var(--accent) #1a1a1a;
         }
 
-        .playlist::-webkit-scrollbar { width: 6px; }
-        .playlist::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
-        .playlist::-webkit-scrollbar-thumb { background-color: var(--accent); border-radius: 10px; border: 1px solid rgba(0,0,0,0.2); }
-        .playlist::-webkit-scrollbar-thumb:hover { background-color: #a833ff; }
+        /* Styling Scrollbar per Chrome, Edge, Safari */
+        .playlist::-webkit-scrollbar {
+            width: 6px; /* Larghezza sottile */
+        }
+
+        .playlist::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05); /* Sfondo traccia discreto */
+            border-radius: 10px;
+        }
+
+        .playlist::-webkit-scrollbar-thumb {
+            background-color: var(--accent); /* Colore viola del brand */
+            border-radius: 10px;
+            border: 1px solid rgba(0,0,0,0.2); /* Leggero bordo per definizione */
+        }
+
+        .playlist::-webkit-scrollbar-thumb:hover {
+            background-color: #d633ff; /* Leggermente più chiaro all'hover */
+        }
 
         .playlist-item {
             padding: 12px;
@@ -460,6 +488,7 @@
             display: flex; justify-content: space-between; align-items: center;
             border: 1px solid transparent;
             font-size: 0.95rem;
+            /* Flex-shrink 0 impedisce che si schiaccino */
             flex-shrink: 0; 
         }
         
@@ -467,12 +496,13 @@
         
         .playlist-item.active {
             border-color: var(--accent);
-            background: rgba(140, 0, 255, 0.1);
+            background: rgba(191, 0, 255, 0.1);
         }
         
         .item-title { font-weight: 600; }
+        .item-duration { color: var(--text-muted); font-size: 0.8rem; }
 
-        /* --- SERVIZI --- */
+        /* --- SERVIZI (GRID) --- */
         .grid-3 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -492,22 +522,23 @@
         .card:hover {
             transform: translateY(-10px);
             border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(140, 0, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(191, 0, 255, 0.1);
         }
 
         .card h3 { font-size: 1.8rem; margin-bottom: 15px; color: #fff; }
         .card p { color: #aaa; font-size: 0.95rem; line-height: 1.6; }
         .icon-box { font-size: 2rem; color: var(--accent); margin-bottom: 20px; }
 
-        /* --- RECENSIONI (SLIDER STYLE FIX) --- */
+        /* --- RECENSIONI (SLIDER STYLE) --- */
         #reviews-grid {
             display: flex; 
             gap: 30px;
             overflow-x: auto; 
             scroll-snap-type: x mandatory; 
-            padding: 20px 0px; /* Rimosso padding laterale per evitare problemi di centro */
+            padding: 20px 10px;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none; 
+            /* No scroll-behavior smooth qui per controllo JS */
         }
         
         #reviews-grid::-webkit-scrollbar { display: none; } 
@@ -553,10 +584,8 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
-            
-            /* DESKTOP FIX: Usiamo CENTER per evitare spostamenti */
             flex: 0 0 calc((100% - 60px) / 3); 
-            scroll-snap-align: center; /* <<< CAMBIATO DA START A CENTER */
+            scroll-snap-align: start;
             position: relative;
         }
         
@@ -580,6 +609,7 @@
         
         .review-text { font-size: 0.95rem; color: #ccc; font-style: italic; }
         
+        /* Icona G nella card */
         .card-g-icon {
             position: absolute;
             top: 20px; right: 20px;
@@ -588,6 +618,7 @@
             fill: #fff; 
         }
 
+        /* Frecce Slider */
         .slider-btn {
             background: rgba(0,0,0,0.6);
             border: 1px solid #444;
@@ -603,7 +634,7 @@
             transition: 0.3s;
             font-size: 1.2rem;
         }
-        .slider-btn:hover { background: var(--accent); color: #fff; }
+        .slider-btn:hover { background: var(--accent); color: #000; }
         
         .slider-btn.prev { left: 0; }
         .slider-btn.next { right: 0; }
@@ -672,7 +703,7 @@
         .social-link svg { width: 20px; height: 20px; fill: currentColor; }
         .social-link:hover {
             background: var(--accent);
-            color: #fff;
+            color: #000;
             transform: translateY(-3px);
             box-shadow: 0 0 15px var(--accent-glow);
         }
@@ -704,6 +735,24 @@
             text-align: center;
         }
 
+        .footer-brands-title {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .brands-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+            opacity: 0.5; 
+        }
+
+        .brand-item { font-size: 1.2rem; color: #444; font-weight: bold; }
         .copyright { font-size: 0.8rem; color: #555; }
 
         /* --- MEDIA QUERIES (RESPONSIVE) --- */
@@ -711,13 +760,14 @@
             .dual-player-grid { grid-template-columns: 1fr; gap: 50px; }
             .grid-3 { grid-template-columns: 1fr; }
 
+            /* ABOUT SECTION MOBILE - STACK VERTICALE */
             .about-box { 
                 flex-direction: column; 
                 text-align: center; 
             }
             .about-text { text-align: center; }
             .about-img-wrapper { 
-                max-width: 250px; 
+                max-width: 250px; /* Foto più piccola su mobile */
                 margin: 0 auto; 
             }
 
@@ -759,16 +809,21 @@
             .player-container { padding: 30px 20px; }
             
             /* --- FIX SLIDER MOBILE --- */
-            .reviews-slider-wrapper { padding: 0 45px; }
+            
+            /* Aggiungiamo padding laterale al wrapper per fare spazio alle frecce */
+            .reviews-slider-wrapper { 
+                padding: 0 45px; 
+            }
 
             /* Mobile: 1 card visibile (100% width) */
             .review-card { 
                 flex: 0 0 100%; 
                 min-width: 100%; 
                 padding: 20px;
-                scroll-snap-align: center; 
+                scroll-snap-align: center; /* <<< FIX: Centra perfettamente la card */
             }
             
+            /* Riattiviamo le frecce su mobile, ma più piccole e distanziate */
             .slider-btn { 
                 display: flex; 
                 width: 35px;
@@ -776,6 +831,7 @@
                 font-size: 1rem;
             }
             
+            /* Spostiamole un po' dai bordi estremi per estetica */
             .slider-btn.prev { left: 5px; }
             .slider-btn.next { right: 5px; }
 
@@ -784,31 +840,37 @@
         }
     </style>
 
+    <!-- ================= CONFIGURAZIONE FACILE (MODIFICA QUI) ================= -->
     <script>
         // 1. CARTELLA FILE AUDIO (Lasciare vuota se si usano link esterni completi)
         const AUDIO_FOLDER = "audio/"; 
 
         // 2. LISTA A/B (MIX vs MASTER)
         const AB_FILES_LIST = [
+            // ESEMPIO DEMO (Link esterni funzionanti)
             {
                 title: "d0sky - L'hai voluto tu (rap pop)",
-                description: "Produzione Vocale | Mix & Master",
+                description: "Produzione Vocale | Mix & Master", // <--- NUOVA DESCRIZIONE
                 master: "audio/d0sky - l'hai voluto tu.mp3",
                 raw: "audio/d0sky - l'hai voluto tu_raw.mp3" 
             },
+            
+            // Esempio 2
             {
                 title: "Marco Delpapa - Ovunque e per sempre (rockpop)",
-                description: "Produzione artistica, musicale, registrazione, mix & mastering", 
+                description: "Produzione artistica, musicale, registrazione, mix & mastering", // <--- NUOVA DESCRIZIONE
                 master: "audio/Marco Delpapa ovunque e per sempre.mp3",
                 raw: "audio/Marco Delpapa ovunque e per sempre_raw.mp3" 
             },
+
         ];
 
         // 3. LISTA PORTFOLIO (LAVORI FINITI)
         const PORTFOLIO_FILES_LIST = [
+            // ESEMPIO DEMO
             {
                 title: "Laureato - Paris (Hip Hop)",
-                description: "Produzione artistica, musicale, registrazione, mix & mastering", 
+                description: "Produzione artistica, musicale, registrazione, mix & mastering", // <--- NUOVA DESCRIZIONE
                 src: "audio/Laureato - Paris.mp3"
             },
             {
@@ -826,6 +888,7 @@
                 description: "Registrazione, Mix & Mastering su base", 
                 src: "audio/MZeta Jenga Feat jkmap.mp3"
             },
+
         ];
 
         // 4. LISTA RECENSIONI
@@ -852,7 +915,9 @@
             }
         ];
     </script>
-    </head>
+    <!-- ================= FINE CONFIGURAZIONE ================= -->
+
+</head>
 <body>
 
     <header>
@@ -883,17 +948,20 @@
         </div>
     </section>
 
+    <!-- SEZIONE ABOUT MODIFICATA CON IMMAGINE -->
     <section id="about" class="section-padding">
         <div class="reveal">
             <h2 class="section-title">Oltre il Tasto Rec</h2>
             <div class="about-box">
+                <!-- IMMAGINE -->
                 <div class="about-img-wrapper">
                     <img src="img/jo.jpg" alt="Giordano Boschetti" width="713" height="911">
                 </div>
                 
+                <!-- TESTO -->
                 <div class="about-content">
                     <p class="about-text">Mi chiamo <span class="highlight">Giordano Boschetti</span>. Dal 1990 coltivo una visione: non limitarsi a registrare, ma <em>scolpire</em> l'identità artistica.</p>
-                    <p class="about-text">Che si tratti di chitarre, tastiere o beat elettronici, il mio obiettivo non è solo farti "suonare bene", ma creare un prodotto che ti rappresenti. <span class="highlight">Non cerco clienti, ma progetti in cui credere.</span></p>
+                    <p class="about-text">Che si tratti di chitarre, tastiere o beat elettronici, il mio obiettivo non è solo farti "suonare bene", ma creare un prodotto che ti rappresenti. <span>Non cerco clienti, ma progetti in cui credere.</span></p>
                 </div>
             </div>
         </div>
@@ -905,9 +973,11 @@
             <p class="section-subtitle">Ascolta la differenza e i lavori finiti.</p>
 
             <div class="dual-player-grid">
+                <!-- PLAYER 1 -->
                 <div class="player-container" id="ab-player-root">
                     <div>
                         <div class="track-title-display" id="ab-track-title">Caricamento...</div>
+                        <!-- NUOVO DIV PER DESCRIZIONE -->
                         <div class="track-description-display" id="ab-track-description"></div>
                         
                         <div class="controls-wrapper">
@@ -931,9 +1001,11 @@
                     <audio id="audioB" preload="auto"></audio>
                 </div>
 
+                <!-- PLAYER 2 -->
                 <div class="player-container" id="portfolio-player-root">
                     <div>
                         <div class="track-title-display" id="port-track-title">Caricamento...</div>
+                        <!-- NUOVO DIV PER DESCRIZIONE -->
                         <div class="track-description-display" id="port-track-description"></div>
 
                         <div class="controls-wrapper">
@@ -982,9 +1054,9 @@
                     <div class="g-stars">★★★★★</div>
                 </div>
 
-                <button class="slider-btn prev" onclick="scrollReviews(-1)">❮</button>
+                <button class="slider-btn prev" onclick="scrollReviews(-1)">&#10094;</button>
                 <div id="reviews-grid"></div> 
-                <button class="slider-btn next" onclick="scrollReviews(1)">❯</button>
+                <button class="slider-btn next" onclick="scrollReviews(1)">&#10095;</button>
             </div>
         </div>
     </section>
@@ -995,7 +1067,7 @@
                 <h2>Lavoriamo Insieme</h2>
                 <p>Il feeling è tutto. Prenota un <strong>colloquio conoscitivo gratuito</strong> in studio (o una call online).</p>
                 <div class="buttons-group">
-                    <a href="https://wa.me/39INSERISCINUMERO" class="btn-glow btn-whatsapp" target="_blank">💬 Scrivimi su WhatsApp</a>
+                    <a href="https://wa.me/3485491400" class="btn-glow btn-whatsapp" target="_blank">💬 Scrivimi su WhatsApp</a>
                     <a href="mailto:giordanoboschetti@jbprojectstudio.com" class="btn-glow">📧 Richiedi Preventivo</a>
                 </div>
             </div>
@@ -1010,11 +1082,11 @@
 
     <footer>
         <div class="social-links">
-            <a href="#" class="social-link" title="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
-            <a href="#" class="social-link" title="Facebook"><svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
-            <a href="#" class="social-link" title="YouTube"><svg viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></a>
+            <a href="https://www.instagram.com/jbprojectstudio/" target="_blank" class="social-link" title="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+            <a href="https://www.facebook.com/joboscheti/" target="_blank" class="social-link" title="Facebook"><svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
+            <a href="https://www.youtube.com/@JBPROJECTSTUDIO" target="_blank" class="social-link" title="YouTube"><svg viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></a>
         </div>
-        <div class="copyright">© 2025 JB Project Studio - P.IVA: 02426720567 | All rights reserved.</div> 
+        <div class="copyright">&copy; 2026 JB Project Studio - P.IVA: 02426720567 | All rights reserved.</div>
     </footer>
 
 <script>
@@ -1053,8 +1125,12 @@
             return { name: filename.substring(0, lastDotIndex), ext: filename.substring(lastDotIndex) };
         }
 
+        // Funzione per costruire il percorso corretto (gestisce spazi e caratteri speciali e link esterni)
         function getSafePath(filename) {
+            // Se è già un URL completo (http/https), lo restituisce così com'è
             if (filename.startsWith('http')) return filename;
+            
+            // Altrimenti aggiunge la cartella locale e codifica
             return AUDIO_FOLDER + encodeURIComponent(filename.trim());
         }
 
@@ -1071,22 +1147,30 @@
         
         function parseABList(list) {
             const parsed = [];
+            
             list.forEach(item => {
+                // Caso A: Stringa semplice (File locale con convenzione _raw)
                 if (typeof item === 'string') {
-                    if (item.toLowerCase().includes('_raw.')) return; 
+                    if (item.toLowerCase().includes('_raw.')) return; // Salta se è già il file raw
+
                     const parts = getFileParts(item);
                     let cleanTitle = parts.name.replace(/-/g, ' ').replace(/_/g, ' ');
+                    
+                    // Costruzione automatica nome file RAW
                     const rawFileName = `${parts.name}_raw${parts.ext}`;
+                    
                     parsed.push({
                         title: cleanTitle,
-                        description: "",
+                        description: "", // Vuoto per stringhe
                         srcA: getSafePath(rawFileName),
                         srcB: getSafePath(item)
                     });
-                } else if (typeof item === 'object') {
+                } 
+                // Caso B: Oggetto esplicito (per link esterni o configurazioni custom)
+                else if (typeof item === 'object') {
                     parsed.push({
                         title: item.title,
-                        description: item.description || "",
+                        description: item.description || "", // Legge la descrizione
                         srcA: item.raw,
                         srcB: item.master
                     });
@@ -1097,39 +1181,40 @@
 
         function parsePortfolioList(list) {
             return list.map(item => {
+                // Caso A: Stringa semplice (File locale)
                 if (typeof item === 'string') {
                     const parts = getFileParts(item);
                     let cleanTitle = parts.name.replace(/-/g, ' ').replace(/_/g, ' ');
                     return {
                         title: cleanTitle,
-                        description: "",
+                        description: "", // Vuoto per stringhe
                         src: getSafePath(item)
                     };
-                } else {
+                } 
+                // Caso B: Oggetto esplicito (Link esterno)
+                else {
                       return {
                         title: item.title,
-                        description: item.description || "",
+                        description: item.description || "", // Legge la descrizione
                         src: item.src
                     };
                 }
             });
         }
 
+        // Generazione dati
         const abTracksData = (typeof AB_FILES_LIST !== 'undefined') ? parseABList(AB_FILES_LIST) : [];
         const portfolioTracksData = (typeof PORTFOLIO_FILES_LIST !== 'undefined') ? parsePortfolioList(PORTFOLIO_FILES_LIST) : [];
 
-        // --- 3. PLAYER A/B (SYNC PERFETTO RISOLTO) ---
-        // Logica: Si caricano e si avviano ENTRAMBI i file (audioA e audioB) simultaneamente.
-        // Lo switch tra Raw e Master agisce SOLO sul MUTE/VOLUME, non mette in pausa e non cambia currentTime.
-        
+        // --- 3. PLAYER A/B LOGIC ---
         const abPlayer = {
             audioA: null, audioB: null,
-            playBtn: null, titleDisplay: null, descDisplay: null,
+            playBtn: null, titleDisplay: null, descDisplay: null, // Aggiunto descDisplay
             progressBar: null, currTimeDisplay: null, durDisplay: null,
             playlistList: null, switchBtns: null,
             
             currentTrackIndex: 0,
-            activeTrackLabel: 'A', // 'A' per RAW, 'B' per MASTER
+            activeAudio: null, 
             isPlaying: false,
             isDragging: false,
 
@@ -1138,7 +1223,7 @@
                 this.audioB = document.getElementById('audioB');
                 this.playBtn = document.getElementById('ab-play-btn');
                 this.titleDisplay = document.getElementById('ab-track-title');
-                this.descDisplay = document.getElementById('ab-track-description');
+                this.descDisplay = document.getElementById('ab-track-description'); // Selezione elemento
                 this.progressBar = document.getElementById('ab-progress');
                 this.currTimeDisplay = document.getElementById('ab-current-time');
                 this.durDisplay = document.getElementById('ab-duration');
@@ -1147,12 +1232,11 @@
 
                 if (!this.audioA || !this.audioB) return;
 
-                // Set initial volume state: A on, B off
-                this.audioA.volume = 1;
-                this.audioB.volume = 0; // Usiamo volume 0 invece di mute per compatibilità
-
+                // Default
+                this.activeAudio = this.audioA;
                 this.renderPlaylist();
                 if(abTracksData.length > 0) {
+                    // Carica il primo ma NON suona (solo init)
                     this.setTrackData(0, false);
                 }
 
@@ -1162,34 +1246,31 @@
                     btn.addEventListener('click', (e) => this.switchAB(e.target.dataset.track));
                 });
 
-                // Ascoltiamo solo Audio A per la barra di progresso (dato che sono sincroni)
-                this.audioA.addEventListener('timeupdate', () => this.updateProgress());
-                
-                // Metadati
-                this.audioA.addEventListener('loadedmetadata', () => {
-                    if(!isNaN(this.audioA.duration)) {
-                        this.durDisplay.innerText = formatTime(this.audioA.duration);
-                        this.progressBar.max = this.audioA.duration;
-                    }
+                [this.audioA, this.audioB].forEach(audio => {
+                    audio.addEventListener('timeupdate', () => this.updateProgress());
+                    audio.addEventListener('loadedmetadata', () => {
+                        if(this.activeAudio && !isNaN(this.activeAudio.duration)) {
+                            this.durDisplay.innerText = formatTime(this.activeAudio.duration);
+                            this.progressBar.max = this.activeAudio.duration;
+                        }
+                    });
+                    // Error handling
+                    audio.addEventListener('error', (e) => {
+                        console.error("Errore caricamento audio:", audio.src);
+                    });
+                    audio.addEventListener('ended', () => {
+                          this.isPlaying = false;
+                          this.playBtn.innerHTML = "▶";
+                          this.playBtn.classList.remove("playing");
+                          this.audioA.currentTime = 0;
+                          this.audioB.currentTime = 0;
+                    });
                 });
 
-                // Gestione fine traccia
-                this.audioA.addEventListener('ended', () => {
-                     this.isPlaying = false;
-                     this.playBtn.innerHTML = "▶";
-                     this.playBtn.classList.remove("playing");
-                     this.audioA.currentTime = 0;
-                     this.audioB.currentTime = 0;
-                     this.audioA.pause();
-                     this.audioB.pause();
-                });
-
-                // Progress Bar Dragging
                 this.progressBar.addEventListener('input', () => {
                     this.isDragging = true;
                     this.currTimeDisplay.innerText = formatTime(this.progressBar.value);
                 });
-                
                 this.progressBar.addEventListener('change', () => {
                     const targetTime = this.progressBar.value;
                     this.audioA.currentTime = targetTime;
@@ -1205,13 +1286,14 @@
                     let li = document.createElement('li');
                     li.className = 'playlist-item';
                     li.innerHTML = `<span class="item-title">${track.title}</span>`;
+                    // Click sulla playlist -> Carica E SUONA
                     li.addEventListener('click', () => this.loadTrack(index));
                     this.playlistList.appendChild(li);
                 });
             },
 
             forcePause: function() {
-                if(this.audioA) {
+                if(this.activeAudio) {
                     this.audioA.pause();
                     this.audioB.pause();
                     this.isPlaying = false;
@@ -1220,37 +1302,38 @@
                 }
             },
 
+            // Funzione interna per settare i dati senza per forza suonare
             setTrackData: function(index, autoPlay) {
                 this.currentTrackIndex = index;
                 const track = abTracksData[index];
                 
-                // Stop e reset
+                // Ferma tutto prima di cambiare
                 this.audioA.pause();
                 this.audioB.pause();
                 this.progressBar.value = 0;
 
-                // Carica sorgenti
                 this.audioA.src = track.srcA;
                 this.audioB.src = track.srcB;
-                
                 this.titleDisplay.innerText = track.title;
-                if(this.descDisplay) this.descDisplay.innerText = track.description || "";
+                
+                // Setta descrizione
+                if(this.descDisplay) {
+                    this.descDisplay.innerText = track.description || "";
+                }
 
-                // Update Playlist UI
+                // Update UI Playlist
                 if(this.playlistList) {
                     this.playlistList.querySelectorAll('.playlist-item').forEach((item, i) => {
                         item.classList.toggle('active', i === index);
                     });
                 }
 
-                // Reset switch su A (visuale)
-                this.activeTrackLabel = 'A';
-                this.audioA.volume = 1;
-                this.audioB.volume = 0;
-                
+                // Reset su A (RAW)
+                this.activeAudio = this.audioA;
                 this.switchBtns.forEach(btn => btn.classList.remove('active'));
-                const btnA = document.querySelector('.switch-btn[data-track="A"]');
-                if(btnA) btnA.classList.add('active');
+                if(document.querySelector('.switch-btn[data-track="A"]')) {
+                    document.querySelector('.switch-btn[data-track="A"]').classList.add('active');
+                }
 
                 if (autoPlay) {
                     this.playAudio();
@@ -1261,9 +1344,10 @@
                 }
             },
 
+            // Chiamata dalla playlist (Click utente)
             loadTrack: function(index) {
                 if(typeof portPlayer !== 'undefined') portPlayer.forcePause();
-                this.setTrackData(index, true); 
+                this.setTrackData(index, true); // true = AutoPlay
             },
 
             playAudio: function() {
@@ -1271,26 +1355,25 @@
                 this.playBtn.innerHTML = "⏸";
                 this.playBtn.classList.add("playing");
                 
-                // SYNC CRUCIALE: Assicura che partano dallo stesso punto esatto
-                let currentTime = this.audioA.currentTime;
-                this.audioB.currentTime = currentTime;
-
-                // Avvia entrambi
-                let pA = this.audioA.play();
-                let pB = this.audioB.play();
-
-                if (pA !== undefined) {
-                    pA.catch(error => { console.log("Errore Play A:", error); this.isPlaying = false; });
-                }
-                if (pB !== undefined) {
-                    pB.catch(error => { console.log("Errore Play B:", error); });
+                // Sync
+                let t = this.audioA.currentTime; 
+                this.audioB.currentTime = t;
+                
+                let playPromise = this.activeAudio.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log("Autoplay prevent o errore:", error);
+                        this.titleDisplay.innerText = "Errore File / Autoplay";
+                        this.isPlaying = false;
+                        this.playBtn.innerHTML = "▶";
+                        this.playBtn.classList.remove("playing");
+                    });
                 }
             },
 
             togglePlay: function() {
                 if (this.isPlaying) {
-                    this.audioA.pause();
-                    this.audioB.pause();
+                    this.activeAudio.pause();
                     this.isPlaying = false;
                     this.playBtn.innerHTML = "▶";
                     this.playBtn.classList.remove("playing");
@@ -1300,38 +1383,44 @@
                 }
             },
 
-            // NUOVA LOGICA SWITCH: Solo volume, nessun seek/pause
             switchAB: function(target) {
-                this.activeTrackLabel = target;
+                let currentTime = this.activeAudio.currentTime;
+                let wasPlaying = !this.activeAudio.paused;
+                
+                this.activeAudio.pause();
 
                 this.switchBtns.forEach(btn => btn.classList.remove('active'));
 
                 if (target === 'A') {
-                    this.audioA.volume = 1;
-                    this.audioB.volume = 0;
-                    document.querySelector('.switch-btn[data-track="A"]').classList.add('active');
+                    this.activeAudio = this.audioA;
+                    let btn = document.querySelector('.switch-btn[data-track="A"]');
+                    if(btn) btn.classList.add('active');
                 } else {
-                    this.audioA.volume = 0;
-                    this.audioB.volume = 1;
-                    document.querySelector('.switch-btn[data-track="B"]').classList.add('active');
+                    this.activeAudio = this.audioB;
+                    let btn = document.querySelector('.switch-btn[data-track="B"]');
+                    if(btn) btn.classList.add('active');
                 }
+
+                this.activeAudio.currentTime = currentTime;
+                if (wasPlaying) this.activeAudio.play();
             },
 
             updateProgress: function() {
-                if (this.isDragging || !this.audioA.duration) return;
-                const currentTime = this.audioA.currentTime;
+                if (this.isDragging || !this.activeAudio.duration) return;
+                const currentTime = this.activeAudio.currentTime;
                 this.progressBar.value = currentTime;
                 this.currTimeDisplay.innerText = formatTime(currentTime);
-                if(!isNaN(this.audioA.duration)) {
-                    this.durDisplay.innerText = formatTime(this.audioA.duration);
-                    this.progressBar.max = this.audioA.duration;
+                // Aggiorna durata se disponibile
+                if(!isNaN(this.activeAudio.duration)) {
+                    this.durDisplay.innerText = formatTime(this.activeAudio.duration);
+                    this.progressBar.max = this.activeAudio.duration;
                 }
             }
         };
 
-        // --- 4. LOGICA PLAYER PORTFOLIO (STANDARD) ---
+        // --- 4. LOGICA PLAYER PORTFOLIO ---
         const portPlayer = {
-            audio: null, playBtn: null, titleDisplay: null, descDisplay: null,
+            audio: null, playBtn: null, titleDisplay: null, descDisplay: null, // Aggiunto descDisplay
             progressBar: null, currTimeDisplay: null, durDisplay: null,
             playlistList: null,
             
@@ -1342,7 +1431,7 @@
                 this.audio = document.getElementById('audioPortfolio');
                 this.playBtn = document.getElementById('port-play-btn');
                 this.titleDisplay = document.getElementById('port-track-title');
-                this.descDisplay = document.getElementById('port-track-description');
+                this.descDisplay = document.getElementById('port-track-description'); // Selezione elemento
                 this.progressBar = document.getElementById('port-progress');
                 this.currTimeDisplay = document.getElementById('port-current-time');
                 this.durDisplay = document.getElementById('port-duration');
@@ -1361,6 +1450,9 @@
                         this.durDisplay.innerText = formatTime(this.audio.duration);
                         this.progressBar.max = this.audio.duration;
                       }
+                });
+                this.audio.addEventListener('error', () => {
+                    console.error("Errore file portfolio:", this.audio.src);
                 });
                 this.audio.addEventListener('ended', () => {
                     this.playBtn.innerHTML = "▶";
@@ -1406,7 +1498,11 @@
                 this.progressBar.value = 0;
                 this.audio.src = track.src;
                 this.titleDisplay.innerText = track.title;
-                if(this.descDisplay) this.descDisplay.innerText = track.description || "";
+                
+                // Setta descrizione
+                if(this.descDisplay) {
+                    this.descDisplay.innerText = track.description || "";
+                }
                 
                 if(this.playlistList) {
                     this.playlistList.querySelectorAll('.playlist-item').forEach((item, i) => {
@@ -1488,10 +1584,7 @@
         function scrollReviews(direction) {
             const container = document.getElementById('reviews-grid');
             if(container) {
-                // Calcola la larghezza di una card + gap per scorrere esattamente di 1 elemento o 1 pagina
-                // Per un carousel fluido, container.clientWidth va bene, ma lo scroll-snap penserà al resto.
-                const scrollAmount = container.clientWidth / (window.innerWidth > 900 ? 3 : 1);
-                
+                const scrollAmount = container.clientWidth;
                 container.scrollBy({
                     left: direction * scrollAmount,
                     behavior: 'smooth'
