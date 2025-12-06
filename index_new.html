@@ -851,33 +851,52 @@
         }
         
         /* ========================================
-        AGGIUNTA STILI FORM BREVO (OVERRIDE)
+        AGGIUNTA STILI FORM BREVO (FIX DEFINITIVO)
         ======================================== 
         */
 
-        /* 1. Reset contenitore */
-        #sib-container {
+        /* 1. Reset TOTALE dei contenitori (Rende tutto trasparente) */
+        #sib-form-container,
+        #sib-container,
+        .sib-form,
+        .sib-form-block,
+        .form__entry,
+        .form__label-row,
+        .entry__field,
+        .sib-input {
             background-color: transparent !important;
+            background: transparent !important;
             border: none !important;
             padding: 0 !important;
+            margin: 0 !important;
         }
 
-        /* 2. Colori Input (Risoluzione bianco su bianco) */
+        /* 2. Fix Input Email (Scuro, proporzionato, niente strisce bianche) */
         #sib-container input[type="text"],
         #sib-container input[type="email"] {
             background-color: #1a1a1a !important;
             color: #ffffff !important;
             border: 1px solid #333 !important;
             border-radius: 8px !important;
-            padding: 15px 20px !important;
-            font-family: 'Segoe UI', sans-serif !important;
+            
+            /* Dimensioni corrette */
+            padding: 0 15px !important;
+            font-size: 16px !important;
+            
+            /* Forza la larghezza per evitare spazi vuoti */
+            width: 100% !important;
+            box-sizing: border-box !important;
+            max-width: 100% !important;
+            height: 50px !important; /* ALTEZZA FISSA STANDARD */
             box-shadow: none !important;
         }
         
+        /* Focus (quando clicchi) */
         #sib-container input[type="text"]:focus,
         #sib-container input[type="email"]:focus {
             border-color: var(--accent) !important;
             outline: none !important;
+            background-color: #222 !important;
         }
         
         /* 3. Etichette e Testi */
@@ -885,16 +904,26 @@
             color: #b3b3b3 !important;
             font-weight: 600 !important;
             font-size: 0.9rem !important;
+            margin-bottom: 5px !important;
+            display: block !important;
+            text-align: left !important;
         }
+        
+        /* Titoli e descrizioni interni al form */
         .sib-form-block p {
             color: #fff !important;
+            text-align: left !important;
         }
+        
+        /* Scritta piccola sotto l'input */
         .entry__specification {
             color: #666 !important;
             font-size: 0.8rem !important;
+            text-align: left !important;
+            margin-top: 5px !important;
         }
 
-        /* 4. Bottone (Stile btn-glow) */
+        /* 4. Bottone (Stile btn-glow perfetto) */
         .sib-form-block__button {
             background-color: transparent !important;
             color: #ffffff !important;
@@ -908,8 +937,10 @@
             letter-spacing: 2px !important;
             padding: 15px 45px !important;
             transition: all 0.3s ease !important;
-            margin-top: 10px !important;
+            margin-top: 20px !important;
             width: 100% !important;
+            cursor: pointer !important;
+            display: block !important;
         }
 
         .sib-form-block__button:hover {
@@ -918,7 +949,7 @@
             transform: scale(1.02) !important;
         }
 
-        /* Nascondi icone interne al bottone se danno fastidio */
+        /* Nascondi icone interne al bottone */
         .sib-form-block__button svg {
             display: none !important;
         }
@@ -930,6 +961,14 @@
         }
         #success-message .sib-form-message-panel__inner-text {
             color: #085229 !important;
+        }
+        
+        #error-message {
+            background-color: #ffeded !important;
+            border-color: #ff4949 !important;
+        }
+        #error-message .sib-form-message-panel__inner-text {
+            color: #661d1d !important;
         }
     </style>
 
