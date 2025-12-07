@@ -46,8 +46,6 @@
       }
     }
     </script>
-    
-    <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
 
     <style>
         /* --- RESET GLOBALE --- */
@@ -57,12 +55,15 @@
             padding: 0;
         }
 
-        /* --- VARIABILI COLORI --- */
+        /* --- VARIABILI COLORI (AGGIORNATO VIOLA) --- */
         :root {
             --bg-color: #050505;
             --card-bg: #111111;
+            
+            /* NUOVO COLORE VIOLA (MENO ROSA/LILLA) */
             --accent: #8c00ff; 
             --accent-glow: rgba(140, 0, 255, 0.4);
+            
             --whatsapp: #25D366;
             --whatsapp-glow: rgba(37, 211, 102, 0.4);
             --text-main: #ffffff;
@@ -204,7 +205,6 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             display: inline-block;
-            text-align: center;
         }
 
         .btn-glow:hover {
@@ -499,13 +499,13 @@
         .card p { color: #aaa; font-size: 0.95rem; line-height: 1.6; }
         .icon-box { font-size: 2rem; color: var(--accent); margin-bottom: 20px; }
 
-        /* --- RECENSIONI --- */
+        /* --- RECENSIONI (SLIDER STYLE FIX) --- */
         #reviews-grid {
             display: flex; 
             gap: 30px;
             overflow-x: auto; 
             scroll-snap-type: x mandatory; 
-            padding: 20px 0px; 
+            padding: 20px 0px; /* Rimosso padding laterale per evitare problemi di centro */
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none; 
         }
@@ -553,8 +553,10 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
+            
+            /* DESKTOP FIX: Usiamo CENTER per evitare spostamenti */
             flex: 0 0 calc((100% - 60px) / 3); 
-            scroll-snap-align: center; 
+            scroll-snap-align: center; /* <<< CAMBIATO DA START A CENTER */
             position: relative;
         }
         
@@ -605,58 +607,6 @@
         
         .slider-btn.prev { left: 0; }
         .slider-btn.next { right: 0; }
-
-        /* --- NEWSLETTER SECTION (Split Layout) --- */
-        #newsletter {
-            background-color: #080808; 
-            border-top: 1px solid #222;
-            border-bottom: 1px solid #222;
-            padding: 80px 5%;
-            width: 100%;
-        }
-
-        .newsletter-content {
-            max-width: 1100px; 
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .newsletter-text-side { text-align: left; }
-
-        .newsletter-text-side h2 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            line-height: 1.1;
-            color: #fff;
-        }
-
-        .newsletter-text-side p {
-            font-size: 1.1rem;
-            color: #aaa;
-            margin-bottom: 30px;
-            max-width: 450px;
-        }
-        
-        .arrow-pointer {
-            font-size: 2rem;
-            color: var(--accent);
-            display: inline-block;
-            animation: bounceRight 2s infinite;
-        }
-
-        @keyframes bounceRight {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(10px); }
-        }
-
-        .newsletter-form-side {
-            width: 100%;
-            border-left: 1px solid #222; 
-            padding-left: 40px;
-        }
 
         /* --- FOOTER & CONTACT --- */
         footer {
@@ -771,27 +721,8 @@
                 margin: 0 auto; 
             }
 
+            /* Tablet: 2 card visibili */
             .review-card { flex: 0 0 calc((100% - 30px) / 2); }
-
-            /* Mobile Newsletter */
-            .newsletter-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
-                text-align: center;
-            }
-            .newsletter-text-side { text-align: center; }
-            .newsletter-text-side p { margin: 0 auto 30px auto; }
-            .newsletter-form-side {
-                border-left: none;
-                border-top: 1px solid #222;
-                padding-left: 0;
-                padding-top: 30px;
-            }
-            .arrow-pointer { transform: rotate(90deg); animation: bounceDown 2s infinite; }
-            @keyframes bounceDown {
-                0%, 100% { transform: translateY(0) rotate(90deg); }
-                50% { transform: translateY(10px) rotate(90deg); }
-            }
 
             .contact-container { grid-template-columns: 1fr; gap: 40px; text-align: center; }
             .contact-info { text-align: center; margin: 0 auto; }
@@ -827,8 +758,10 @@
             .about-box { padding: 30px; }
             .player-container { padding: 30px 20px; }
             
+            /* --- FIX SLIDER MOBILE --- */
             .reviews-slider-wrapper { padding: 0 45px; }
 
+            /* Mobile: 1 card visibile (100% width) */
             .review-card { 
                 flex: 0 0 100%; 
                 min-width: 100%; 
@@ -849,131 +782,10 @@
             .switch-btn { padding: 10px 20px; font-size: 0.85rem; }
             footer h2 { font-size: 2.5rem !important; }
         }
-        
-        /* ========================================
-        AGGIUNTA STILI FORM BREVO (FIX DEFINITIVO)
-        ======================================== 
-        */
-
-        /* 1. Reset TOTALE dei contenitori (Rende tutto trasparente) */
-        #sib-form-container,
-        #sib-container,
-        .sib-form,
-        .sib-form-block,
-        .form__entry,
-        .form__label-row,
-        .entry__field,
-        .sib-input {
-            background-color: transparent !important;
-            background: transparent !important;
-            border: none !important;
-            padding: 0 !important;
-            margin: 0 !important;
-        }
-
-        /* 2. Fix Input Email (Scuro, proporzionato, niente strisce bianche) */
-        #sib-container input[type="text"],
-        #sib-container input[type="email"] {
-            background-color: #1a1a1a !important;
-            color: #ffffff !important;
-            border: 1px solid #333 !important;
-            border-radius: 8px !important;
-            
-            /* Dimensioni corrette */
-            padding: 0 15px !important;
-            font-size: 16px !important;
-            
-            /* Forza la larghezza per evitare spazi vuoti */
-            width: 100% !important;
-            box-sizing: border-box !important;
-            max-width: 100% !important;
-            height: 50px !important; /* ALTEZZA FISSA STANDARD */
-            box-shadow: none !important;
-        }
-        
-        /* Focus (quando clicchi) */
-        #sib-container input[type="text"]:focus,
-        #sib-container input[type="email"]:focus {
-            border-color: var(--accent) !important;
-            outline: none !important;
-            background-color: #222 !important;
-        }
-        
-        /* 3. Etichette e Testi */
-        .entry__label {
-            color: #b3b3b3 !important;
-            font-weight: 600 !important;
-            font-size: 0.9rem !important;
-            margin-bottom: 5px !important;
-            display: block !important;
-            text-align: left !important;
-        }
-        
-        /* Titoli e descrizioni interni al form */
-        .sib-form-block p {
-            color: #fff !important;
-            text-align: left !important;
-        }
-        
-        /* Scritta piccola sotto l'input */
-        .entry__specification {
-            color: #666 !important;
-            font-size: 0.8rem !important;
-            text-align: left !important;
-            margin-top: 5px !important;
-        }
-
-        /* 4. Bottone (Stile btn-glow perfetto) */
-        .sib-form-block__button {
-            background-color: transparent !important;
-            color: #ffffff !important;
-            border: 2px solid var(--accent) !important;
-            border-radius: 50px !important;
-            box-shadow: 0 0 15px var(--accent-glow) !important;
-            font-family: 'Segoe UI', sans-serif !important;
-            font-weight: bold !important;
-            font-size: 1rem !important;
-            text-transform: uppercase !important;
-            letter-spacing: 2px !important;
-            padding: 15px 45px !important;
-            transition: all 0.3s ease !important;
-            margin-top: 20px !important;
-            width: 100% !important;
-            cursor: pointer !important;
-            display: block !important;
-        }
-
-        .sib-form-block__button:hover {
-            background-color: var(--accent) !important;
-            box-shadow: 0 0 40px var(--accent-glow) !important;
-            transform: scale(1.02) !important;
-        }
-
-        /* Nascondi icone interne al bottone */
-        .sib-form-block__button svg {
-            display: none !important;
-        }
-
-        /* 5. Messaggi di Successo/Errore */
-        #success-message {
-            background-color: #e7faf0 !important;
-            border-color: #13ce66 !important;
-        }
-        #success-message .sib-form-message-panel__inner-text {
-            color: #085229 !important;
-        }
-        
-        #error-message {
-            background-color: #ffeded !important;
-            border-color: #ff4949 !important;
-        }
-        #error-message .sib-form-message-panel__inner-text {
-            color: #661d1d !important;
-        }
     </style>
 
     <script>
-        // 1. CARTELLA FILE AUDIO
+        // 1. CARTELLA FILE AUDIO (Lasciare vuota se si usano link esterni completi)
         const AUDIO_FOLDER = "audio/"; 
 
         // 2. LISTA A/B (MIX vs MASTER)
@@ -992,7 +804,7 @@
             },
         ];
 
-        // 3. LISTA PORTFOLIO
+        // 3. LISTA PORTFOLIO (LAVORI FINITI)
         const PORTFOLIO_FILES_LIST = [
             {
                 title: "Laureato - Paris (Hip Hop)",
@@ -1058,7 +870,6 @@
                 <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
                 <li><a href="#services" class="nav-link">Servizi</a></li>
                 <li><a href="#reviews" class="nav-link">Recensioni</a></li>
-                <li><a href="#newsletter" class="nav-link">Newsletter</a></li>
                 <li><a href="#contact" class="nav-link">Contatti</a></li>
             </ul>
         </nav>
@@ -1178,113 +989,6 @@
         </div>
     </section>
 
-<section id="newsletter">
-    <div class="reveal newsletter-content">
-        
-        <div class="newsletter-text-side">
-            <h2>Resta nel<br><span style="color: var(--accent);">Loop</span></h2>
-            <p>Niente spam, solo risorse per la tua musica, aggiornamenti dallo studio e contenuti esclusivi.</p>
-            <div class="arrow-pointer">➔</div>
-        </div>
-
-        <div class="newsletter-form-side">
-            
-            <div class="sib-form" style="text-align: center; background-color: transparent;">
-  <div id="sib-form-container" class="sib-form-container">
-    <div id="error-message" class="sib-form-message-panel" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#661d1d; background-color:#ffeded; border-radius:3px; border-color:#ff4949;max-width:540px;">
-      <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
-        <svg viewBox="0 0 512 512" class="sib-icon sib-notification__icon">
-          <path d="M256 40c118.621 0 216 96.075 216 216 0 119.291-96.61 216-216 216-119.244 0-216-96.562-216-216 0-119.203 96.602-216 216-216m0-32C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm-11.49 120h22.979c6.823 0 12.274 5.682 11.99 12.5l-7 168c-.268 6.428-5.556 11.5-11.99 11.5h-8.979c-6.433 0-11.722-5.073-11.99-11.5l-7-168c-.283-6.818 5.167-12.5 11.99-12.5zM256 340c-15.464 0-28 12.536-28 28s12.536 28 28 28 28-12.536 28-28-12.536-28-28-28z" />
-        </svg>
-        <span class="sib-form-message-panel__inner-text">
-                          La tua iscrizione non può essere convalidata.
-                      </span>
-      </div>
-    </div>
-    <div></div>
-    <div id="success-message" class="sib-form-message-panel" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#085229; background-color:#e7faf0; border-radius:3px; border-color:#13ce66;max-width:540px;">
-      <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
-        <svg viewBox="0 0 512 512" class="sib-icon sib-notification__icon">
-          <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 464c-118.664 0-216-96.055-216-216 0-118.663 96.055-216 216-216 118.664 0 216 96.055 216 216 0 118.663-96.055 216-216 216zm141.63-274.961L217.15 376.071c-4.705 4.667-12.303 4.637-16.97-.068l-85.878-86.572c-4.667-4.705-4.637-12.303.068-16.97l8.52-8.451c4.705-4.667 12.303-4.637 16.97.068l68.976 69.533 163.441-162.13c4.705-4.667 12.303-4.637 16.97.068l8.451 8.52c4.668 4.705 4.637 12.303-.068 16.97z" />
-        </svg>
-        <span class="sib-form-message-panel__inner-text">
-                          La tua iscrizione è avvenuta correttamente.
-                      </span>
-      </div>
-    </div>
-    <div></div>
-    <div id="sib-container" class="sib-container--large sib-container--vertical" style="text-align:center; background-color:rgba(8,8,8,1); max-width:540px; border-radius:22px; border-width:1px; border-color:#080808; border-style:solid; direction:ltr">
-      <form id="sib-form" method="POST" action="https://fff73002.sibforms.com/serve/MUIFAK9trnN124fEd4z_qJmmj9imbBX1ewKMHYtBiEWvyyTJzKwT59b4eXPqhVoJsjA5zKCSGG1LSL1FSe_ra2kPqarlSZeL4JodXc07rdffXUyNWnQFAzmgX0VJJyYIi_mo8qQ8arcUWt-M4BkoxelLfzNudgie_SKCNhW7asLx2E-txeNafuTr9VS7ORm53W7495Hd_emCWYkd3A==" data-type="subscription">
-        <div style="padding: 8px 0;">
-          <div class="sib-form-block" style="font-size:32px; text-align:left; font-weight:700; font-family:Helvetica, sans-serif; color:#ffffff; background-color:transparent; text-align:left">
-            <p>Newsletter</p>
-          </div>
-        </div>
-        <div style="padding: 8px 0;">
-          <div class="sib-form-block" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#ffffff; background-color:transparent; text-align:left">
-            <div class="sib-text-form-block">
-              <p>Abbonati alla nostra newsletter e resta aggiornato.</p>
-            </div>
-          </div>
-        </div>
-        <div style="padding: 8px 0;">
-          <div class="sib-input sib-form-block">
-            <div class="form__entry entry_block">
-              <div class="form__label-row ">
-                <label class="entry__label" style="font-weight: 700; text-align:left; font-size:16px; text-align:left; font-weight:700; font-family:Helvetica, sans-serif; color:#b3b3b3;" for="EMAIL" data-required="*">Inserisci il tuo indirizzo email per iscriverti</label>
-
-                <div class="entry__field">
-                  <input class="input " type="text" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="" data-required="true" required />
-                </div>
-              </div>
-
-              <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#661d1d; background-color:#ffeded; border-radius:3px; border-color:#ff4949;">
-              </label>
-              <label class="entry__specification" style="font-size:12px; text-align:left; font-family:Helvetica, sans-serif; color:#b3b3b3; text-align:left">
-                Indica il tuo indirizzo email per iscriverti. Es. abc@xyz.com
-              </label>
-            </div>
-          </div>
-        </div>
-        <div style="padding: 8px 0;">
-          <div class="sib-captcha sib-form-block">
-            <div class="form__entry entry_block">
-              <div class="form__label-row ">
-                <script>
-                  function handleCaptchaResponse() {
-                    var event = new Event('captchaChange');
-                    document.getElementById('sib-captcha').dispatchEvent(event);
-                  }
-                </script>
-                <div class="g-recaptcha sib-visible-recaptcha" id="sib-captcha" data-sitekey="6LcrdiMsAAAAAFFFViS1NJOd64rfNubzCQaGd2Od" data-callback="handleCaptchaResponse" style="direction:ltr"></div>
-              </div>
-              <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#661d1d; background-color:#ffeded; border-radius:3px; border-color:#ff4949;">
-              </label>
-            </div>
-          </div>
-        </div>
-        <div style="padding: 8px 0;">
-          <div class="sib-form-block" style="text-align: left">
-            <button class="sib-form-block__button sib-form-block__button-with-loader" style="font-size:16px; text-align:left; font-weight:700; font-family:Helvetica, sans-serif; color:#ffffff; background-color:#8c00ff; border-radius:20px; border-width:0px;" form="sib-form" type="submit">
-              <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512" style="">
-                <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
-              </svg>
-              ISCRIVITI
-            </button>
-          </div>
-        </div>
-
-        <input type="text" name="email_address_check" value="" class="input--hidden">
-        <input type="hidden" name="locale" value="it">
-      </form>
-    </div>
-  </div>
-</div>
-</div>
-
-    </div>
-</section>
-
     <section id="contact">
         <div class="reveal contact-container">
             <div class="contact-info">
@@ -1313,27 +1017,8 @@
         <div class="copyright">© 2025 JB Project Studio - P.IVA: 02426720567 | All rights reserved.</div> 
     </footer>
 
-    <script>
-        window.REQUIRED_CODE_ERROR_MESSAGE = 'Scegli un prefisso paese';
-        window.LOCALE = 'it';
-        window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "Le informazioni fornite non sono valide. Controlla il formato del campo e riprova.";
-        window.REQUIRED_ERROR_MESSAGE = "Questo campo non può essere lasciato vuoto. ";
-        window.GENERIC_INVALID_MESSAGE = "Le informazioni fornite non sono valide. Controlla il formato del campo e riprova.";
-        window.translation = {
-            common: {
-                selectedList: '{quantity} lista selezionata',
-                selectedLists: '{quantity} liste selezionate',
-                selectedOption: '{quantity} selezionato',
-                selectedOptions: '{quantity} selezionati',
-            }
-        };
-        var AUTOHIDE = Boolean(1);
-    </script>
-    <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js?hl=it"></script>
-
-    <script>
-        // --- UTILITIES & NAVIGAZIONE ---
+<script>
+        // --- 1. UTILITIES & NAVIGAZIONE ---
         const hamburger = document.querySelector(".hamburger");
         const navMenu = document.querySelector("nav ul");
         const navLink = document.querySelectorAll(".nav-link");
@@ -1434,6 +1119,8 @@
         const portfolioTracksData = (typeof PORTFOLIO_FILES_LIST !== 'undefined') ? parsePortfolioList(PORTFOLIO_FILES_LIST) : [];
 
         // --- 3. PLAYER A/B (SYNC PERFETTO RISOLTO) ---
+        // Logica: Si caricano e si avviano ENTRAMBI i file (audioA e audioB) simultaneamente.
+        // Lo switch tra Raw e Master agisce SOLO sul MUTE/VOLUME, non mette in pausa e non cambia currentTime.
         
         const abPlayer = {
             audioA: null, audioB: null,
@@ -1488,13 +1175,13 @@
 
                 // Gestione fine traccia
                 this.audioA.addEventListener('ended', () => {
-                      this.isPlaying = false;
-                      this.playBtn.innerHTML = "▶";
-                      this.playBtn.classList.remove("playing");
-                      this.audioA.currentTime = 0;
-                      this.audioB.currentTime = 0;
-                      this.audioA.pause();
-                      this.audioB.pause();
+                     this.isPlaying = false;
+                     this.playBtn.innerHTML = "▶";
+                     this.playBtn.classList.remove("playing");
+                     this.audioA.currentTime = 0;
+                     this.audioB.currentTime = 0;
+                     this.audioA.pause();
+                     this.audioB.pause();
                 });
 
                 // Progress Bar Dragging
@@ -1801,6 +1488,8 @@
         function scrollReviews(direction) {
             const container = document.getElementById('reviews-grid');
             if(container) {
+                // Calcola la larghezza di una card + gap per scorrere esattamente di 1 elemento o 1 pagina
+                // Per un carousel fluido, container.clientWidth va bene, ma lo scroll-snap penserà al resto.
                 const scrollAmount = container.clientWidth / (window.innerWidth > 900 ? 3 : 1);
                 
                 container.scrollBy({
