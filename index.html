@@ -276,7 +276,7 @@
             color: #ccc;
             line-height: 1.8;
             margin-bottom: 20px;
-            text-align: justify;
+            text-align: left; /* Modificato da justify a left */
         }
 
         .about-text:last-child { margin-bottom: 0; }
@@ -303,13 +303,8 @@
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             display: flex;
             flex-direction: column;
-            /* --- MODIFICA QUI --- */
-            /* Prima era: justify-content: space-between; */
-            /* Ora mettiamo flex-start per allinearli in alto in sequenza */
             justify-content: flex-start; 
-            /* Aggiungiamo un gap opzionale per gestire meglio lo spazio se serve */
             gap: 20px; 
-            /* -------------------- */
             height: 100%;
         }
 
@@ -326,17 +321,11 @@
             margin-bottom: 5px; 
             text-align: center; 
             color: var(--accent); 
-            
-            /* --- MODIFICA PER ALLINEAMENTO --- */
-            /* Altezza minima sufficiente per 2 righe (circa 3rem) */
             min-height: 3.2rem; 
-            line-height: 1.2; /* Interlinea stretta per i titoli */
-            
-            /* Questo serve a centrare il testo verticalmente nello spazio riservato */
+            line-height: 1.2; 
             display: flex;
-            align-items: flex-end; /* Allinea in basso (più elegante per i titoli) o center */
+            align-items: flex-end; 
             justify-content: center;
-            /* --------------------------------- */
         }
 
         .track-description-display {
@@ -345,17 +334,11 @@
             text-align: center;
             margin-bottom: 25px; 
             font-style: italic;
-            
-            /* --- MODIFICA PER ALLINEAMENTO --- */
-            /* Altezza minima per 2 righe abbondanti */
             min-height: 3rem; 
             line-height: 1.4;
-            
-            /* Centriamo il testo nel box se è corto */
             display: flex;
-            align-items: flex-start; /* Allinea in alto */
+            align-items: flex-start; 
             justify-content: center;
-            /* --------------------------------- */
         }
 
         .controls-wrapper {
@@ -397,17 +380,13 @@
             border: 1px solid #333;
             flex-wrap: wrap;
             justify-content: center;
-            
-            /* --- MODIFICA AGGIUNTA --- */
-            /* Impostiamo un'altezza fissa che accomodi bene i tasti */
             height: 54px; 
-            box-sizing: border-box; /* Include bordi e padding nel calcolo */
-            align-items: center;    /* Centra verticalmente i tasti nel box */
-            /* ------------------------- */
+            box-sizing: border-box; 
+            align-items: center;   
         }
 
         .ghost-spacer {
-            height: 54px; /* Stessa identica altezza del contenitore switch */
+            height: 54px; 
             width: 100%;
             display: block;
         }
@@ -443,6 +422,7 @@
         .progress-bar {
             flex-grow: 1;
             -webkit-appearance: none;
+            appearance: none; /* FIX VS CODE WARNING */
             height: 5px;
             background: #333;
             border-radius: 5px;
@@ -453,6 +433,7 @@
 
         .progress-bar::-webkit-slider-thumb {
             -webkit-appearance: none;
+            appearance: none; /* FIX VS CODE WARNING */
             width: 12px; height: 12px;
             background: var(--accent);
             border-radius: 50%;
@@ -796,6 +777,29 @@
         .copyright { font-size: 0.8rem; color: #555; }
 
         /* --- MEDIA QUERIES (RESPONSIVE) --- */
+
+        /* 1. NAVIGAZIONE (Mobile menu BREAKPOINT A 1100PX) */
+        @media (max-width: 1100px) {
+            .hamburger { display: block; margin-left: auto; }
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+            nav { position: absolute; width: 0; height: 0; padding: 0; margin: 0; }
+            nav ul {
+                position: fixed; left: -100%; top: 80px;
+                gap: 0; flex-direction: column;
+                background-color: var(--bg-color);
+                width: 100%; text-align: center;
+                transition: 0.3s;
+                border-bottom: 1px solid #222;
+                padding-bottom: 20px;
+            }
+            nav ul.active { left: 0; }
+            nav li { margin: 16px 0; }
+        }
+
+        /* 2. LAYOUT GENERALE (Breakpoints intermedi e mobile) */
         @media (max-width: 900px) {
             .dual-player-grid { grid-template-columns: 1fr; gap: 50px; }
             .grid-3 { grid-template-columns: 1fr; }
@@ -804,7 +808,8 @@
                 flex-direction: column; 
                 text-align: center; 
             }
-            .about-text { text-align: center; }
+            /* FIX 1: TESTO ABOUT LEFT SU MOBILE */
+            .about-text { text-align: left; }
             .about-img-wrapper { 
                 max-width: 250px; 
                 margin: 0 auto; 
@@ -820,11 +825,16 @@
             }
             .newsletter-text-side { text-align: center; }
             .newsletter-text-side p { margin: 0 auto 30px auto; }
+            
+            /* FIX 2: NEWSLETTER FORM SPACING */
             .newsletter-form-side {
                 border-left: none;
                 border-top: 1px solid #222;
-                padding-left: 0;
+                padding-left: 20px;
+                padding-right: 20px;
                 padding-top: 30px;
+                width: 100%;
+                box-sizing: border-box;
             }
             .arrow-pointer { transform: rotate(90deg); animation: bounceDown 2s infinite; }
             @keyframes bounceDown {
@@ -843,24 +853,6 @@
         }
 
         @media (max-width: 768px) {
-            .hamburger { display: block; margin-left: auto; }
-            .hamburger.active .bar:nth-child(2) { opacity: 0; }
-            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
-            nav { position: absolute; width: 0; height: 0; padding: 0; margin: 0; }
-            nav ul {
-                position: fixed; left: -100%; top: 80px;
-                gap: 0; flex-direction: column;
-                background-color: var(--bg-color);
-                width: 100%; text-align: center;
-                transition: 0.3s;
-                border-bottom: 1px solid #222;
-                padding-bottom: 20px;
-            }
-            nav ul.active { left: 0; }
-            nav li { margin: 16px 0; }
-
             .section-padding { padding: 60px 5%; }
             .hero { padding-top: 100px; }
             .about-box { padding: 30px; }
@@ -890,8 +882,8 @@
         }
         
         /* ========================================
-        AGGIUNTA STILI FORM BREVO (FIX DEFINITIVO)
-        ======================================== 
+           AGGIUNTA STILI FORM BREVO (FIX DEFINITIVO)
+           ======================================== 
         */
 
         /* 1. Reset TOTALE dei contenitori (Rende tutto trasparente) */
@@ -976,7 +968,11 @@
             letter-spacing: 2px !important;
             padding: 15px 45px !important;
             transition: all 0.3s ease !important;
+            
+            /* Margini modificati qui sotto */
             margin-top: 20px !important;
+            margin-bottom: 30px !important; /* AGGIUNTO QUESTO per staccarlo dal bordo */
+            
             width: 100% !important;
             cursor: pointer !important;
             display: block !important;
@@ -1267,10 +1263,7 @@ Ho scelto un open space acusticamente calibrato per evitare il suono "inscatolat
         </div>
         <div style="padding: 8px 0;">
           <div class="sib-form-block" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#ffffff; background-color:transparent; text-align:left">
-            <!-- <div class="sib-text-form-block">
-              <p>Seguimi nel loop per ricevere contenuti esclusivi.</p>
-            </div>-->
-          </div>
+            </div>
         </div>
         <div style="padding: 8px 0;">
           <div class="sib-input sib-form-block">
@@ -1311,7 +1304,7 @@ Ho scelto un open space acusticamente calibrato per evitare il suono "inscatolat
         <div style="padding: 8px 0;">
           <div class="sib-form-block" style="text-align: left">
             <button class="sib-form-block__button sib-form-block__button-with-loader" style="font-size:16px; text-align:left; font-weight:700; font-family:Helvetica, sans-serif; color:#ffffff; background-color:#8c00ff; border-radius:20px; border-width:0px;" form="sib-form" type="submit">
-              <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512" style="">
+              <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512">
                 <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
               </svg>
               ENTRA
