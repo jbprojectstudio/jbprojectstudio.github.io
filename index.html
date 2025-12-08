@@ -292,7 +292,7 @@
             align-items: start;
         }
 
-        .player-container {
+      .player-container {
             background: var(--card-bg);
             border: 1px solid #333;
             border-radius: 20px;
@@ -303,7 +303,13 @@
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            /* --- MODIFICA QUI --- */
+            /* Prima era: justify-content: space-between; */
+            /* Ora mettiamo flex-start per allinearli in alto in sequenza */
+            justify-content: flex-start; 
+            /* Aggiungiamo un gap opzionale per gestire meglio lo spazio se serve */
+            gap: 20px; 
+            /* -------------------- */
             height: 100%;
         }
 
@@ -320,7 +326,17 @@
             margin-bottom: 5px; 
             text-align: center; 
             color: var(--accent); 
-            min-height: 1.5em; 
+            
+            /* --- MODIFICA PER ALLINEAMENTO --- */
+            /* Altezza minima sufficiente per 2 righe (circa 3rem) */
+            min-height: 3.2rem; 
+            line-height: 1.2; /* Interlinea stretta per i titoli */
+            
+            /* Questo serve a centrare il testo verticalmente nello spazio riservato */
+            display: flex;
+            align-items: flex-end; /* Allinea in basso (più elegante per i titoli) o center */
+            justify-content: center;
+            /* --------------------------------- */
         }
 
         .track-description-display {
@@ -329,7 +345,17 @@
             text-align: center;
             margin-bottom: 25px; 
             font-style: italic;
-            min-height: 1.2em;
+            
+            /* --- MODIFICA PER ALLINEAMENTO --- */
+            /* Altezza minima per 2 righe abbondanti */
+            min-height: 3rem; 
+            line-height: 1.4;
+            
+            /* Centriamo il testo nel box se è corto */
+            display: flex;
+            align-items: flex-start; /* Allinea in alto */
+            justify-content: center;
+            /* --------------------------------- */
         }
 
         .controls-wrapper {
@@ -371,6 +397,19 @@
             border: 1px solid #333;
             flex-wrap: wrap;
             justify-content: center;
+            
+            /* --- MODIFICA AGGIUNTA --- */
+            /* Impostiamo un'altezza fissa che accomodi bene i tasti */
+            height: 54px; 
+            box-sizing: border-box; /* Include bordi e padding nel calcolo */
+            align-items: center;    /* Centra verticalmente i tasti nel box */
+            /* ------------------------- */
+        }
+
+        .ghost-spacer {
+            height: 54px; /* Stessa identica altezza del contenitore switch */
+            width: 100%;
+            display: block;
         }
 
         .switch-btn {
@@ -1127,8 +1166,8 @@
 
                         <div class="controls-wrapper">
                             <button class="play-btn-large" id="port-play-btn">▶</button>
-                            <div style="height: 38px;"></div> 
-                            <div class="progress-container">
+<div class="ghost-spacer"></div>
+<div class="progress-container">
                                 <span id="port-current-time">0:00</span>
                                 <input type="range" class="progress-bar" id="port-progress" value="0" min="0" max="100" step="0.1">
                                 <span id="port-duration">0:00</span>
