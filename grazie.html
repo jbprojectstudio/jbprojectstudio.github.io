@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benvenuto nel Backstage | JB Project Studio</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+
+    <style>
+        /* --- STESSO CSS DELLA LANDING PAGE --- */
+        :root {
+            --bg-color: #050505;
+            --accent: #8c00ff; 
+            --accent-glow: rgba(140, 0, 255, 0.4);
+            --text-main: #ffffff;
+            --text-muted: #b3b3b3;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, rgba(5,5,5,0.7), var(--bg-color)), 
+                        url('img/studio_back.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Centrato verticalmente */
+            padding: 40px 20px;
+        }
+
+        .landing-wrapper {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            text-align: center;
+        }
+
+        /* LOGO CON GLOW BIANCO (Identico al precedente) */
+        .logo-header { margin-bottom: 20px; }
+        .logo-header img {
+            height: 180px;
+            width: auto;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6)) 
+                    drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+            transition: transform 0.3s ease;
+        }
+        .logo-header img:hover { transform: scale(1.05); }
+
+        /* BOX CONTENUTO */
+        .content-box {
+            background: rgba(10, 10, 10, 0.9);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            animation: fadeUp 0.8s ease-out;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* BOTTONE ACTION (Stile identico al form) */
+        .btn-action {
+            display: inline-block;
+            background-color: transparent;
+            color: #ffffff;
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            box-shadow: 0 0 15px var(--accent-glow);
+            font-weight: bold;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 15px 40px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn-action:hover {
+            background-color: var(--accent);
+            box-shadow: 0 0 40px var(--accent-glow);
+            transform: scale(1.02);
+        }
+
+        .simple-footer {
+            color: #555;
+            font-size: 0.8rem;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logo-header">
+        <a href="index.html">
+            <img src="img/logo.svg" alt="JB Project Studio">
+        </a>
+    </div>
+
+    <div class="landing-wrapper">
+        <div class="content-box">
+            <h2>Benvenuto nel <span style="color: var(--accent);">Backstage</span></h2>
+            
+            <p>Grazie per esserti iscritto. Da ora in poi riceverai solo contenuti utili per la tua musica, aggiornamenti e risorse esclusive.</p>
+            
+            <p style="font-size: 0.9rem; margin-top: -15px;">Nessuno spam, promesso. E ricorda che puoi uscire dal backstage (disiscriverti) in qualsiasi momento con un semplice click.</p>
+
+            <a href="https://jbprojectstudio.com/" class="btn-action">
+                Vai al Sito Web
+            </a>
+        </div>
+    </div>
+
+    <div class="simple-footer">© 2025 JB Project Studio</div>
+
+</body>
+</html>
