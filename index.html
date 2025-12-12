@@ -184,7 +184,8 @@
         */
         .woofer-beat {
             display: inline-block;
-            margin-bottom: 30px; /* Spazio sotto il logo */
+            /* MODIFICATO: Spazio aumentato a 60px per evitare sovrapposizione con il titolo */
+            margin-bottom: 60px; 
             border-radius: 50%;
             /* Animazione del battito cardiaco */
             animation: bpm-pulse 0.55s cubic-bezier(0.1, 0.9, 0.2, 1.0) infinite;
@@ -195,67 +196,80 @@
            - Vibra velocissimo (elettrico)
         */
        /* 2. IL LOGO INTERNO (IL CONO FISICO) */
-.hero-logo {
-    width: 220px;
-    height: auto;
-    display: block;
-    
-    /* MATERIALE DEL CONO */
-    /* Un gradiente radiale leggero simula la curvatura del cono bianco */
-    background: radial-gradient(circle, #ffffff 30%, #e0e0e0 100%);
-    padding: 25px;
-    
-    /* LA SOSPENSIONE IN GOMMA (Più spessa e opaca) */
-    border: 12px solid #222; 
-    border-radius: 50%;
-    
-    /* PROFONDITÀ MECCANICA */
-    /* L'ombra interna (inset) molto marcata crea l'effetto "scavato" */
-    box-shadow: 
-        inset 0 0 20px rgba(0, 0, 0, 0.8), /* Ombra dentro il cono */
-        0 0 0 1px rgba(255, 255, 255, 0.1); /* Riflesso sul bordo di gomma */
+        .hero-logo {
+            width: 220px;
+            height: auto;
+            display: block;
+            
+            /* MATERIALE DEL CONO */
+            background: radial-gradient(circle, #ffffff 30%, #e0e0e0 100%);
+            padding: 25px;
+            
+            /* LA SOSPENSIONE IN GOMMA (Più spessa e opaca) */
+            border: 12px solid #222; 
+            border-radius: 50%;
+            
+            /* PROFONDITÀ MECCANICA */
+            box-shadow: 
+                inset 0 0 20px rgba(0, 0, 0, 0.8), /* Ombra dentro il cono */
+                0 0 0 1px rgba(255, 255, 255, 0.1); /* Riflesso sul bordo di gomma */
 
-    /* Animazione vibrazione */
-    animation: electric-shiver 0.05s linear infinite;
-    
-    transform: translateZ(0); 
-    will-change: transform;
-    box-sizing: content-box; 
-}
+            /* Animazione vibrazione */
+            animation: electric-shiver 0.045s linear infinite;
+            
+            transform: translateZ(0); 
+            will-change: transform;
+            box-sizing: content-box; 
+        }
 
         /* KEYFRAMES */
 
         /* A. IL BATTITO (Simulazione Pressione Sonora) */
-@keyframes bpm-pulse {
+        @keyframes bpm-pulse {
     0% {
-        transform: scale(1);
-        /* Ombra statica, vicina all'oggetto */
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); 
-    }
-    10% {
-        /* IL COLPO (Escursione massima) */
-        transform: scale(1.12); 
-        
-        /* NIENTE LUCE VIOLA. Solo ombra nera profonda */
-        /* L'ombra si allarga perché il woofer "esce" dallo schermo */
-        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
-    }
-    25% {
-        /* RINCULO (Rientra dentro) */
-        transform: scale(0.95); 
-        /* L'ombra sparisce quasi perché il cono è rientrato */
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    }
-    40% {
-        /* Stabilizzazione */
         transform: scale(1);
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     }
+
+    /* IL COLPO: Manteniamo l'energia */
+    10% {
+        transform: scale(1.12); 
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        /* Timing function per rendere il colpo esplosivo */
+        animation-timing-function: ease-out; 
+    }
+
+    /* IL RINCULO: Qui sta la correzione. 
+       È molto più vicino al 10% (al 22% invece che 30%).
+       Scendiamo sotto l'1 (0.92), ma lo facciamo velocemente. */
+    22% {
+        transform: scale(0.92); /* Meno esagerato di prima, ma percepibile */
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        animation-timing-function: ease-in-out; 
+    }
+
+    /* ASSESTAMENTO: Torna a riposo morbido */
+    35% {
+        transform: scale(1);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
     100% {
         transform: scale(1);
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     }
 }
+
+        /* B. LA VIBRAZIONE ELETTRICA (Costante) */
+        @keyframes electric-shiver {
+            /* Tremolio impercettibile (0.5px - 1px) */
+            0%   { transform: translate(0, 0); }
+            25%  { transform: translate(-0.5px, 0.5px); }
+            50%  { transform: translate(0, -0.5px); }
+            75%  { transform: translate(0.5px, 0); }
+            100% { transform: translate(0, 0); }
+        }
+
         /* =========================================== */
 
         .hero h1 {
@@ -946,8 +960,25 @@
 
         @media (max-width: 768px) {
             .section-padding { padding: 60px 5%; }
-            .hero { padding-top: 100px; }
-            .hero-logo { width: 160px; } /* Logo più piccolo su mobile */
+            
+            /* MODIFICA HERO MOBILE (FIX POSIZIONAMENTO) */
+            .hero { 
+                /* Invece di centrare (center), allineiamo in alto (flex-start) */
+                justify-content: flex-start; 
+                
+                /* Riduciamo un po' l'altezza minima per evitare scroll inutili */
+                min-height: 90vh; 
+                
+                /* CALCOLO SPAZIO DALL'ALTO:
+                   80px (Altezza Navbar) + ~60px (Spazio extra) = 140px 
+                   Questo sposta tutto più in alto visivamente.
+                */
+                padding-top: 140px; 
+                padding-bottom: 60px;
+            }
+
+            .hero-logo { width: 160px; } 
+            /* ... il resto rimane uguale ... */
             .about-box { padding: 30px; }
             .player-container { padding: 30px 20px; }
             
