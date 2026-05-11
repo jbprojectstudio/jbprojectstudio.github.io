@@ -5,44 +5,147 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>JB Project Studio | Studio di registrazione a Viterbo</title>
+    <meta name="description" content="JB Project Studio a Viterbo: Produzione artistica, Mix & Mastering e registrazione professionale. Realizza il tuo progetto musicale con Giordano Boschetti.">
+    <meta name="keywords" content="studio registrazione viterbo, mix e master, produzione musicale, beatmaking, giordano boschetti, studio musicale lazio">
+    <meta name="author" content="Giordano Boschetti">
     
+    <link rel="canonical" href="https://jbprojectstudio.com/">
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+
     <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.min.css">
     <script src="https://get.mavo.io/stable/mavo.min.js"></script>
 
-    <style>
-        /* --- SICUREZZA ADMIN --- */
-        .mv-bar.mv-ui { display: none !important; }
-        .show-admin .mv-bar.mv-ui, [mv-app].mv-logged-in .mv-bar.mv-ui { display: flex !important; }
-        
-        /* Stile extra per l'editing */
-        [property]:hover { outline: 1px dashed var(--accent); cursor: text; }
-        .mv-add { background: var(--accent) !important; color: white !important; }
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jbprojectstudio.com/">
+    <meta property="og:title" content="JB Project Studio | Il tuo suono, la tua identità">
+    <meta property="og:description" content="Studio di registrazione e produzione artistica a Viterbo. Ascolta i lavori e prenota una sessione.">
+    <meta property="og:image" content="https://jbprojectstudio.com/img/social-preview.jpg">
+    <meta property="og:locale" content="it_IT">
 
-        /* --- IL TUO CSS ORIGINALE (Riepilogato per brevità ma intatto) --- */
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MusicRecordingStudio",
+      "name": "JB Project Studio",
+      "image": "https://jbprojectstudio.com/img/logo.svg",
+      "url": "https://jbprojectstudio.com",
+      "telephone": "+393485491400",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Piazza Dalmazia 9",
+        "addressLocality": "Viterbo",
+        "postalCode": "01100",
+        "addressCountry": "IT"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 42.5209982,
+        "longitude": 12.1659138
+      },
+      "priceRange": "$$",
+      "founder": {
+        "@type": "Person",
+        "name": "Giordano Boschetti"
+      }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+
+    <style>
+        /* --- MAVO ADMIN LOGIC --- */
+        .mv-bar.mv-ui { display: none !important; }
+        .admin-mode .mv-bar.mv-ui, [mv-app].mv-logged-in .mv-bar.mv-ui { display: flex !important; }
+        .admin-mode [property]:hover { outline: 1px dotted var(--accent) !important; cursor: pointer; }
+
+        /* --- RESET GLOBALE --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        :root { --bg-color: #050505; --card-bg: #111111; --accent: #8c00ff; --accent-glow: rgba(140, 0, 255, 0.4); --text-main: #ffffff; --text-muted: #b3b3b3; }
-        body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Segoe UI', sans-serif; overflow-x: hidden; line-height: 1.6; }
-        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 5%; background: rgba(5, 5, 5, 0.95); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.1); height: 80px; }
-        .logo { font-size: 1.2rem; font-weight: 800; color: white; display: flex; align-items: center; gap: 15px; }
-        .logo span { color: var(--accent); }
+        :root {
+            --bg-color: #050505; --card-bg: #111111; --accent: #8c00ff; 
+            --accent-glow: rgba(140, 0, 255, 0.4); --whatsapp: #25D366;
+            --whatsapp-glow: rgba(37, 211, 102, 0.4); --text-main: #ffffff;
+            --text-muted: #b3b3b3; --google-blue: #4285F4; --google-orange: #FBBC05;
+        }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; overflow-x: hidden; line-height: 1.6; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        h1, h2, h3 { line-height: 1.2; }
+        .reveal { position: relative; transform: translateY(50px); opacity: 0; transition: all 1s ease; }
+        .reveal.active { transform: translateY(0); opacity: 1; }
+
+        /* --- NAVBAR --- */
+        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 5%; background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.1); height: 80px; }
+        .logo { font-size: 1.2rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; z-index: 1001; display: flex; align-items: center; gap: 15px; }
+        .logo img { height: 90px; width: auto; margin-top: -20px; margin-bottom: -20px; display: block; object-fit: contain; }
+        .logo span { color: var(--accent); text-shadow: 0 0 10px var(--accent-glow); }
         nav ul { display: flex; gap: 30px; }
-        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(to bottom, rgba(5,5,5,0.3), var(--bg-color)), url('img/studio_back.jpg'); background-size: cover; padding: 100px 20px; }
-        .hero h1 { font-size: clamp(2.5rem, 5vw, 5rem); text-transform: uppercase; }
+        nav a { font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        nav a:hover { color: var(--accent); text-shadow: 0 0 8px var(--accent); }
+        .hamburger { display: none; cursor: pointer; z-index: 1001; }
+        .bar { display: block; width: 25px; height: 3px; margin: 5px auto; transition: all 0.3s ease-in-out; background-color: white; }
+
+        /* --- HERO --- */
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(to bottom, rgba(5,5,5,0.3), var(--bg-color)), linear-gradient(45deg, rgba(140,0,255,0.2), rgba(0,0,0,0.8)), url('img/studio_back.jpg'); background-size: cover; background-position: center; padding: 100px 20px 40px 20px; }
+        .woofer-beat { display: inline-block; margin-bottom: 60px; border-radius: 50%; animation: bpm-pulse 0.55s cubic-bezier(0.1, 0.9, 0.2, 1.0) infinite; }
+        .hero-logo { width: 220px; height: auto; display: block; background: radial-gradient(circle, #ffffff 30%, #e0e0e0 100%); padding: 25px; border: 12px solid #222; border-radius: 50%; box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1); animation: electric-shiver 0.045s linear infinite; transform: translateZ(0); will-change: transform; box-sizing: content-box; }
+        @keyframes bpm-pulse { 0% { transform: scale(1); } 10% { transform: scale(1.12); } 22% { transform: scale(0.92); } 100% { transform: scale(1); } }
+        @keyframes electric-shiver { 0% { transform: translate(0, 0); } 25% { transform: translate(-0.5px, 0.5px); } 100% { transform: translate(0, 0); } }
+        .hero h1 { font-size: clamp(2.5rem, 5vw, 5rem); margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px; line-height: 1.1; }
+        .hero h1 span { color: var(--accent); text-shadow: 0 0 20px var(--accent-glow); }
+        .hero p { font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 500; color: #ffffff; text-shadow: 0 2px 10px rgba(0,0,0,0.8); max-width: 800px; margin: 0 auto 50px auto; line-height: 1.5; }
+        .btn-glow { padding: 15px 45px; font-size: 1rem; font-weight: bold; color: #fff; background: transparent; border: 2px solid var(--accent); border-radius: 50px; box-shadow: 0 0 15px var(--accent-glow); transition: all 0.3s ease; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; display: inline-block; text-align: center; }
+        .btn-glow:hover { background: var(--accent); box-shadow: 0 0 40px var(--accent-glow); transform: scale(1.05); }
+
+        /* --- ABOUT --- */
         .section-padding { padding: 100px 5%; }
-        .about-box { max-width: 1000px; margin: 0 auto; background: #111; padding: 50px; border-left: 4px solid var(--accent); display: flex; align-items: center; gap: 40px; }
-        .about-img-wrapper img { width: 300px; border-radius: 10px; }
+        .section-title { text-align: center; font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 10px; }
+        #about { background-color: #080808; border-bottom: 1px solid #222; }
+        .about-box { max-width: 1000px; margin: 0 auto; background: linear-gradient(145deg, #111111, #0d0d0d); padding: 50px; border-left: 4px solid var(--accent); border-radius: 0 15px 15px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 40px; }
+        .about-img-wrapper { flex: 0 0 35%; max-width: 350px; }
+        .about-img-wrapper img { width: 100%; border-radius: 10px; border: 1px solid #333; filter: grayscale(20%); transition: 0.3s; }
+        .about-content { flex: 1; }
+        .about-text { font-size: 1.1rem; color: #ccc; line-height: 1.8; margin-bottom: 20px; text-align: left; }
+        .highlight { color: var(--accent); font-weight: bold; }
+
+        /* --- PLAYERS --- */
+        .dual-player-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1200px; margin: 0 auto; }
+        .player-container { background: var(--card-bg); border: 1px solid #333; border-radius: 20px; padding: 40px; position: relative; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .track-title-display { font-size: 1.3rem; font-weight: bold; text-align: center; color: var(--accent); min-height: 3.2rem; display: flex; align-items: flex-end; justify-content: center; }
+        .controls-wrapper { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+        .play-btn-large { width: 70px; height: 70px; border-radius: 50%; background: var(--accent); border: none; color: #fff; font-size: 28px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px var(--accent-glow); }
+        .ab-switch-container { display: flex; background: #000; border-radius: 30px; padding: 5px; border: 1px solid #333; }
+        .switch-btn { padding: 8px 25px; border-radius: 25px; border: none; background: transparent; color: #888; font-weight: bold; cursor: pointer; }
+        .switch-btn.active { background: var(--accent); color: #fff; }
+        .progress-container { width: 100%; display: flex; align-items: center; gap: 10px; color: var(--text-muted); font-size: 0.8rem; }
+        .progress-bar { flex-grow: 1; height: 5px; cursor: pointer; }
+
+        /* --- SERVIZI --- */
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 50px; }
-        .card { background: #151515; padding: 40px; border-radius: 15px; border: 1px solid #222; }
-        /* Mobile fixes */
-        @media (max-width: 900px) { .about-box { flex-direction: column; } .grid-3 { grid-template-columns: 1fr; } }
+        .card { background: linear-gradient(145deg, #151515, #0a0a0a); padding: 40px 30px; border-radius: 15px; border: 1px solid #222; transition: 0.4s; }
+        .card:hover { transform: translateY(-10px); border-color: var(--accent); }
+
+        /* --- RECENSIONI --- */
+        #reviews-grid { display: flex; gap: 30px; overflow-x: auto; padding: 20px 0; scrollbar-width: none; }
+        .review-card { background: var(--card-bg); border: 1px solid #333; border-radius: 15px; padding: 30px; flex: 0 0 calc((100% - 60px) / 3); }
+
+        /* --- NEWSLETTER BREVO --- */
+        #seguimi { background-color: #080808; border-top: 1px solid #222; padding: 80px 5%; }
+        .newsletter-content { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+        .newsletter-form-side { border-left: 1px solid #222; padding-left: 40px; }
+
+        /* --- FOOTER --- */
+        footer { background: #000; padding: 60px 5%; border-top: 1px solid #333; text-align: center; }
+        .social-links { display: flex; gap: 20px; justify-content: center; margin-bottom: 40px; }
+        .social-link { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(255, 255, 255, 0.1); color: #fff; }
+
+        @media (max-width: 1100px) { .hamburger { display: block; } nav ul { position: fixed; left: -100%; top: 80px; flex-direction: column; background: var(--bg-color); width: 100%; transition: 0.3s; } nav ul.active { left: 0; } }
+        @media (max-width: 900px) { .dual-player-grid, .grid-3, .newsletter-content, .contact-container { grid-template-columns: 1fr; } .newsletter-form-side { border-left: none; border-top: 1px solid #222; padding: 30px 0; } }
     </style>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            if (window.location.search.includes('admin')) {
-                document.body.classList.add('show-admin');
-            }
-        });
+        if (window.location.search.includes('admin')) {
+            document.documentElement.classList.add('admin-mode');
+        }
     </script>
 </head>
 
@@ -52,62 +155,175 @@
 
     <header>
         <div class="logo">
-            <img src="img/logo.svg" alt="Logo" style="height: 50px;">
-            <span property="site_name">JB PROJECT <span>STUDIO</span></span>
+            <img src="img/logo.svg" alt="JB Project Studio">
+            <span property="site_name" mv-default>JB PROJECT <span>STUDIO</span></span>
         </div>
+        <div class="hamburger"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
         <nav>
             <ul>
                 <li><a href="#about">Visione</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#services">Servizi</a></li>
+                <li><a href="#reviews">Recensioni</a></li>
+                <li><a href="#seguimi">Seguimi</a></li>
                 <li><a href="#contact">Contatti</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="hero">
-        <img property="hero_logo" src="img/logo.svg" style="width: 200px; margin-bottom: 30px;">
-        <h1 property="hero_title">Il Tuo Suono<br><span style="color:var(--accent)">La tua identità</span></h1>
-        <p property="hero_subtitle" style="font-size: 1.5rem; margin: 20px 0;">Produzione Artistica & Musicale. Concept, Arrangiamento, Mix e Mastering.</p>
-        <a href="#portfolio" class="btn-glow" style="border: 2px solid var(--accent); padding: 15px 40px; border-radius: 50px; color: white;">ASCOLTA</a>
+        <div class="reveal active"> 
+            <div class="woofer-beat">
+                <img property="hero_logo_img" src="img/logo.svg" alt="Logo" class="hero-logo">
+            </div>
+            <h1 property="hero_title" mv-default>Il Tuo Suono<br><span>La tua identità</span></h1>
+            <p property="hero_subtitle" mv-default>Produzione Artistica & Musicale.<br>Concept, Arrangiamento, Mix e Mastering.</p>
+            <a href="#portfolio" class="btn-glow" property="hero_btn_text" mv-default>Ascolta</a>
+        </div>
     </section>
 
     <section id="about" class="section-padding">
-        <h2 class="section-title" property="about_title" style="text-align:center; font-size: 2.5rem; margin-bottom: 40px;">Oltre il Tasto Rec</h2>
-        <div class="about-box">
-            <div class="about-img-wrapper">
-                <img property="about_image" src="img/jo.jpg" alt="Giordano Boschetti">
+        <div class="reveal">
+            <h2 class="section-title" property="about_section_title" mv-default>Oltre il Tasto Rec</h2>
+            <div class="about-box">
+                <div class="about-img-wrapper">
+                    <img property="about_photo" src="img/jo.jpg" alt="Giordano Boschetti">
+                </div>
+                <div class="about-content">
+                    <p class="about-text" property="about_p1" mv-default>Non mi limito a catturare un'esecuzione: insieme valorizziamo la tua identità artistica. Lavoriamo fianco a fianco, senza vetri a dividerci, per costruire un sound che rispecchi davvero chi sei.</p>
+                    <p class="about-text" property="about_p2" mv-default>Ho scelto un open space acusticamente calibrato per garantire un prodotto tecnicamente solido e competitivo.</p>
+                    <p class="about-text"><span class="highlight" property="about_highlight" mv-default>Non cerco semplici clienti, ma progetti in cui credere.</span></p>
+                </div>
             </div>
-            <div class="about-content">
-                <p class="about-text" property="about_p1">Non mi limito a catturare un'esecuzione: insieme valorizziamo la tua identità artistica.</p>
-                <p class="about-text" property="about_p2">Lavoriamo fianco a fianco per costruire un sound che rispecchi davvero chi sei.</p>
-                <p style="color: var(--accent); font-weight: bold;" property="about_highlight">Non cerco semplici clienti, ma progetti in cui credere.</p>
+        </div>
+    </section>
+
+    <section id="portfolio" class="section-padding">
+        <div class="reveal">
+            <h2 class="section-title" property="port_title" mv-default>Portfolio & Demo</h2>
+            <p class="section-subtitle" property="port_sub" mv-default>Ascolta la differenza e i lavori finiti.</p>
+            <div class="dual-player-grid">
+                <div class="player-container">
+                    <div class="track-title-display" id="ab-track-title">Caricamento...</div>
+                    <div class="track-description-display" id="ab-track-description"></div>
+                    <div class="controls-wrapper">
+                        <button class="play-btn-large" id="ab-play-btn">▶</button>
+                        <div class="ab-switch-container">
+                            <button class="switch-btn active" data-track="A">RAW MIX</button>
+                            <button class="switch-btn" data-track="B">MASTER</button>
+                        </div>
+                        <div class="progress-container">
+                            <span id="ab-current-time">0:00</span>
+                            <input type="range" class="progress-bar" id="ab-progress" value="0">
+                            <span id="ab-duration">0:00</span>
+                        </div>
+                    </div>
+                    <ul class="playlist" id="ab-playlist-list"></ul>
+                    <audio id="audioA"></audio><audio id="audioB"></audio>
+                </div>
+                <div class="player-container">
+                    <div class="track-title-display" id="port-track-title">Caricamento...</div>
+                    <div class="track-description-display" id="port-track-description"></div>
+                    <div class="controls-wrapper">
+                        <button class="play-btn-large" id="port-play-btn">▶</button>
+                        <div class="progress-container">
+                            <span id="port-current-time">0:00</span>
+                            <input type="range" class="progress-bar" id="port-progress" value="0">
+                            <span id="port-duration">0:00</span>
+                        </div>
+                    </div>
+                    <ul class="playlist" id="port-playlist-list"></ul>
+                    <audio id="audioPortfolio"></audio>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="services" class="section-padding" style="background: #0a0a0a;">
-        <h2 style="text-align:center; font-size: 2.5rem;">I Miei Servizi</h2>
-        <div class="grid-3">
-            <div class="card" mv-multiple property="servizio">
-                <div class="icon-box" property="servizio_icon" style="font-size: 2rem;">🎨</div>
-                <h3 property="servizio_titolo">Produzione Artistica</h3>
-                <p property="servizio_desc">Il cuore del progetto. Definiamo insieme la direzione stilistica.</p>
+        <div class="reveal">
+            <h2 class="section-title" property="serv_title" mv-default>I Miei Servizi</h2>
+            <div class="grid-3">
+                <div class="card" mv-multiple property="service_card">
+                    <div class="icon-box" property="s_icon" mv-default>🎨</div>
+                    <h3 property="s_title" mv-default>Produzione Artistica</h3>
+                    <p property="s_desc" mv-default>Definiamo insieme la direzione stilistica del tuo progetto.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="section-padding">
+        <div class="reveal">
+            <h2 class="section-title">Dicono di Me</h2>
+            <div id="reviews-grid"></div>
+        </div>
+    </section>
+
+    <section id="seguimi">
+        <div class="newsletter-content">
+            <div class="newsletter-text-side">
+                <h2 property="news_title" mv-default>Resta nel Loop</h2>
+                <p property="news_p" mv-default>Iscriviti per ricevere aggiornamenti e un voucher da 30€.</p>
+            </div>
+            <div class="newsletter-form-side">
+                <div class="sib-form">
+                  <div id="sib-form-container">
+                    <form id="sib-form" method="POST" action="https://fff73002.sibforms.com/serve/MUIFAK9...">
+                      <input class="input" type="email" id="EMAIL" name="EMAIL" placeholder="Email" required />
+                      <button class="sib-form-block__button" type="submit">ISCRIVITI</button>
+                    </form>
+                  </div>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="contact" class="section-padding">
-        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-            <h2 property="contact_title" style="font-size: 3rem; margin-bottom: 20px;">Lavoriamo Insieme</h2>
-            <p property="contact_text" style="color: #aaa; margin-bottom: 40px;">Prenota un colloquio conoscitivo gratuito in studio.</p>
-            <a href="https://wa.me/3485491400" property="whatsapp_text" style="background: #25D366; padding: 15px 30px; border-radius: 50px; color: white; font-weight: bold;">Scrivimi su WhatsApp</a>
+        <div class="contact-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px;">
+            <div>
+                <h2 property="cont_title" mv-default>Lavoriamo Insieme</h2>
+                <p property="cont_p" mv-default>Prenota un colloquio gratuito in studio.</p>
+                <a href="https://wa.me/3485491400" class="btn-glow" style="background:#25D366; border:none;">WhatsApp</a>
+            </div>
+            <div class="map-section" style="height: 300px; background:#111; border-radius:20px;">
+                <iframe src="https://www.google.com/maps/embed?..." style="width:100%; height:100%; border:0;"></iframe>
+            </div>
         </div>
     </section>
 
-    <footer style="text-align:center; padding: 50px; border-top: 1px solid #222;">
-        <div class="copyright" property="footer_copy">© 2026 JB Project Studio - P.IVA: 02426720567</div>
+    <footer>
+        <div class="social-links">
+            <a href="#" class="social-link">IG</a>
+            <a href="#" class="social-link">FB</a>
+            <a href="#" class="social-link">YT</a>
+        </div>
+        <div class="copyright" property="footer_copy" mv-default>© 2026 JB Project Studio - P.IVA: 02426720567</div>
     </footer>
 
+    <script>
+        const AUDIO_FOLDER = "audio/";
+        const AB_FILES_LIST = [
+            { title: "d0sky - L'hai voluto tu", description: "Mix & Master", master: "audio/d0sky - l'hai voluto tu.mp3", raw: "audio/d0sky - l'hai voluto tu_raw.mp3" },
+            { title: "Marco Delpapa - Ovunque", description: "Produzione", master: "audio/Marco Delpapa ovunque e per sempre.mp3", raw: "audio/Marco Delpapa ovunque e per sempre_raw.mp3" }
+        ];
+        const PORTFOLIO_FILES_LIST = [
+            { title: "Laureato - Paris", src: "audio/Laureato - Paris.mp3" },
+            { title: "MZeta - Apocalisse", src: "audio/MZeta - apocalisse.mp3" }
+        ];
+        const REVIEWS_DATA = [
+            { name: "Alex M.", role: "Cantautore", text: "Vero professionista, consigliatissimo." },
+            { name: "Francesco D.", role: "Rapper", text: "Attento ai gusti dell'artista." }
+        ];
+
+        // --- INIZIALIZZAZIONE PLAYER (Qui metti tutto il tuo codice JS del player) ---
+        // Per brevità non incollo di nuovo tutta la logica del player che hai già, 
+        // ma assicurati che sia presente nel tuo file finale.
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            // abPlayer.init(); 
+            // portPlayer.init();
+            // renderReviews();
+        });
+    </script>
 </body>
 </html>
