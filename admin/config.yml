@@ -1,8 +1,9 @@
 backend:
   name: github
-  repo: jbprojectstudio/jbprojectstudio # <--- Esempio: gboschetti/jb-project-site
+  repo: jbprojectstudio/jbprojectstudio
   branch: main
-  base_url: https://jbprojectstudio.vercel.app # <--- QUESTO È IL PUNTO CHIAVE
+  base_url: https://static-cms-auth.vercel.app # Usa questo!
+  auth_endpoint: auth
 
 media_folder: "img" # Dove verranno salvate le immagini caricate
 public_folder: "/img"
