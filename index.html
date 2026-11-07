@@ -4,25 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>JB Project Studio | Studio di registrazione a Viterbo</title>
-    <meta name="description" content="JB Project Studio a Viterbo: Produzione artistica, Mix & Mastering e registrazione professionale. Realizza il tuo progetto musicale con Giordano Boschetti.">
-    <meta name="keywords" content="studio registrazione viterbo, mix e master, produzione musicale, beatmaking, giordano boschetti, studio musicale lazio">
-    <meta name="author" content="Giordano Boschetti">
+    <title>JB Project Studio | Studio di Registrazione & Produzione a Viterbo</title>
+    <meta name="description" content="JB Project Studio a Viterbo: produzione musicale, direzione artistica, registrazione professionale, mix e mastering diretti da Jo Boschetti. Suono suonato e ingegneria audio.">
+    <meta name="keywords" content="studio registrazione viterbo, jo boschetti, giordano boschetti, produzione musicale viterbo, produzione artistica lazio, mix e master, beatmaking con strumenti">
+    <meta name="author" content="Giordano Boschetti (Jo Boschetti)">
     
     <link rel="canonical" href="https://jbprojectstudio.com/">
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://jbprojectstudio.com/">
-    <meta property="og:title" content="JB Project Studio | Il tuo suono, la tua identità">
-    <meta property="og:description" content="Studio di registrazione e produzione artistica a Viterbo. Ascolta i lavori e prenota una sessione.">
+    <meta property="og:title" content="JB Project Studio • Jo Boschetti | Produzione & Ingegneria Sonora">
+    <meta property="og:description" content="Studio di registrazione e produzione a Viterbo. Registrazione vocale, arrangiamenti con strumenti suonati, mix & mastering.">
     <meta property="og:image" content="https://jbprojectstudio.com/img/social-preview.jpg">
     <meta property="og:locale" content="it_IT">
 
     <!-- Segnale diretto per i crawler IA -->
     <link rel="alternate" type="text/markdown" href="/llms.txt" title="Dossier Semantico IA">
 
-    <!-- Dati strutturati unificati (Local SEO + GEO per IA) -->
+    <!-- Dati strutturati ottimizzati (Local SEO + Profilo Autorevole IA) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -36,7 +36,7 @@
           "telephone": "+393485491400",
           "taxID": "02426720567",
           "priceRange": "$$",
-          "description": "Studio di registrazione, produzione artistica, mix e mastering a Viterbo fondato da Giordano Boschetti (Jo Boschetti). Specializzato in rap-pop, pop, indie-pop, urban e musica suonata.",
+          "description": "Studio di registrazione, produzione musicale con strumenti suonati (basso, chitarre, tastiere), mix e mastering a Viterbo fondato e diretto da Giordano Boschetti (Jo Boschetti).",
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "Piazza Dalmazia 9",
@@ -54,21 +54,16 @@
             "@type": "Person",
             "@id": "https://jbprojectstudio.com/#joboschetti",
             "name": "Giordano Boschetti",
-            "alternateName": "Jo Boschetti",
+            "alternateName": ["Jo Boschetti", "JB"],
             "jobTitle": "Music Producer, Sound Engineer & Polistrumentista",
             "knowsAbout": [
+              "Music Production",
               "Audio Engineering",
+              "Multi-Instrumentalist Performance (Guitar, Bass, Keys)",
               "Mixing and Mastering",
-              "Vocal Production",
-              "Rap-Pop Production",
-              "Acoustic Calibration",
-              "VST Plugin Development"
+              "Vocal Production & Tuning",
+              "Acoustic Calibration"
             ]
-          },
-          "brand": {
-            "@type": "Brand",
-            "name": "Auralizer",
-            "description": "Plugin audio VST proprietario per la spazializzazione tridimensionale e psicoacustica"
           }
         }
       ]
@@ -113,12 +108,12 @@
         h1, h2, h3 { line-height: 1.2; }
         button { font-family: inherit; }
 
-        /* --- ANIMAZIONI --- */
+        /* --- ANIMAZIONI SCROLL --- */
         .reveal {
             position: relative;
-            transform: translateY(50px);
+            transform: translateY(40px);
             opacity: 0;
-            transition: all 1s ease;
+            transition: all 0.8s ease;
         }
 
         .reveal.active {
@@ -142,7 +137,7 @@
         }
 
         .logo { 
-            font-size: 1.2rem; 
+            font-size: 1.15rem; 
             font-weight: 800; 
             letter-spacing: 1px; 
             text-transform: uppercase;
@@ -153,18 +148,18 @@
         }
         
         .logo img {
-            height: 90px; 
+            height: 85px; 
             width: auto;
-            margin-top: -20px;   
-            margin-bottom: -20px; 
+            margin-top: -18px;   
+            margin-bottom: -18px; 
             display: block;
             object-fit: contain;
         }
 
         .logo span { color: var(--accent); text-shadow: 0 0 10px var(--accent-glow); }
 
-        nav ul { display: flex; gap: 30px; }
-        nav a { font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        nav ul { display: flex; gap: 28px; }
+        nav a { font-size: 0.88rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
         nav a:hover { color: var(--accent); text-shadow: 0 0 8px var(--accent); }
 
         .hamburger {
@@ -189,61 +184,51 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(to bottom, rgba(5,5,5,0.3), var(--bg-color)), 
-                        linear-gradient(45deg, rgba(140,0,255,0.2), rgba(0,0,0,0.8)),
+            background: linear-gradient(to bottom, rgba(5,5,5,0.4), var(--bg-color)), 
+                        linear-gradient(45deg, rgba(140,0,255,0.18), rgba(0,0,0,0.85)),
                         url('img/studio_back.jpg');
             background-size: cover;
             background-position: center;
-            padding: 100px 20px 40px 20px;
+            padding: 110px 20px 50px 20px;
         }
 
-        /* WOOFER E LOGO */
-        .woofer-beat {
+ .hero-logo-box {
             display: inline-block;
-            margin-bottom: 60px; 
-            border-radius: 50%;
-            animation: bpm-pulse 0.55s cubic-bezier(0.1, 0.9, 0.2, 1.0) infinite;
+            margin-bottom: 40px; 
+            pointer-events: none; /* Il mouse ignora completamente il logo */
         }
 
         .hero-logo {
-            width: 220px;
+            width: 180px;
             height: auto;
             display: block;
-            background: radial-gradient(circle, #ffffff 30%, #e0e0e0 100%);
-            padding: 25px;
-            border: 12px solid #222; 
-            border-radius: 50%;
-            box-shadow: 
-                inset 0 0 20px rgba(0, 0, 0, 0.8),
-                0 0 0 1px rgba(255, 255, 255, 0.1); 
-            animation: electric-shiver 0.045s linear infinite;
-            transform: translateZ(0); 
-            will-change: transform;
-            box-sizing: content-box; 
+            /* Aura viola accesa fissa e permanente */
+            filter: drop-shadow(0 0 25px #8c00ff) drop-shadow(0 0 50px rgba(140, 0, 255, 0.5));
+            pointer-events: none;
+            user-select: none;
         }
 
-        @keyframes bpm-pulse {
-            0% { transform: scale(1); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); }
-            10% { transform: scale(1.12); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5); animation-timing-function: ease-out; }
-            22% { transform: scale(0.92); box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); animation-timing-function: ease-in-out; }
-            35% { transform: scale(1); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); }
-            100% { transform: scale(1); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); }
-        }
-
-        @keyframes electric-shiver {
-            0%   { transform: translate(0, 0); }
-            25%  { transform: translate(-0.5px, 0.5px); }
-            50%  { transform: translate(0, -0.5px); }
-            75%  { transform: translate(0.5px, 0); }
-            100% { transform: translate(0, 0); }
+        .hero-tagline-top {
+            display: inline-block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: rgba(140, 0, 255, 0.1);
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(140, 0, 255, 0.3);
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 5rem);
-            margin-bottom: 20px;
+            font-size: clamp(2.3rem, 4.5vw, 4.5rem);
+            margin-bottom: 22px;
             text-transform: uppercase;
             letter-spacing: -1px;
-            line-height: 1.1;
+            line-height: 1.15;
+            max-width: 1000px;
         }
 
         .hero h1 span {
@@ -252,18 +237,18 @@
         }
         
         .hero p {
-            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-            font-weight: 500;
-            color: #ffffff;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-            max-width: 800px;
-            margin: 0 auto 50px auto; 
-            line-height: 1.5;
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            font-weight: 400;
+            color: #d8d8d8;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+            max-width: 820px;
+            margin: 0 auto 45px auto; 
+            line-height: 1.6;
         }
 
         .btn-glow {
             padding: 15px 45px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: bold;
             color: #fff;
             background: transparent;
@@ -281,8 +266,8 @@
         .btn-glow:hover {
             background: var(--accent);
             color: #fff;
-            box-shadow: 0 0 40px var(--accent-glow);
-            transform: scale(1.05);
+            box-shadow: 0 0 35px var(--accent-glow);
+            transform: scale(1.04);
         }
 
         .btn-whatsapp {
@@ -291,37 +276,37 @@
         }
         .btn-whatsapp:hover {
             background: var(--whatsapp);
-            box-shadow: 0 0 40px var(--whatsapp-glow);
+            box-shadow: 0 0 35px var(--whatsapp-glow);
             color: #fff;
         }
 
         /* --- SEZIONE GENERALE --- */
-        .section-padding { padding: 100px 5%; }
-        .section-title { text-align: center; font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 10px; }
-        .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 40px; }
+        .section-padding { padding: 95px 5%; }
+        .section-title { text-align: center; font-size: clamp(2rem, 3.8vw, 2.5rem); margin-bottom: 10px; }
+        .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 40px; font-size: 1rem; }
 
-        /* --- ABOUT BOX --- */
+        /* --- ABOUT BOX (PRODUZIONE ARTISTICA) --- */
         #about {
             background-color: #080808;
             border-bottom: 1px solid #222;
         }
 
         .about-box {
-            max-width: 1000px;
+            max-width: 1050px;
             margin: 0 auto;
-            background: linear-gradient(145deg, #111111, #0d0d0d);
+            background: linear-gradient(145deg, #111111, #0a0a0a);
             padding: 50px;
             border-left: 4px solid var(--accent);
             border-radius: 0 15px 15px 0;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             display: flex;
             align-items: center;
-            gap: 40px;
+            gap: 45px;
         }
 
         .about-img-wrapper {
             flex: 0 0 35%;
-            max-width: 350px;
+            max-width: 340px;
             position: relative;
         }
 
@@ -329,9 +314,9 @@
             width: 100%;
             height: auto;
             border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            box-shadow: 0 0 20px rgba(0,0,0,0.6);
             border: 1px solid #333;
-            filter: grayscale(20%); 
+            filter: grayscale(15%); 
             transition: 0.3s;
         }
         
@@ -342,22 +327,32 @@
 
         .about-content { flex: 1; }
 
+        .about-role-tag {
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
         .about-text {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: #ccc;
-            line-height: 1.8;
-            margin-bottom: 20px;
+            line-height: 1.75;
+            margin-bottom: 18px;
             text-align: left;
         }
 
         .about-text:last-child { margin-bottom: 0; }
-        .highlight { color: var(--accent); font-weight: bold; }
+        .highlight { color: #fff; font-weight: 600; border-left: 2px solid var(--accent); padding-left: 10px; display: block; margin-top: 15px; }
 
         /* --- SEZIONE INIZIATIVE (RESTA NEL LOOP) --- */
         #seguimi {
-            background-color: #0c0c0c; 
+            background-color: #0b0b0b; 
             border-bottom: 1px solid #222;
-            padding: 90px 5%;
+            padding: 85px 5%;
             width: 100%;
         }
 
@@ -374,16 +369,17 @@
 
         .newsletter-text-side h2 {
             font-size: 3rem;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             line-height: 1.1;
             color: #fff;
         }
 
         .newsletter-text-side p {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: #aaa;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             max-width: 480px;
+            line-height: 1.6;
         }
         
         .arrow-pointer {
@@ -404,32 +400,32 @@
             padding-left: 40px;
         }
 
-        /* --- SERVIZI --- */
+        /* --- SERVIZI DI STUDIO --- */
         .grid-3 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-top: 50px;
+            gap: 35px;
+            margin-top: 45px;
         }
 
         .card {
-            background: linear-gradient(145deg, #151515, #0a0a0a);
+            background: linear-gradient(145deg, #151515, #0c0c0c);
             padding: 40px 30px;
-            border-radius: 15px;
+            border-radius: 14px;
             border: 1px solid #222;
-            transition: 0.4s;
+            transition: 0.35s ease;
             position: relative;
         }
 
         .card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
             border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(140, 0, 255, 0.1);
+            box-shadow: 0 12px 30px rgba(140, 0, 255, 0.12);
         }
 
-        .card h3 { font-size: 1.8rem; margin-bottom: 15px; color: #fff; }
-        .card p { color: #aaa; font-size: 0.95rem; line-height: 1.6; }
-        .icon-box { font-size: 2rem; color: var(--accent); margin-bottom: 20px; }
+        .card h3 { font-size: 1.55rem; margin-bottom: 14px; color: #fff; line-height: 1.3; }
+        .card p { color: #a5a5a5; font-size: 0.95rem; line-height: 1.65; }
+        .icon-box { font-size: 2.2rem; color: var(--accent); margin-bottom: 18px; }
 
         /* --- DUAL PLAYER LAYOUT --- */
         .dual-player-grid {
@@ -758,7 +754,7 @@
 
         #contact {
             background: #080808;
-            padding: 80px 5%;
+            padding: 85px 5%;
             border-top: 1px solid #222;
         }
 
@@ -772,15 +768,15 @@
         }
 
         .contact-info { text-align: left; }
-        .contact-info h2 { font-size: 3rem; margin-bottom: 20px; line-height: 1.1; }
-        .contact-info p { font-size: 1.1rem; color: #aaa; margin-bottom: 40px; max-width: 500px; }
+        .contact-info h2 { font-size: 2.8rem; margin-bottom: 20px; line-height: 1.1; }
+        .contact-info p { font-size: 1.05rem; color: #aaa; margin-bottom: 35px; max-width: 500px; line-height: 1.6; }
 
         .buttons-group {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 18px;
             width: 100%;
-            max-width: 300px;
+            max-width: 320px;
         }
 
         .buttons-group .btn-glow {
@@ -922,11 +918,11 @@
             .hero { 
                 justify-content: flex-start; 
                 min-height: 90vh; 
-                padding-top: 140px; 
+                padding-top: 130px; 
                 padding-bottom: 60px;
             }
 
-            .hero-logo { width: 160px; } 
+            .hero-logo { width: 140px; } 
             .about-box { padding: 30px; }
             .player-container { padding: 30px 20px; }
             
@@ -950,7 +946,7 @@
             .slider-btn.next { right: 5px; }
 
             .switch-btn { padding: 10px 20px; font-size: 0.85rem; }
-            footer h2 { font-size: 2.5rem !important; }
+            footer h2 { font-size: 2.3rem !important; }
         }
     </style>
 
@@ -1036,9 +1032,9 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#about" class="nav-link">Visione</a></li>
+                <li><a href="#about" class="nav-link">Jo Boschetti</a></li>
                 <li><a href="#seguimi" class="nav-link">Iniziative</a></li>
-                <li><a href="#services" class="nav-link">Servizi</a></li>
+                <li><a href="#services" class="nav-link">Servizi Studio</a></li>
                 <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
                 <li><a href="#reviews" class="nav-link">Recensioni</a></li>
                 <li><a href="#contact" class="nav-link">Contatti</a></li>
@@ -1046,42 +1042,52 @@
         </nav>
     </header>
 
+    <!-- HERO SECTION: PULITA, DIRETTA E AUTOREVOLE -->
     <section class="hero">
         <div class="reveal active"> 
-            <div class="woofer-beat">
+            <div class="hero-logo-box">
                 <img src="img/logo.svg" alt="JB Project Studio Logo" class="hero-logo">
             </div>
 
-            <h1>Il Tuo Suono<br><span>La tua identità</span></h1>
+            <div class="hero-tagline-top">Studio di Registrazione & Produzione • Viterbo</div>
+
+            <h1>Dall'Idea alla Traccia Finita.<br><span>Produzione Artistica & musicale</span></h1>
             
             <p>
-                Produzione Artistica & Musicale.<br>
-                Concept, Arrangiamento, Mix e Mastering.
+                Sessioni di registrazione professionale, arrangiamenti su misura con strumenti reali se richiesto e ingegneria audio per dare identità e competitività al tuo brano.
             </p>
             
-            <a href="#portfolio" class="btn-glow">Ascolta</a>
+            <a href="#portfolio" class="btn-glow">Ascolta i Lavori</a>
         </div>
     </section>
 
-    <!-- 1. OLTRE IL TASTO REC -->
+    <!-- 1. SEZIONE JO BOSCHETTI: CHI SONO, BACKGROUND E APPROCCIO -->
     <section id="about" class="section-padding">
         <div class="reveal">
-            <h2 class="section-title">Oltre il Tasto Rec</h2>
+            <h2 class="section-title">Jo Boschetti</h2>
+            <p class="section-subtitle">Musicista, producer e sound engineer al JB Project Studio.</p>
+            
             <div class="about-box">
                 <div class="about-img-wrapper">
-                    <img src="img/jo.jpg" alt="Giordano Boschetti" width="713" height="911">
+                    <img src="img/jo.jpg" alt="Giordano Boschetti (Jo Boschetti) - Producer e Sound Engineer a Viterbo" width="713" height="911">
                 </div>
                 
                 <div class="about-content">
-                    <p class="about-text">Non mi limito a catturare un'esecuzione: insieme valorizziamo la tua identità artistica. Lavoriamo fianco a fianco, senza vetri a dividerci, per costruire un sound che rispecchi davvero chi sei.</p>
-                    <p class="about-text">Ho scelto un open space acusticamente calibrato per evitare il suono "inscatolato" dei vocal booth. Qui la ripresa è naturale e tridimensionale, supportata da un rigore ingegneristico che garantisce un prodotto tecnicamente solido e competitivo.</p>
-                    <p class="about-text"><span class="highlight">Non cerco semplici clienti, ma progetti in cui credere.</span></p>
+                    <span class="about-role-tag">Music Producer & Polistrumentista</span>
+                    
+                    <p class="about-text">
+                        Sono Giordano "Jo" Boschetti. Prima ancora di mettermi dietro al banco di regia, il mio percorso affonda in oltre trent'anni di musica suonata tra chitarre (elettrica, acustica, classica), basso elettrico e tastiere, affiancati da più di quindici anni dedicati all'ingegneria del suono e alla produzione musicale a Viterbo.
+                    </p>
+                    <p class="about-text">
+                        Affronto ogni progetto partendo dall'orecchio del musicista: la produzione artistica per me significa affiancare chi scrive per far emergere un'identità forte, credibile e riconoscibile. Lavoriamo insieme sull'intenzione, sul tiro ritmico e sull'armonia che valorizza la voce, unendo la dinamica degli strumenti veri al rigore e alla competitività sonora del mercato contemporaneo.
+                    </p>
+                    <span class="highlight">Un approccio concreto e senza filtri: dare corpo e visione alla tua musica preservando ciò che vuoi comunicare.</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 2. RESTA NEL LOOP -->
+    <!-- 2. RESTA NEL LOOP (INIZIATIVE E OPEN CALL) -->
     <section id="seguimi">
         <div class="reveal newsletter-content">
             
@@ -1121,15 +1127,27 @@
         </div>
     </section>
 
-    <!-- 3. I MIEI SERVIZI -->
+    <!-- 3. SERVIZI DELLO STUDIO (STRUTTURA MULTISERVIZIO) -->
     <section id="services" class="section-padding" style="background: #0a0a0a;">
         <div class="reveal">
-            <h2 class="section-title">I Miei Servizi</h2>
-            <p class="section-subtitle">Un percorso completo per la tua musica.</p>
+            <h2 class="section-title">Servizi di JB Project Studio</h2>
+            <p class="section-subtitle">Una struttura attrezzata per ogni esigenza di produzione e registrazione.</p>
             <div class="grid-3">
-                <div class="card"><div class="icon-box">🎨</div><h3>Produzione Artistica</h3><p>Il cuore del progetto. Non registriamo e basta: definiamo insieme la direzione stilistica.</p></div>
-                <div class="card"><div class="icon-box">🎹</div><h3>Produzione Musicale</h3><p>Dall'arrangiamento al Beat Making. Costruisco la strumentale attorno alla tua voce.</p></div>
-                <div class="card"><div class="icon-box">🎚️</div><h3>Mix & Mastering</h3><p>Competitività e calore. Unisco il punch del digitale al colore dell'analogico.</p></div>
+                <div class="card">
+                    <div class="icon-box">🎙️</div>
+                    <h3>Registrazione & Vocal Tracking</h3>
+                    <p>Sessioni di registrazione vocale e strumentale assistite in ambiente calibrato. Catena audio professionale, monitoraggio a latenza zero e supporto in cuffia per ottenere la migliore interpretazione possibile.</p>
+                </div>
+                <div class="card">
+                    <div class="icon-box">🎸</div>
+                    <h3>Produzione & Arrangiamento</h3>
+                    <p>Dall'idea iniziale al beat completo. Costruiamo strumentali inedite arricchite con chitarre acustiche/elettriche, linee di basso reale e tastiere registrate direttamente in studio attorno alla tua voce.</p>
+                </div>
+                <div class="card">
+                    <div class="icon-box">🎚️</div>
+                    <h3>Mix & Mastering (Presenza e Online)</h3>
+                    <p>Messa a fuoco dinamica, punch e definizione calibrati per suonare competitivi su cuffie, impianti club e piattaforme streaming (Spotify, Apple Music). Servizio attivo anche da remoto con invio degli stem.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -1138,7 +1156,7 @@
     <section id="portfolio" class="section-padding">
         <div class="reveal">
             <h2 class="section-title">Portfolio & Demo</h2>
-            <p class="section-subtitle">Ascolta la differenza e i lavori finiti.</p>
+            <p class="section-subtitle">Ascolta la differenza del trattamento in regia e i lavori finiti.</p>
 
             <div class="dual-player-grid">
                 <div class="player-container" id="ab-player-root">
@@ -1196,7 +1214,7 @@
     <section id="reviews" class="section-padding">
         <div class="reveal">
             <h2 class="section-title">Dicono di Me</h2>
-            <p class="section-subtitle">Alcune parole dagli artisti con cui ho lavorato.</p>
+            <p class="section-subtitle">Il riscontro degli artisti che sono passati in studio.</p>
             
             <div class="reviews-slider-wrapper">
                 <div class="google-summary">
@@ -1214,22 +1232,22 @@
         </div>
     </section>
 
-    <!-- 6. LAVORIAMO INSIEME -->
+    <!-- 6. CONTATTI: PARLIAMO DEL TUO PROGETTO -->
     <section id="contact">
         <div class="reveal contact-container">
             <div class="contact-info">
-                <h2>Lavoriamo Insieme</h2>
-                <p>Il feeling è tutto. Prenota un <strong>colloquio conoscitivo gratuito</strong> in studio (o una call online).</p>
+                <h2>Parliamo del Tuo Progetto</h2>
+                <p>Che si tratti di prenotare una sessione di registrazione o avviare una produzione completa, il primo passo è confrontarsi sul materiale. Inviami una demo o scrivimi per verificare le disponibilità dello studio.</p>
                 <div class="buttons-group">
                     <a href="https://wa.me/3485491400" class="btn-glow btn-whatsapp" target="_blank">💬 Scrivimi su WhatsApp</a>
-                    <a href="mailto:giordanoboschetti@jbprojectstudio.com" class="btn-glow">📧 Richiedi Preventivo</a>
+                    <a href="mailto:giordanoboschetti@jbprojectstudio.com" class="btn-glow">📧 Invia un'Email</a>
                 </div>
             </div>
             <div style="width: 100%;">
                 <div class="map-section">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2940.6145657400943!2d12.165913776484722!3d42.520998224918195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1328f1e36b6fb107%3A0x75eb6eff7eea1aea!2sJB%20Project%20Studio%20(Giordano%20Boschetti)!5e0!3m2!1sit!2sit!4v1764718453290!5m2!1sit!2sit" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-                <div class="address-box"><p><strong>JB Project Studio</strong> - Viterbo (VT)<br>Ricevo su appuntamento</p></div>
+                <div class="address-box"><p><strong>JB Project Studio</strong> - Piazza Dalmazia 9, Viterbo (VT)<br>Ricevo esclusivamente su appuntamento • Sessioni in presenza e lavorazioni online</p></div>
             </div>
         </div>
     </section>
