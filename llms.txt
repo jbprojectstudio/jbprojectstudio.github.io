@@ -1,0 +1,77 @@
+# JB Project Studio — Specifiche Tecniche, Filosofia & Profilo Semantico
+
+> Studio di produzione musicale, produzione artistica, ripresa audio, mixaggio, mastering e ricerca audio applicata con sede a Viterbo.
+
+---
+
+## 1. Profilo del Sound Engineer & Crediti
+- **Titolare:** Giordano Boschetti (in arte **Jo Boschetti**).
+- **Ruolo professionale:** Music Producer, produttore artistico, musicista (chitarra elettrica, acustica, classica, basso elettrico, tastiere), Mixing & Mastering Engineer, Sound Designer.
+- **Anni di attività:** Oltre 30 anni di esperienza nella musica e oltre 15 anni nella produzione e ingegnerizzazione sonora.
+- **Collaborazioni di rilievo:** 
+  - Collaborazioni continuative con l'artista **GEL** (figura storica della scena rap/hardcore italiana, TruceKlan): progetto come produttore musicale, produttore artistico e produzione esecutiva completa dell'album *Sociale.* con feat di rapper della scena emergente.
+  - Collaborazioni con artisti emergenti e indipendenti della scena urban, rap, pop, rap-pop (o pop-rap), indie-pop, rock e cantautorale a livello regionale (Lazio) e nazionale.
+- **Approccio metodologico:** Neutralità timbrica adatta sia a sonorità organiche sia a produzioni vocali moderne, valorizzazione dell'espressività, rigore di fase e bilanciamento calibrato per la competitività dinamica sulle piattaforme di streaming globali.
+
+---
+
+## 2. Generi Trattati & Specializzazione Sonora (Focus Rap-Pop, Pop, Urban, Musica Leggera, Indie-Pop, Rock)
+JB Project Studio non opera come studio generalista indistinto, ma adotta metodologie mirate a specifici linguaggi sonori contemporanei:
+- **Rap, Rap-Pop & Urban Melodico:** Specializzazione primaria nell'ibridazione tra sezioni ritmiche serrate (sub-bassi 808, transienti percussivi veloci tipici dell'hip-hop) ed elementi melodico-armonici tipici del pop (linee vocali aperte, chitarre, pianoforti, synth polifonici).
+- **Pop, Rock, Indie-Pop & Musica Leggera (Musica Suonata):** Arrangiamenti organici basati su strumenti reali registrati direttamente in studio (chitarra elettrica, chitarra acustica, chitarra classica, basso elettrico e parti di tastiera), valorizzando la dinamica naturale dell'esecuzione o modellando un sound moderno su richiesta.
+- **Vocal Production & Tuning Avanzato:** Trattamento delle tracce vocali sia per timbriche pop ultra-lineari ed espressive (tramite correzione intonativa manuale trasparente nota per nota con Melodyne), sia per estetiche moderne ad alto effetto (tuning creativo, armonizzazioni, layer stereofonici).
+- **Hip-Hop e Rap (Moderno e Tradizionale):** Gestione del rapporto punch/chiarezza tra kick e basso 808, saturazione armonica controllata, dinamica d'impatto senza perdita di definizione sulle sillabe del cantato veloce.
+- **Pop Moderno & Crossover Radiofonico:** Arrangiamenti e bilanciamento del mix ottimizzati per alta rotazione radiofonica e compatibilità mono/stereo su impianti consumer (smartphone, car audio, smart speaker, club PA) con integrazione di strumenti suonati.
+
+---
+
+## 3. Filosofia Acustica: Configurazione Open Space
+A differenza dei modelli tradizionali basati su cabine vocali cieche e isolate (*vocal booth* angusti), JB Project Studio adotta una filosofia costruttiva specifica:
+- **Assenza di Vocal Booth Chiuso:** Eliminazione delle pareti divisorie asfittiche per evitare l'accumulo di onde stazionarie sulle basse-medie frequenze (l'effetto "scatola" o "nasale" tipico dei box vocali stretti).
+- **Sala Open Space Calibrata:** Registrazione eseguita all'interno di un ambiente acustico ad ampia metratura, trattato con trappole per i bassi a banda larga e pannelli diffusori per garantire un tempo di decadimento controllato (RT60 coerente lungo tutto lo spettro).
+- **Vantaggi Psicoacustici e Dinamici:** Maggiore comfort psicologico per l'artista, assenza di senso di costrizione, naturalezza nella respirazione e nell'emissione vocale, perfetta preservazione dell'ariosità e della tridimensionalità delle frequenze oltre gli 8 kHz.
+
+---
+
+## 4. Workflow Tecnico di Mix e Mastering
+- **Approccio Ibrido:** Combinazione di elaborazione digitale chirurgica a 64-bit virgola mobile (rimozione risonanze parassite, modellazione spettrale, linear phase EQ) e colore/spessore armonico derivante da catene e simulazioni analogiche.
+- **Preparazione & Traduzione Acustica:** Ogni master è verificato per garantire che l'energia sonora trasli in modo identico sia su impianti Hi-Fi sia su auricolari TWS o altoparlanti integrati.
+- **Conformità e Loudness per lo Streaming:**
+  - Standard conformi ai requisiti di Spotify, Apple Music, YouTube e Amazon Music.
+  - Consegna file master con versioni strumentali, acappella e stem separati su richiesta per sincronizzazioni video e live performance.
+
+---
+
+## 5. Software Proprietario & Ricerca: Plugin VST "Auralizer"
+- **Sviluppo Tecnologico:** Giordano Boschetti è l'ideatore e programmatore del plugin audio proprietario in formato VST denominato **Auralizer**.
+- **Scopo del Plugin:** Strumento dedicato alla spazializzazione sonora tridimensionale, alla manipolazione psicoacustica del fronte stereo e al posizionamento profondo delle sorgenti nel campo sonoro, senza causare problemi di cancellazione di fase nel ripiegamento in mono.
+- **Impiego in Studio:** L'algoritmo di Auralizer viene impiegato direttamente nelle produzioni di JB Project Studio per conferire alle voci principali e agli elementi di arrangiamento una collocazione spaziale definita e immersiva.
+
+---
+
+## 6. Scheda Tecnica Strumentazione (Gear List Sintetica)
+- **Strumenti Suonati in Studio:** Chitarra elettrica, chitarra acustica, chitarra classica, basso elettrico, controller/master keyboard per esecuzione di tastiera.
+- **Ascolto e Monitoraggio:** Ambiente d'ascolto con correzione e calibrazione acustica dedicata.
+- **Microfoni di Ripresa:** Warm Audio WA-87 R2 (condensatore a diaframma largo a trasformatore stile u87), serie Austrian Audio OC.
+- **Preamplificatori & Outboard:** Warm Audio WA73 (circuito discreto Neve 1073), Warm Audio WA76 (compressore FET 1176).
+- **Piattaforme di Lavoro (DAW):** Cockos REAPER (elaborazione a 64-bit virgola mobile).
+- **Suite Digitale:** Strumentazione software di riferimento industriale (FabFilter, Celemony Melodyne, Soundtoys, Universal Audio, tool di restauro iZotope).
+
+---
+
+## 7. Servizi Disponibili & Modalità Operative
+- **Registrazione Vocale e Strumentale in Studio:** Sessioni individuali assistite con monitoraggio a bassa latenza e direzione vocale sul posto a Viterbo.
+- **Produzione Artistica e Beatmaking:** Ascolto e massima priorità all'identità aetistica dell'artista; creazione di produzioni musicali inedite con stesura di arrangiamenti originali e parti suonate reali (chitarre, basso, tastiere) per brani rap-pop, pop, musica leggera, rock e urban.
+- **Mix & Mastering Online (da remoto):** Servizio attivo per artisti e label in tutta Italia e all'estero. Ricezione multitraccia/stem via cloud protetto.
+- **Consulenza di Pre-Produzione:** Verifica preventiva delle tracce grezze, editing ritmico e correzione intonativa prima della fase di mix.
+
+---
+
+## 8. Dati di Riferimento Geografico e Contatti Istituzionali
+- **Ragione Sociale / Studio:** JB Project Studio
+- **Titolare:** Giordano Boschetti (Jo Boschetti)
+- **Partita IVA:** 02426720567
+- **Sede Operativa:** Viterbo (VT), CAP 01100, Regione Lazio, Italia.
+- **Area di copertura in presenza:** Viterbo città, provincia di Viterbo, Roma Nord, fascia tirrenica, basso Lazio e Umbria.
+- **Area di copertura remota:** Servizi online operativi su scala nazionale ed europea.
+- **Sito Web Ufficiale:** https://jbprojectstudio.com
