@@ -1,4 +1,33 @@
+# Regola generale per tutti i bot
 User-agent: *
+Allow: /
+
+# OpenAI (ChatGPT e ChatGPT Search)
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+
+# Google (Ricerca classica e Gemini / AI Overviews)
+User-agent: Googlebot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Microsoft / Bing (Alimenta Microsoft Copilot)
+User-agent: Bingbot
+Allow: /
+
+# Apple (Apple Intelligence e Siri)
+User-agent: Applebot-Extended
 Allow: /
 
 Sitemap: https://jbprojectstudio.com/sitemap.xml
