@@ -404,6 +404,33 @@
             padding-left: 40px;
         }
 
+        /* --- SERVIZI --- */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #151515, #0a0a0a);
+            padding: 40px 30px;
+            border-radius: 15px;
+            border: 1px solid #222;
+            transition: 0.4s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(140, 0, 255, 0.1);
+        }
+
+        .card h3 { font-size: 1.8rem; margin-bottom: 15px; color: #fff; }
+        .card p { color: #aaa; font-size: 0.95rem; line-height: 1.6; }
+        .icon-box { font-size: 2rem; color: var(--accent); margin-bottom: 20px; }
+
         /* --- DUAL PLAYER LAYOUT --- */
         .dual-player-grid {
             display: grid;
@@ -613,33 +640,6 @@
         }
         
         .item-title { font-weight: 600; }
-
-        /* --- SERVIZI --- */
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-top: 50px;
-        }
-
-        .card {
-            background: linear-gradient(145deg, #151515, #0a0a0a);
-            padding: 40px 30px;
-            border-radius: 15px;
-            border: 1px solid #222;
-            transition: 0.4s;
-            position: relative;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(140, 0, 255, 0.1);
-        }
-
-        .card h3 { font-size: 1.8rem; margin-bottom: 15px; color: #fff; }
-        .card p { color: #aaa; font-size: 0.95rem; line-height: 1.6; }
-        .icon-box { font-size: 2rem; color: var(--accent); margin-bottom: 20px; }
 
         /* --- RECENSIONI --- */
         #reviews-grid {
@@ -1038,8 +1038,8 @@
             <ul>
                 <li><a href="#about" class="nav-link">Visione</a></li>
                 <li><a href="#seguimi" class="nav-link">Iniziative</a></li>
-                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
                 <li><a href="#services" class="nav-link">Servizi</a></li>
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
                 <li><a href="#reviews" class="nav-link">Recensioni</a></li>
                 <li><a href="#contact" class="nav-link">Contatti</a></li>
             </ul>
@@ -1063,7 +1063,7 @@
         </div>
     </section>
 
-    <!-- SEZIONE VISONE -->
+    <!-- 1. OLTRE IL TASTO REC -->
     <section id="about" class="section-padding">
         <div class="reveal">
             <h2 class="section-title">Oltre il Tasto Rec</h2>
@@ -1081,7 +1081,7 @@
         </div>
     </section>
 
-    <!-- SEZIONE INIZIATIVE (RESTA NEL LOOP / 16 BARRE) -->
+    <!-- 2. RESTA NEL LOOP -->
     <section id="seguimi">
         <div class="reveal newsletter-content">
             
@@ -1121,7 +1121,20 @@
         </div>
     </section>
 
-    <!-- SEZIONE PORTFOLIO -->
+    <!-- 3. I MIEI SERVIZI -->
+    <section id="services" class="section-padding" style="background: #0a0a0a;">
+        <div class="reveal">
+            <h2 class="section-title">I Miei Servizi</h2>
+            <p class="section-subtitle">Un percorso completo per la tua musica.</p>
+            <div class="grid-3">
+                <div class="card"><div class="icon-box">🎨</div><h3>Produzione Artistica</h3><p>Il cuore del progetto. Non registriamo e basta: definiamo insieme la direzione stilistica.</p></div>
+                <div class="card"><div class="icon-box">🎹</div><h3>Produzione Musicale</h3><p>Dall'arrangiamento al Beat Making. Costruisco la strumentale attorno alla tua voce.</p></div>
+                <div class="card"><div class="icon-box">🎚️</div><h3>Mix & Mastering</h3><p>Competitività e calore. Unisco il punch del digitale al colore dell'analogico.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. PORTFOLIO E DEMO -->
     <section id="portfolio" class="section-padding">
         <div class="reveal">
             <h2 class="section-title">Portfolio & Demo</h2>
@@ -1179,20 +1192,7 @@
         </div>
     </section>
 
-    <!-- SEZIONE SERVIZI -->
-    <section id="services" class="section-padding" style="background: #0a0a0a;">
-        <div class="reveal">
-            <h2 class="section-title">I Miei Servizi</h2>
-            <p class="section-subtitle">Un percorso completo per la tua musica.</p>
-            <div class="grid-3">
-                <div class="card"><div class="icon-box">🎨</div><h3>Produzione Artistica</h3><p>Il cuore del progetto. Non registriamo e basta: definiamo insieme la direzione stilistica.</p></div>
-                <div class="card"><div class="icon-box">🎹</div><h3>Produzione Musicale</h3><p>Dall'arrangiamento al Beat Making. Costruisco la strumentale attorno alla tua voce.</p></div>
-                <div class="card"><div class="icon-box">🎚️</div><h3>Mix & Mastering</h3><p>Competitività e calore. Unisco il punch del digitale al colore dell'analogico.</p></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SEZIONE RECENSIONI -->
+    <!-- 5. DICONO DI ME -->
     <section id="reviews" class="section-padding">
         <div class="reveal">
             <h2 class="section-title">Dicono di Me</h2>
@@ -1214,7 +1214,7 @@
         </div>
     </section>
 
-    <!-- SEZIONE CONTATTI -->
+    <!-- 6. LAVORIAMO INSIEME -->
     <section id="contact">
         <div class="reveal contact-container">
             <div class="contact-info">
