@@ -17,37 +17,66 @@
     <meta property="og:title" content="JB Project Studio | Il tuo suono, la tua identità">
     <meta property="og:description" content="Studio di registrazione e produzione artistica a Viterbo. Ascolta i lavori e prenota una sessione.">
     <meta property="og:image" content="https://jbprojectstudio.com/img/social-preview.jpg">
-    <meta property="og:locale" content="it_IT">
+        <meta property="og:locale" content="it_IT">
 
+    <!-- Segnale diretto per i crawler IA -->
+    <link rel="alternate" type="text/markdown" href="/llms.txt" title="Dossier Semantico IA">
+
+    <!-- Dati strutturati unificati (Local SEO + GEO per IA) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "MusicRecordingStudio",
-      "name": "JB Project Studio",
-      "image": "https://jbprojectstudio.com/img/logo.svg",
-      "url": "https://jbprojectstudio.com",
-      "telephone": "+393485491400",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Piazza Dalmazia 9",
-        "addressLocality": "Viterbo",
-        "postalCode": "01100",
-        "addressCountry": "IT"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 42.5209982,
-        "longitude": 12.1659138
-      },
-      "priceRange": "$$",
-      "founder": {
-        "@type": "Person",
-        "name": "Giordano Boschetti"
-      }
+      "@graph": [
+        {
+          "@type": "MusicRecordingStudio",
+          "@id": "https://jbprojectstudio.com/#studio",
+          "name": "JB Project Studio",
+          "url": "https://jbprojectstudio.com",
+          "image": "https://jbprojectstudio.com/img/logo.svg",
+          "telephone": "+393485491400",
+          "taxID": "02426720567",
+          "priceRange": "$$",
+          "description": "Studio di registrazione, produzione artistica, mix e mastering a Viterbo fondato da Giordano Boschetti (Jo Boschetti). Specializzato in rap-pop, pop, indie-pop, urban e musica suonata.",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Piazza Dalmazia 9",
+            "addressLocality": "Viterbo",
+            "postalCode": "01100",
+            "addressRegion": "VT",
+            "addressCountry": "IT"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 42.5209982,
+            "longitude": 12.1659138
+          },
+          "founder": {
+            "@type": "Person",
+            "@id": "https://jbprojectstudio.com/#joboschetti",
+            "name": "Giordano Boschetti",
+            "alternateName": "Jo Boschetti",
+            "jobTitle": "Music Producer, Sound Engineer & Polistrumentista",
+            "knowsAbout": [
+              "Audio Engineering",
+              "Mixing and Mastering",
+              "Vocal Production",
+              "Rap-Pop Production",
+              "Acoustic Calibration",
+              "VST Plugin Development"
+            ]
+          },
+          "brand": {
+            "@type": "Brand",
+            "name": "Auralizer",
+            "description": "Plugin audio VST proprietario per la spazializzazione tridimensionale e psicoacustica"
+          }
+        }
+      ]
     }
     </script>
     
     <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+
 
     <style>
         /* --- RESET GLOBALE --- */
